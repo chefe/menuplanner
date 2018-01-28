@@ -6,8 +6,8 @@ use App\Meal;
 use App\User;
 use App\Menuplan;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use phpDocumentor\Reflection\DocBlock\Description;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MealTest extends TestCase
 {
@@ -23,7 +23,7 @@ class MealTest extends TestCase
             'date' => '2018-01-01',
             'start' => '12:00:00',
             'end' => '13:00:00',
-            'people' => 8
+            'people' => 8,
         ];
     }
 
@@ -126,11 +126,11 @@ class MealTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $meal = factory(Meal::class)->create([
             'menuplan_id' => $menuplan->id,
-            'title' => 'Meal Number One'
+            'title' => 'Meal Number One',
         ]);
 
         $this->assertDatabaseHas('meals', [
-            'title' => 'Meal Number One'
+            'title' => 'Meal Number One',
         ]);
 
         $this->actingAs($user)
@@ -138,7 +138,7 @@ class MealTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('meals', [
-            'title' => 'Meal Number One'
+            'title' => 'Meal Number One',
         ]);
     }
 
@@ -147,7 +147,7 @@ class MealTest extends TestCase
     {
         $user = factory(User::class)->create();
         $meal = factory(Meal::class)->create([
-            'title' => 'Meal Number Two'
+            'title' => 'Meal Number Two',
         ]);
 
         $this->actingAs($user)
@@ -155,7 +155,7 @@ class MealTest extends TestCase
             ->assertStatus(403);
 
         $this->assertDatabaseHas('meals', [
-            'title' => 'Meal Number Two'
+            'title' => 'Meal Number Two',
         ]);
     }
 }

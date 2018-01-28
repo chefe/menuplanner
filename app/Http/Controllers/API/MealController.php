@@ -26,7 +26,7 @@ class MealController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'start' => 'required|date_format:H:i:s',
             'end' => 'required|date_format:H:i:s|after:start',
-            'people' => 'nullable|integer|min:1'
+            'people' => 'nullable|integer|min:1',
         ]);
 
         return $menuplan->meals()->create($data);
@@ -42,7 +42,7 @@ class MealController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'start' => 'required|date_format:H:i:s',
             'end' => 'required|date_format:H:i:s|after:start',
-            'people' => 'nullable|integer|min:1'
+            'people' => 'nullable|integer|min:1',
         ]);
 
         return tap($meal)->update($data);
