@@ -8,7 +8,4 @@ class Menuplan extends Model
 {
     /** */
     protected $guarded = [];
-
-    /** */
-    protected $dates = ['start', 'end'];
 }
