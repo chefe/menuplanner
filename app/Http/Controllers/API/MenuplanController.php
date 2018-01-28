@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Menuplan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Menuplan;
 
 class MenuplanController extends Controller
 {
-    /** */
     public function index(Request $request)
     {
         return $request->user()->menuplans;
     }
 
-    /** */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -25,11 +23,10 @@ class MenuplanController extends Controller
         ]);
 
         return Menuplan::create(array_merge($data, [
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
         ]));
     }
 
-    /** */
     public function update(Request $request, Menuplan $menuplan)
     {
         abort_unless($menuplan->user_id == $request->user()->id, 403);
@@ -44,7 +41,6 @@ class MenuplanController extends Controller
         return tap($menuplan)->update($data);
     }
 
-    /** */
     public function destroy(Request $request, Menuplan $menuplan)
     {
         abort_unless($menuplan->user_id == $request->user()->id, 403);

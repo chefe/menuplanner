@@ -17,6 +17,6 @@ $factory->define(Menuplan::class, function (Faker $faker) {
         'people' => $faker->numberBetween(2, 50),
         'user_id' => function () {
             return factory(User::class)->create()->id;
-        }
+        },
     ];
 });

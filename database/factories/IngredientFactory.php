@@ -13,6 +13,6 @@ $factory->define(Ingredient::class, function (Faker $faker) {
         },
         'meal_id' => function () {
             return factory(Meal::class)->create()->id;
-        }
+        },
     ];
 });
