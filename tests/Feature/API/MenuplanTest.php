@@ -15,18 +15,19 @@ class MenuplanTest extends TestCase
     public function a_user_can_get_his_menuplans()
     {
         $user = factory(User::class)->create();
-        $menuplans = factory(Menuplan::class, 4)
+        $ownMenuplans = factory(Menuplan::class, 4)
             ->create(['user_id' => $user->id]);
+        $otherMenuplans = factory(Menuplan::class, 10);
 
         $this->actingAs($user)
             ->get('/api/menuplan')
             ->assertStatus(200)
             ->assertJsonCount(4)
             ->assertJson([
-                ['title' => $menuplans[0]->title],
-                ['title' => $menuplans[1]->title],
-                ['title' => $menuplans[2]->title],
-                ['title' => $menuplans[3]->title],
+                ['title' => $ownMenuplans[0]->title],
+                ['title' => $ownMenuplans[1]->title],
+                ['title' => $ownMenuplans[2]->title],
+                ['title' => $ownMenuplans[3]->title],
             ]);
     }
 
@@ -71,6 +72,21 @@ class MenuplanTest extends TestCase
             ->put('/api/menuplan/'.$menuplan->id, $newMenuplanData)
             ->assertStatus(200)
             ->assertJson($newMenuplanData);
+    }
+
+    /** @test */
+    public function a_user_can_not_update_a_menuplan_from_another_user()
+    {
+        $userOne = factory(User::class)->create();
+        $userTwo = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create([
+            'user_id' => $userOne->id,
+        ]);
+
+        $this->actingAs($userTwo)
+            ->put('/api/menuplan/'.$menuplan->id, [
+                'title' => 'Changed',
+            ])->assertStatus(403);
     }
 
     /** @test */
