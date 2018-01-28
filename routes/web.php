@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
+    Route::get('/menuplan', 'MenuplanController@index');
+    Route::post('/menuplan', 'MenuplanController@store');
+    Route::put('/menuplan/{menuplan}', 'MenuplanController@update');
+    Route::delete('/menuplan/{menuplan}', 'MenuplanController@destroy');
+});
