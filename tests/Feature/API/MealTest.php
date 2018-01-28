@@ -13,6 +13,20 @@ class MealTest extends TestCase
 {
     use DatabaseMigrations;
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->validMealData = [
+            'title' => 'First Meal',
+            'description' => 'And here is the description!',
+            'date' => '2018-01-01',
+            'start' => '12:00:00',
+            'end' => '13:00:00',
+            'people' => 8
+        ];
+    }
+
     /** @test */
     public function a_user_can_get_the_meals_of_his_menuplans()
     {
@@ -53,21 +67,13 @@ class MealTest extends TestCase
     {
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $validMealData = [
-            'title' => 'First Meal',
-            'description' => 'And here is the description!',
-            'date' => '2018-01-01',
-            'start' => '12:00:00',
-            'end' => '13:00:00',
-            'people' => 8
-        ];
 
         $this->actingAs($user)
-            ->post('/api/menuplan/'.$menuplan->id.'/meals', $validMealData)
+            ->post('/api/menuplan/'.$menuplan->id.'/meals', $this->validMealData)
             ->assertStatus(200)
-            ->assertJson($validMealData);
+            ->assertJson($this->validMealData);
 
-        $this->assertDatabaseHas('meals', $validMealData);
+        $this->assertDatabaseHas('meals', $this->validMealData);
     }
 
     /** @test */
@@ -75,20 +81,12 @@ class MealTest extends TestCase
     {
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create();
-        $validMealData = [
-            'title' => 'First Meal',
-            'description' => 'And here is the description!',
-            'date' => '2018-01-01',
-            'start' => '12:00:00',
-            'end' => '13:00:00',
-            'people' => 8
-        ];
 
         $this->actingAs($user)
-            ->post('/api/menuplan/'.$menuplan->id.'/meals', $validMealData)
+            ->post('/api/menuplan/'.$menuplan->id.'/meals', $this->validMealData)
             ->assertStatus(403);
 
-        $this->assertDatabaseMissing('meals', $validMealData);
+        $this->assertDatabaseMissing('meals', $this->validMealData);
     }
 
     /** @test */
@@ -98,23 +96,14 @@ class MealTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
 
-        $validMealData = [
-            'title' => 'First Meal',
-            'description' => 'And here is the description!',
-            'date' => '2018-01-01',
-            'start' => '12:00:00',
-            'end' => '13:00:00',
-            'people' => 8
-        ];
-
-        $this->assertDatabaseMissing('meals', $validMealData);
+        $this->assertDatabaseMissing('meals', $this->validMealData);
 
         $this->actingAs($user)
-            ->put('/api/meal/'.$meal->id, $validMealData)
+            ->put('/api/meal/'.$meal->id, $this->validMealData)
             ->assertStatus(200)
-            ->assertJson($validMealData);
+            ->assertJson($this->validMealData);
 
-        $this->assertDatabaseHas('meals', $validMealData);
+        $this->assertDatabaseHas('meals', $this->validMealData);
     }
 
     /** @test */
@@ -123,20 +112,11 @@ class MealTest extends TestCase
         $user = factory(User::class)->create();
         $meal = factory(Meal::class)->create();
 
-        $validMealData = [
-            'title' => 'First Meal',
-            'description' => 'And here is the description!',
-            'date' => '2018-01-01',
-            'start' => '12:00:00',
-            'end' => '13:00:00',
-            'people' => 8
-        ];
-
         $this->actingAs($user)
-            ->put('/api/meal/'.$meal->id, $validMealData)
+            ->put('/api/meal/'.$meal->id, $this->validMealData)
             ->assertStatus(403);
 
-        $this->assertDatabaseMissing('meals', $validMealData);
+        $this->assertDatabaseMissing('meals', $this->validMealData);
     }
 
     /** @test */
