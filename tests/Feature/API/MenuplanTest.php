@@ -68,7 +68,7 @@ class MenuplanTest extends TestCase
         ];
 
         $this->actingAs($user)
-            ->put('/api/menuplan/' . $menuplan->id, $newMenuplanData)
+            ->put('/api/menuplan/'.$menuplan->id, $newMenuplanData)
             ->assertStatus(200)
             ->assertJson($newMenuplanData);
     }
@@ -84,7 +84,7 @@ class MenuplanTest extends TestCase
         $this->assertDatabaseHas('menuplans', ['id' => $menuplan->id]);
 
         $this->actingAs($user)
-            ->delete('/api/menuplan/' . $menuplan->id)
+            ->delete('/api/menuplan/'.$menuplan->id)
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('menuplans', ['id' => $menuplan->id]);
@@ -96,11 +96,11 @@ class MenuplanTest extends TestCase
         $userOne = factory(User::class)->create();
         $userTwo = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create([
-            'user_id' => $userOne->id
+            'user_id' => $userOne->id,
         ]);
-  
+
         $this->actingAs($userTwo)
-            ->delete('/api/menuplan/' . $menuplan->id)
+            ->delete('/api/menuplan/'.$menuplan->id)
             ->assertStatus(403);
     }
 }

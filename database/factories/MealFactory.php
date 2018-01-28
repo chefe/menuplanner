@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(Meal::class, function (Faker $faker) {
     $times = [
         $faker->time(),
-        $faker->time()
+        $faker->time(),
     ];
 
     return [
@@ -17,14 +17,15 @@ $factory->define(Meal::class, function (Faker $faker) {
         'end' => max($times),
         'people' => $faker->randomElement([
             null,
-            $faker->numberBetween(2, 50)
+            $faker->numberBetween(2, 50),
         ]),
         'menuplan_id' => function () {
             return factory(Menuplan::class)->create()->id;
         },
         'date' => function (array $meal) use ($faker) {
             $plan = Menuplan::find($meal['menuplan_id']);
+
             return $faker->dateTimeBetween($plan->start, $plan->end);
-        }
+        },
     ];
 });
