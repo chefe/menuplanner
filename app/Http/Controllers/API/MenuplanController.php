@@ -30,7 +30,7 @@ class MenuplanController extends Controller
 
     public function update(Request $request, Menuplan $menuplan)
     {
-        abort_unless($menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('update', $menuplan);
 
         $data = $request->validate([
             'title' => 'required|string|min:3',
@@ -44,7 +44,7 @@ class MenuplanController extends Controller
 
     public function destroy(Request $request, Menuplan $menuplan)
     {
-        abort_unless($menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('delete', $menuplan);
 
         $menuplan->delete();
     }

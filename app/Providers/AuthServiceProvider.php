@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Menuplan;
+use App\Policies\MenuplanPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -12,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Menuplan::class => MenuplanPolicy::class,
     ];
 
     /**
