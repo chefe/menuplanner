@@ -24,10 +24,19 @@ class MenuplanTest extends TestCase
             ->assertStatus(200)
             ->assertJsonCount(4)
             ->assertJson([
-                ['title' => $ownMenuplans[0]->title],
-                ['title' => $ownMenuplans[1]->title],
-                ['title' => $ownMenuplans[2]->title],
-                ['title' => $ownMenuplans[3]->title],
+                [
+                    'title' => $ownMenuplans[0]->title,
+                    'start' => $ownMenuplans[0]->start->format('Y-m-d'),
+                ],[
+                    'title' => $ownMenuplans[1]->title,
+                    'start' => $ownMenuplans[1]->start->format('Y-m-d'),
+                ],[
+                    'title' => $ownMenuplans[2]->title,
+                    'start' => $ownMenuplans[2]->start->format('Y-m-d'),
+                ],[
+                    'title' => $ownMenuplans[3]->title,
+                    'start' => $ownMenuplans[3]->start->format('Y-m-d'),
+                ]
             ]);
     }
 

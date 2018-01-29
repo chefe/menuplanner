@@ -5,12 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Menuplan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MenuplanResource;
 
 class MenuplanController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->menuplans;
+        return MenuplanResource::collection($request->user()->menuplans);
     }
 
     public function store(Request $request)
