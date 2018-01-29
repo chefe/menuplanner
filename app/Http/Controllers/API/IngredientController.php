@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Meal;
 use App\Ingredient;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Rules\ItemInMenuplan;
+use App\Http\Controllers\Controller;
 
 class IngredientController extends Controller
 {
@@ -25,7 +25,7 @@ class IngredientController extends Controller
             'quantity' => 'required|numeric|min:0.001',
             'item_id' => [
                 'required',
-                new ItemInMenuplan($meal->menuplan)
+                new ItemInMenuplan($meal->menuplan),
             ],
         ]);
 

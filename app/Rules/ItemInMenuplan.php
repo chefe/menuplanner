@@ -2,15 +2,15 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use App\Menuplan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Rule;
 
 class ItemInMenuplan implements Rule
 {
     /**
      * Holds the instance of the menuplan which
-     * the rule should compare against
+     * the rule should compare against.
      */
     private $menuplan;
 
