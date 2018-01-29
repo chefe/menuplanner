@@ -12,4 +12,9 @@ class Meal extends Model
     {
         return $this->belongsTo(Menuplan::class);
     }
+
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredient::class);
+    }
 }
