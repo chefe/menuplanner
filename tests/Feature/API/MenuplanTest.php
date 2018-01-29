@@ -27,16 +27,16 @@ class MenuplanTest extends TestCase
                 [
                     'title' => $ownMenuplans[0]->title,
                     'start' => $ownMenuplans[0]->start->format('Y-m-d'),
-                ],[
+                ], [
                     'title' => $ownMenuplans[1]->title,
                     'start' => $ownMenuplans[1]->start->format('Y-m-d'),
-                ],[
+                ], [
                     'title' => $ownMenuplans[2]->title,
                     'start' => $ownMenuplans[2]->start->format('Y-m-d'),
-                ],[
+                ], [
                     'title' => $ownMenuplans[3]->title,
                     'start' => $ownMenuplans[3]->start->format('Y-m-d'),
-                ]
+                ],
             ]);
     }
 

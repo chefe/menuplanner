@@ -31,7 +31,7 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         abort_unless($request->user()->id == $item->menuplan->user_id, 403);
-        
+
         $data = $request->validate([
             'title' => 'required|string|min:2',
             'unit' => 'required|string|min:1',
