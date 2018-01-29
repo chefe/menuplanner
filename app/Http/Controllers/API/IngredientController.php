@@ -6,6 +6,7 @@ use App\Meal;
 use App\Ingredient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Rules\ItemInMenuplan;
 
 class IngredientController extends Controller
 {
@@ -24,7 +25,7 @@ class IngredientController extends Controller
             'quantity' => 'required|numeric|min:0.001',
             'item_id' => [
                 'required',
-                'in:'.$meal->menuplan->items->pluck('id')->implode(','),
+                new ItemInMenuplan($meal->menuplan)
             ],
         ]);
 
