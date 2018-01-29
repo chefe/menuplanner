@@ -20,10 +20,7 @@ class ItemController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        $data = $request->validate([
-            'title' => 'required|string|min:2',
-            'unit' => 'required|string|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return $menuplan->items()->create($data);
     }
@@ -32,10 +29,7 @@ class ItemController extends Controller
     {
         $this->authorize('view', $item->menuplan);
 
-        $data = $request->validate([
-            'title' => 'required|string|min:2',
-            'unit' => 'required|string|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return tap($item)->update($data);
     }
@@ -45,5 +39,13 @@ class ItemController extends Controller
         $this->authorize('view', $item->menuplan);
 
         $item->delete();
+    }
+
+    private function getValidatedData(Request $request)
+    {
+        return $request->validate([
+            'title' => 'required|string|min:2',
+            'unit' => 'required|string|min:1',
+        ]);
     }
 }
