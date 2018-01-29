@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Meal;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
-use App\Item;
 use App\Ingredient;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class IngredientController extends Controller
 {
@@ -27,7 +25,7 @@ class IngredientController extends Controller
             'item_id' => [
                 'required',
                 'in:'.$meal->menuplan->items->pluck('id')->implode(','),
-            ]
+            ],
         ]);
 
         return $meal->ingredients()->create($data);
