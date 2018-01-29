@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\API;
 
+use App\Item;
 use App\Meal;
 use App\User;
 use App\Menuplan;
+use App\Ingredient;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Ingredient;
-use App\Item;
 
 class IngredientTest extends TestCase
 {
@@ -41,10 +41,10 @@ class IngredientTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 ['quantity' => $ingredients[0]->quantity],
-                ['quantity' => $ingredients[1]->quantity]
+                ['quantity' => $ingredients[1]->quantity],
             ])->assertJsonMissing([
                 ['quantity' => $otherIngredients[0]->quantity],
-                ['quantity' => $otherIngredients[1]->quantity]
+                ['quantity' => $otherIngredients[1]->quantity],
             ]);
     }
 
