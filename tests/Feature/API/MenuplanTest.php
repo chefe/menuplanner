@@ -44,10 +44,15 @@ class MenuplanTest extends TestCase
 
         $this->actingAs($user)
             ->post('/api/menuplan', $validMenuplanData)
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJson($validMenuplanData);
 
-        $this->assertDatabaseHas('menuplans', $validMenuplanData);
+        $this->assertDatabaseHas('menuplans', [
+            'title' => 'Week 01 - 2018',
+            'start' => '2018-01-01 00:00:00',
+            'end' => '2018-01-07 00:00:00',
+            'people' => 4,
+        ]);
     }
 
     /** @test */

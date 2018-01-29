@@ -25,6 +25,10 @@ $factory->define(Meal::class, function (Faker $faker) {
         'date' => function (array $meal) use ($faker) {
             $plan = Menuplan::find($meal['menuplan_id']);
 
+            if ($plan->start->diff($plan->end)->days == 0) {
+                return $plan->start;
+            }
+
             return $faker->dateTimeBetween($plan->start, $plan->end);
         },
     ];

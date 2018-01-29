@@ -24,7 +24,7 @@ class MenuplanController extends Controller
 
         return Menuplan::create(array_merge($data, [
             'user_id' => $request->user()->id,
-        ]));
+        ]))->asResource();
     }
 
     public function update(Request $request, Menuplan $menuplan)
@@ -38,7 +38,7 @@ class MenuplanController extends Controller
             'people' => 'required|integer|min:1',
         ]);
 
-        return tap($menuplan)->update($data);
+        return tap($menuplan)->update($data)->asResource();
     }
 
     public function destroy(Request $request, Menuplan $menuplan)
