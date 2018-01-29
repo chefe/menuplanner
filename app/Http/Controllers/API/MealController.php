@@ -20,14 +20,7 @@ class MealController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        $data = $request->validate([
-            'title' => 'required|string|min:3',
-            'description' => 'nullable|string',
-            'date' => 'required|date_format:Y-m-d',
-            'start' => 'required|date_format:H:i:s',
-            'end' => 'required|date_format:H:i:s|after:start',
-            'people' => 'nullable|integer|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return $menuplan->meals()->create($data);
     }
@@ -36,14 +29,7 @@ class MealController extends Controller
     {
         $this->authorize('view', $meal->menuplan);
 
-        $data = $request->validate([
-            'title' => 'required|string|min:3',
-            'description' => 'nullable|string',
-            'date' => 'required|date_format:Y-m-d',
-            'start' => 'required|date_format:H:i:s',
-            'end' => 'required|date_format:H:i:s|after:start',
-            'people' => 'nullable|integer|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return tap($meal)->update($data);
     }
@@ -53,5 +39,17 @@ class MealController extends Controller
         $this->authorize('view', $meal->menuplan);
 
         $meal->delete();
+    }
+
+    private function getValidatedData(Request $request)
+    {
+        return $request->validate([
+            'title' => 'required|string|min:3',
+            'description' => 'nullable|string',
+            'date' => 'required|date_format:Y-m-d',
+            'start' => 'required|date_format:H:i:s',
+            'end' => 'required|date_format:H:i:s|after:start',
+            'people' => 'nullable|integer|min:1',
+        ]);
     }
 }
