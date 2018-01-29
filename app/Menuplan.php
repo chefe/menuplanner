@@ -12,4 +12,9 @@ class Menuplan extends Model
     {
         return $this->hasMany(Meal::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

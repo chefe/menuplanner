@@ -17,6 +17,8 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('unit');
+            $table->integer('menuplan_id')->unsigned();
+            $table->foreign('menuplan_id')->references('id')->on('menuplans');
             $table->timestamps();
         });
     }
