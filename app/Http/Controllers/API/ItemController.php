@@ -11,14 +11,14 @@ class ItemController extends Controller
 {
     public function index(Request $request, Menuplan $menuplan)
     {
-        abort_unless($request->user()->id == $menuplan->user_id, 403);
+        $this->authorize('view', $menuplan);
 
         return $menuplan->items;
     }
 
     public function store(Request $request, Menuplan $menuplan)
     {
-        abort_unless($request->user()->id == $menuplan->user_id, 403);
+        $this->authorize('view', $menuplan);
 
         $data = $request->validate([
             'title' => 'required|string|min:2',
@@ -30,7 +30,7 @@ class ItemController extends Controller
 
     public function update(Request $request, Item $item)
     {
-        abort_unless($request->user()->id == $item->menuplan->user_id, 403);
+        $this->authorize('view', $item->menuplan);
 
         $data = $request->validate([
             'title' => 'required|string|min:2',
@@ -42,7 +42,7 @@ class ItemController extends Controller
 
     public function destroy(Request $request, Item $item)
     {
-        abort_unless($request->user()->id == $item->menuplan->user_id, 403);
+        $this->authorize('view', $item->menuplan);
 
         $item->delete();
     }

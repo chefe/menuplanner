@@ -11,14 +11,14 @@ class MealController extends Controller
 {
     public function index(Request $request, Menuplan $menuplan)
     {
-        abort_unless($menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('view', $menuplan);
 
         return $menuplan->meals;
     }
 
     public function store(Request $request, Menuplan $menuplan)
     {
-        abort_unless($menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('view', $menuplan);
 
         $data = $request->validate([
             'title' => 'required|string|min:3',
@@ -34,7 +34,7 @@ class MealController extends Controller
 
     public function update(Request $request, Meal $meal)
     {
-        abort_unless($meal->menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('view', $meal->menuplan);
 
         $data = $request->validate([
             'title' => 'required|string|min:3',
@@ -50,7 +50,7 @@ class MealController extends Controller
 
     public function destroy(Request $request, Meal $meal)
     {
-        abort_unless($meal->menuplan->user_id == $request->user()->id, 403);
+        $this->authorize('view', $meal->menuplan);
 
         $meal->delete();
     }

@@ -13,14 +13,14 @@ class IngredientController extends Controller
 {
     public function index(Request $request, Meal $meal)
     {
-        abort_unless($request->user()->id == $meal->menuplan->user_id, 403);
+        $this->authorize('view', $meal->menuplan);
 
         return $meal->ingredients;
     }
 
     public function store(Request $request, Meal $meal)
     {
-        abort_unless($request->user()->id == $meal->menuplan->user_id, 403);
+        $this->authorize('view', $meal->menuplan);
 
         $data = $request->validate([
             'quantity' => 'required|numeric|min:0.001',
@@ -35,7 +35,7 @@ class IngredientController extends Controller
 
     public function update(Request $request, Ingredient $ingredient)
     {
-        abort_unless($request->user()->id == $ingredient->meal->menuplan->user_id, 403);
+        $this->authorize('view', $ingredient->meal->menuplan);
 
         $data = $request->validate([
             'quantity' => 'required|numeric|min:0.001',
@@ -46,7 +46,7 @@ class IngredientController extends Controller
 
     public function destroy(Request $request, Ingredient $ingredient)
     {
-        abort_unless($request->user()->id == $ingredient->meal->menuplan->user_id, 403);
+        $this->authorize('view', $ingredient->meal->menuplan);
 
         $ingredient->delete();
     }
