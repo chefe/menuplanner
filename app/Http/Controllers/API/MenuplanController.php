@@ -16,12 +16,7 @@ class MenuplanController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string|min:3',
-            'start' => 'required|date_format:Y-m-d',
-            'end' => 'required|date_format:Y-m-d',
-            'people' => 'required|integer|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return Menuplan::create(array_merge($data, [
             'user_id' => $request->user()->id,
@@ -32,12 +27,7 @@ class MenuplanController extends Controller
     {
         $this->authorize('update', $menuplan);
 
-        $data = $request->validate([
-            'title' => 'required|string|min:3',
-            'start' => 'required|date_format:Y-m-d',
-            'end' => 'required|date_format:Y-m-d',
-            'people' => 'required|integer|min:1',
-        ]);
+        $data = $this->getValidatedData($request);
 
         return tap($menuplan)->update($data)->asResource();
     }
@@ -47,5 +37,15 @@ class MenuplanController extends Controller
         $this->authorize('delete', $menuplan);
 
         $menuplan->delete();
+    }
+
+    private function getValidatedData(Request $request)
+    {
+        return $request->validate([
+            'title' => 'required|string|min:3',
+            'start' => 'required|date_format:Y-m-d',
+            'end' => 'required|date_format:Y-m-d',
+            'people' => 'required|integer|min:1',
+        ]);
     }
 }
