@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Menuplanner') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
                 <div class="flex items-center justify-center h-12">
                     <div class="mr-6">
                         <a href="{{ url('/') }}" class="no-underline">
-                            {{ config('app.name', 'Laravel') }}
+                            {{ config('app.name', 'Menuplanner') }}
                         </a>
                     </div>
                     <div class="flex-1 text-right">

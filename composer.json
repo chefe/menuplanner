@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "chefe/menuplanner",
+    "description": "",
+    "keywords": ["menuplanner"],
     "license": "MIT",
     "type": "project",
     "require": {
