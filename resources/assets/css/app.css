@@ -5,3 +5,12 @@
 @tailwind utilities;
 
 /* Add utilities here... */
+
+
+.btn-primary {
+    @apply .bg-green-light .p-2 .rounded .text-green-darkest .no-underline .text-center .cursor-pointer;
+}
+
+.btn-secondary {
+    @apply .bg-grey-light .p-2 .rounded .text-grey-darkest .no-underline .text-center .cursor-pointer;
+}
