@@ -36,7 +36,7 @@ class LoginTest extends DuskTestCase
                 ->type('password', 'secret')
                 ->press('Login')
                 ->assertPathIs('/')
-                ->assertSee('Dashboard');
+                ->assertSee('Menuplans');
         });
     }
 }
