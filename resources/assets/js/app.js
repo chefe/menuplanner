@@ -7,14 +7,14 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 /** Define global components */
-Vue.component('status', require('./components/Status.vue'));
-Vue.component('panel', require('./components/Panel.vue'));
+Vue.component('status', require('./components/status.vue'));
+Vue.component('panel', require('./components/panel.vue'));
 
 /** Define routes for router */
 const routes = [
-    { path: '/', component: require('./components/Dashboard.vue') },
+    { path: '/', component: require('./components/dashboard.vue') },
     { path: '/menuplan/create', component: require('./components/menuplan/create.vue') },
-	{ path: '*', component: require('./components/NotFound.vue') },
+	{ path: '*', component: require('./components/not-found.vue') },
 ];
 
 /** Setup router */
