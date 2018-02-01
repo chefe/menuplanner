@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 
 /** Define global components */
 Vue.component('status', require('./components/status.vue'));
-Vue.component('panel', require('./components/panel.vue'));
+Vue.component('center-panel', require('./components/center-panel.vue'));
 
 /** Define routes for router */
 const routes = [
