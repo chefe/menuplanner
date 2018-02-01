@@ -14,3 +14,7 @@
 .btn-secondary {
     @apply .bg-grey-light .p-2 .rounded .text-grey-darkest .no-underline .text-center .cursor-pointer;
 }
+
+.form-item-form-control > * {
+    width: 100%;
+}
