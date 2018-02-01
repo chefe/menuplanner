@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
 {
-    public function index(Request $request, Menuplan $menuplan)
+    public function index(Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);
 
@@ -34,7 +34,7 @@ class ItemController extends Controller
         return tap($item)->update($data);
     }
 
-    public function destroy(Request $request, Item $item)
+    public function destroy(Item $item)
     {
         $this->authorize('view', $item->menuplan);
 

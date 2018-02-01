@@ -40,7 +40,7 @@ class MenuplanController extends Controller
         return tap($menuplan)->update($data)->asResource();
     }
 
-    public function destroy(Request $request, Menuplan $menuplan)
+    public function destroy(Menuplan $menuplan)
     {
         $this->authorize('delete', $menuplan);
 

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class IngredientController extends Controller
 {
-    public function index(Request $request, Meal $meal)
+    public function index(Meal $meal)
     {
         $this->authorize('view', $meal->menuplan);
 
@@ -43,7 +43,7 @@ class IngredientController extends Controller
         return tap($ingredient)->update($data);
     }
 
-    public function destroy(Request $request, Ingredient $ingredient)
+    public function destroy(Ingredient $ingredient)
     {
         $this->authorize('view', $ingredient->meal->menuplan);
 
