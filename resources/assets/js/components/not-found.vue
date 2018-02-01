@@ -1,11 +1,19 @@
 <template>
-    <div class="flex items-center justify-center h-64">
-        <span class="text-5xl text-grey-darker">Page could not be found!</span>
-    </div>
+    <center-panel>
+        <div class="flex flex-col items-center justify-center h-64">
+            <span class="text-5xl text-grey-darker">Page could not be found!</span>
+            
+            <button class="btn btn-primary text-xl mt-4" @click="back">Back</button>
+        </div>
+    </center-panel>
 </template>
 
 <script>
     export default {
-
+        methods: {
+            back() {
+                router.go(-1);
+            }
+        }
     }
 </script>
