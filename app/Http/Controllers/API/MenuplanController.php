@@ -23,7 +23,6 @@ class MenuplanController extends Controller
         ]))->asResource();
     }
 
-    /** */
     public function show(Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);
