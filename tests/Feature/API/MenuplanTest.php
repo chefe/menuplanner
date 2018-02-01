@@ -41,6 +41,34 @@ class MenuplanTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_get_data_from_a_menuplan()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id)
+            ->assertStatus(200)
+            ->assertJson([
+                'title' => $menuplan->title,
+                'start' => $menuplan->start->format('Y-m-d'),
+                'end' => $menuplan->end->format('Y-m-d'),
+                'people' => $menuplan->people,
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_only_get_data_from_his_menuplans()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create();
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id)
+            ->assertStatus(403);
+    }
+
+    /** @test */
     public function a_user_can_create_a_menuplan()
     {
         $user = factory(User::class)->create();

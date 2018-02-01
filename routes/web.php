@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
     Route::get('/menuplan', 'MenuplanController@index');
     Route::post('/menuplan', 'MenuplanController@store');
+    Route::get('/menuplan/{menuplan}', 'MenuplanController@show');
     Route::put('/menuplan/{menuplan}', 'MenuplanController@update');
     Route::delete('/menuplan/{menuplan}', 'MenuplanController@destroy');
 
