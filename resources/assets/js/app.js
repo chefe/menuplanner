@@ -14,6 +14,7 @@ Vue.component('center-panel', require('./components/center-panel.vue'));
 const routes = [
     { path: '/', component: require('./components/dashboard.vue') },
     { path: '/menuplan/create', component: require('./components/menuplan/create.vue') },
+    { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue') },
 	{ path: '*', component: require('./components/not-found.vue') },
 ];
 
