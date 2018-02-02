@@ -28,18 +28,8 @@
         },
         methods: {
             save() {
-                let that = this;
-                axios.post('/api/menuplan', {
-                    title: that.menuplan.title,
-                    start: that.menuplan.start,
-                    end: that.menuplan.end,
-                    people: that.menuplan.people
-                })
-                .then(function (response) {
+                axios.post('/api/menuplan', this.menuplan).then(response => {
                     router.push('/');
-                })
-                .catch(function (error) {
-                    bus.$emit('error', error);
                 });
             },
             cancel() {
