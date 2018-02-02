@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/menuplan/create', 'HomeController@index');
+    Route::get('/menuplan/{menuplan}', 'HomeController@index');
+    Route::get('/menuplan/{menuplan}/edit', 'HomeController@index');
 });
 
 Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
