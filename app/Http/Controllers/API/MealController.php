@@ -55,8 +55,8 @@ class MealController extends Controller
             'title' => 'required|string|min:3',
             'description' => 'nullable|string',
             'date' => 'required|date_format:Y-m-d',
-            'start' => 'required|date_format:H:i:s',
-            'end' => 'required|date_format:H:i:s|after:start',
+            'start' => 'required|date_format:H:i',
+            'end' => 'required|date_format:H:i|after:start',
             'people' => 'nullable|integer|min:1',
         ]);
     }
