@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Resources\MealResource;
 
 class Meal extends Model
 {
     protected $guarded = [];
+
+    protected $dates = ['date'];
 
     public function menuplan()
     {
@@ -16,5 +19,10 @@ class Meal extends Model
     public function ingredients()
     {
         return $this->hasMany(Ingredient::class);
+    }
+
+    public function asResource()
+    {
+        return new MealResource($this);
     }
 }

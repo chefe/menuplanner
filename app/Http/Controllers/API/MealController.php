@@ -6,6 +6,7 @@ use App\Meal;
 use App\Menuplan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MealResource;
 
 class MealController extends Controller
 {
@@ -13,7 +14,7 @@ class MealController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        return $menuplan->meals;
+        return MealResource::collection($menuplan->meals);
     }
 
     public function store(Request $request, Menuplan $menuplan)
@@ -22,7 +23,14 @@ class MealController extends Controller
 
         $data = $this->getValidatedData($request);
 
-        return $menuplan->meals()->create($data);
+        return $menuplan->meals()->create($data)->asResource();
+    }
+
+    public function show(Meal $meal)
+    {
+        $this->authorize('view', $meal->menuplan);
+
+        return $meal->asResource();
     }
 
     public function update(Request $request, Meal $meal)
@@ -31,7 +39,7 @@ class MealController extends Controller
 
         $data = $this->getValidatedData($request);
 
-        return tap($meal)->update($data);
+        return tap($meal)->update($data)->asResource();
     }
 
     public function destroy(Meal $meal)
