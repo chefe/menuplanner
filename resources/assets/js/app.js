@@ -6,6 +6,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+/** Include vue-progressbar and configure it */
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+    color: 'rgb(31, 157, 85)',
+    failedColor: 'rgb(204, 31, 26)',
+    height: '2px'
+});
+
 /** Define global components */
 Vue.component('status', require('./components/status.vue'));
 Vue.component('center-panel', require('./components/center-panel.vue'));

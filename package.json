@@ -19,6 +19,7 @@
         "postcss-import": "^11.0",
         "tailwindcss": "^0.4.0",
         "vue": "^2.5.7",
+        "vue-progressbar": "^0.7.3",
         "vue-router": "^3.0.1"
     }
 }
