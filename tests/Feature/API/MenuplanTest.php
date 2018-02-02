@@ -5,6 +5,7 @@ namespace Tests\Feature\API;
 use App\User;
 use App\Menuplan;
 use Tests\TestCase;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MenuplanTest extends TestCase
@@ -129,6 +130,24 @@ class MenuplanTest extends TestCase
             ->put('/api/menuplan/'.$menuplan->id, [
                 'title' => 'Changed',
             ])->assertStatus(403);
+    }
+
+    /** @test */
+    public function a_menuplan_with_end_date_before_start_date_can_not_be_saved()
+    {
+        $this->withoutExceptionHandling();
+        $this->expectException(ValidationException::class);
+
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $newMenuplanData = [
+            'title' => 'Week 01 - 2018',
+            'start' => '2018-01-07',
+            'end' => '2018-01-01',
+            'people' => 4,
+        ];
+
+        $this->actingAs($user)->put('/api/menuplan/'.$menuplan->id, $newMenuplanData);
     }
 
     /** @test */
