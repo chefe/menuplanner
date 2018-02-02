@@ -23,6 +23,7 @@ Vue.component('form-item', require('./components/form-item.vue'));
 const routes = [
     { path: '/', component: require('./components/dashboard.vue') },
     { path: '/menuplan/create', component: require('./components/menuplan/create.vue') },
+    { path: '/menuplan/:id', component: require('./components/menuplan/show.vue') },
     { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue') },
 	{ path: '*', component: require('./components/not-found.vue') },
 ];
