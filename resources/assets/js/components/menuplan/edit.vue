@@ -16,7 +16,7 @@
                 <a class="btn-danger" @click="deleteMenuplan">Yes</a>
             </div>
             <div v-else class="px-2 py-4">
-                <a class="btn-danger mr-2" @click="deleteMenuplan">Delete Menuplan</a>
+                <a class="btn-danger mr-2" @click="confirmDelete">Delete Menuplan</a>
                 <span class="text-grey-dark">This action can to be reverted!</span>
             </div>
         </center-panel>
@@ -44,56 +44,32 @@
         },
         mounted() {
             this.endpoint = '/api/menuplan/' + this.$route.params.id;
-
             this.fetchMenuplan();
         },
         methods: {
             fetchMenuplan() {
-                let that = this;
-                bus.$emit('loading', true);
-                axios.get(this.endpoint)
-                    .then(function (response) {
-                        bus.$emit('loading', false);
-                        that.menuplan = response.data;
-                    })
-                    .catch(function (error) {
-                        bus.$emit('error', error);
-                    });
+                axios.get(this.endpoint).then(response => {
+                    this.menuplan = response.data;
+                });
             },
             save() {
-                let that = this;
-                bus.$emit('loading', true);
-                axios.put(this.endpoint, this.menuplan)
-                    .then(function (response) {
-                        bus.$emit('loading', false);
-                        router.push('/');
-                    })
-                    .catch(function (error) {
-                        bus.$emit('error', error);
-                    });
+                axios.put(this.endpoint, this.menuplan).then(response => {
+                    router.push('/');
+                });
             },
             cancel() {
                 router.go(-1);
             }, 
-            deleteMenuplan() {
-                if (this.confirmMode == false) {
-                    this.confirmMode = true;
-                    return;
-                }
-
-                let that = this;
-                bus.$emit('loading', true);
-                axios.delete(this.endpoint)
-                    .then(function (response) {
-                        bus.$emit('loading', false);
-                        router.push('/');
-                    })
-                    .catch(function (error) {
-                        bus.$emit('error', error);
-                    });
+            confirmDelete() {
+                this.confirmMode = true;
             },
             cancelDelete() {
                 this.confirmMode = false;
+            },
+            deleteMenuplan() {
+                axios.delete(this.endpoint).then(response => {
+                    router.push('/');
+                });
             }
         }
     }
