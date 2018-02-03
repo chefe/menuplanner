@@ -14,9 +14,9 @@
                         <p class="text-grey-darker" v-text="meal.title"></p>
                         <small class="text-grey" v-text="getMealTime(meal)"></small>
                     </router-link>
-                    <router-link to="#" class="block no-underline border border-dashed text-grey bg-transparent p-2 mt-3">
+                    <a @click="addMeal(day)" class="block no-underline border border-dashed text-grey bg-transparent p-2 mt-3 cursor-pointer">
                         Add new meal
-                    </router-link>
+                    </a>
                 </div>
             </div>
         </div>
@@ -72,6 +72,12 @@
             },
             getMealTime(meal) {
                 return meal.start + ' - ' + meal.end;
+            },
+            addMeal(date) {
+                router.push({ 
+                    path: '/menuplan/' + this.$route.params.id + '/meal/create', 
+                    query: { date: date.format('YYYY-MM-DD') }
+                });
             }
         }
     }

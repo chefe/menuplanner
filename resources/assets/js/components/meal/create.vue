@@ -49,6 +49,7 @@
         },
         mounted() {
             this.fetchMenuplan();
+            this.loadDateFromQueryString();
         },
         methods: {
             fetchMenuplan() {
@@ -56,6 +57,11 @@
                 axios.get(endpoint).then(response => {
                     this.meal.menuplan = response.data;
                 });
+            },
+            loadDateFromQueryString() {
+                if (this.$route.query.date) {
+                    this.meal.date = this.$route.query.date;
+                }
             },
             save() {
                 let endpoint = '/api/menuplan/' + this.$route.params.id + '/meals';
