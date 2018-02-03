@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 pb-2 border-b-2 shadow-b text-grey-darkest text-xl">
+        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
             <h1 class="flex-1">Edit Meal</h1>
             <a class="btn-secondary mr-2" @click="cancel">Cancel</a>
             <a class="btn-primary" @click="save">Save</a>
