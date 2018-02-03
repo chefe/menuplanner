@@ -46,7 +46,8 @@
                             placeholder="Please provide a title" required />
                     </form-item>
                     <form-item caption="Date">
-                        <input class="form-control" type="date" name="date" v-model="meal.date" required />
+                        <input class="form-control" type="date" name="date" v-model="meal.date"
+                               :min="meal.menuplan.start" :max="meal.menuplan.end" required />
                     </form-item>
                     <form-item caption="Start">
                         <input class="form-control" type="time" name="start" v-model="meal.start" required />
@@ -70,7 +71,10 @@
             return {
                 endpoint: '',
                 meal: {
-                    description: ''
+                    description: '',
+                    menuplan: {
+                        people: 0
+                    }
                 },
             }
         },
