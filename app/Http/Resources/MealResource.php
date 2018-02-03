@@ -12,6 +12,7 @@ class MealResource extends Resource
             'date' => $this->date->format('Y-m-d'),
             'start' => $this->getFormatedTime($this->start),
             'end' => $this->getFormatedTime($this->end),
+            'menuplan' => new MenuplanResource($this->menuplan),
         ]);
     }
 
