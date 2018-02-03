@@ -6,6 +6,7 @@ use App\Meal;
 use App\User;
 use App\Menuplan;
 use Tests\TestCase;
+use Illuminate\Validation\ValidationException;
 use phpDocumentor\Reflection\DocBlock\Description;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -153,6 +154,27 @@ class MealTest extends TestCase
             ->assertStatus(403);
 
         $this->assertDatabaseMissing('meals', $this->validMealData);
+    }
+
+    /** @test */
+    public function date_of_a_meal_has_to_be_in_menuplan_period()
+    {
+        $this->withoutExceptionHandling();
+        $this->expectException(ValidationException::class);
+
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create([
+            'user_id' => $user->id,
+            'start' => '2018-01-01',
+            'end' => '2018-01-07',
+        ]);
+        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+
+        $validMealData = $this->validMealData;
+        $validMealData['date'] = '2018-02-03';
+
+        $this->actingAs($user)
+            ->put('/api/meal/'.$meal->id, $validMealData);
     }
 
     /** @test */

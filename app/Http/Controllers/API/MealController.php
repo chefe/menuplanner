@@ -21,7 +21,7 @@ class MealController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        $data = $this->getValidatedData($request);
+        $data = $this->getValidatedData($request, $menuplan);
 
         return $menuplan->meals()->create($data)->asResource();
     }
@@ -37,7 +37,7 @@ class MealController extends Controller
     {
         $this->authorize('view', $meal->menuplan);
 
-        $data = $this->getValidatedData($request);
+        $data = $this->getValidatedData($request, $meal->menuplan);
 
         return tap($meal)->update($data)->asResource();
     }
@@ -49,15 +49,24 @@ class MealController extends Controller
         $meal->delete();
     }
 
-    private function getValidatedData(Request $request)
+    private function getValidatedData(Request $request, Menuplan $menuplan)
     {
-        return $request->validate([
+        $minDate = 'after_or_equal:'.$menuplan->start->format('Y-m-d');
+        $maxDate = 'before_or_equal:'.$menuplan->end->format('Y-m-d');
+
+        $validated = $request->validate([
             'title' => 'required|string|min:3',
             'description' => 'nullable|string',
-            'date' => 'required|date_format:Y-m-d',
+            'date' => 'required|date_format:Y-m-d|'.$minDate.'|'.$maxDate,
             'start' => 'required|date_format:H:i',
-            'end' => 'required|date_format:H:i|after:start',
+            'end' => 'required|date_format:H:i|min:start',
             'people' => 'nullable|integer|min:1',
         ]);
+
+        if (!isset($validated['description']) || $validated['description'] == null) {
+            $validated['description'] = '';
+        }
+
+        return $validated;
     }
 }
