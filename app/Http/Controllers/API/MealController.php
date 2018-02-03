@@ -63,7 +63,7 @@ class MealController extends Controller
             'people' => 'nullable|integer|min:1',
         ]);
 
-        if (!isset($validated['description']) || $validated['description'] == null) {
+        if (! isset($validated['description']) || $validated['description'] == null) {
             $validated['description'] = '';
         }
 

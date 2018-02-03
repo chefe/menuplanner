@@ -18,6 +18,7 @@ class MealResource extends Resource
     private function getFormatedTime($time)
     {
         $parts = explode(':', $time);
+
         return sprintf('%02d:%02d', $parts[0], $parts[1]);
     }
 }

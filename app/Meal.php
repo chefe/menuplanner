@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\MealResource;
+use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
