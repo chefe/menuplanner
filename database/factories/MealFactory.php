@@ -6,8 +6,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Meal::class, function (Faker $faker) {
     $times = [
-        $faker->time(),
-        $faker->time(),
+        $faker->time('H:i'),
+        $faker->time('H:i'),
     ];
 
     return [
