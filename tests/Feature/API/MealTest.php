@@ -22,10 +22,17 @@ class MealTest extends TestCase
             'title' => 'First Meal',
             'description' => 'And here is the description!',
             'date' => '2018-01-01',
-            'start' => '12:00:00',
-            'end' => '13:00:00',
+            'start' => '12:00',
+            'end' => '13:00',
             'people' => 8,
         ];
+    }
+
+    private function getValidMealData(Menuplan $menuplan)
+    {
+        return array_merge($this->validMealData, [
+            'date' => $menuplan->start->format('Y-m-d')
+        ]);
     }
 
     /** @test */
@@ -101,12 +108,12 @@ class MealTest extends TestCase
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
 
-        $this->actingAs($user)
-            ->post('/api/menuplan/'.$menuplan->id.'/meals', $this->validMealData)
+        $validMealData = $this->getValidMealData($menuplan);
+        $d = $this->actingAs($user)
+            ->post('/api/menuplan/'.$menuplan->id.'/meals', $validMealData)
             ->assertStatus(201)
-            ->assertJson($this->validMealData);
+            ->assertJson($validMealData);
 
-        $validMealData = $this->validMealData;
         $validMealData['date'] .= ' 00:00:00';
         $this->assertDatabaseHas('meals', $validMealData);
     }
@@ -130,15 +137,15 @@ class MealTest extends TestCase
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $validMealData = $this->getValidMealData($menuplan);
 
-        $this->assertDatabaseMissing('meals', $this->validMealData);
+        $this->assertDatabaseMissing('meals', $validMealData);
 
         $this->actingAs($user)
-            ->put('/api/meal/'.$meal->id, $this->validMealData)
+            ->put('/api/meal/'.$meal->id, $validMealData)
             ->assertStatus(200)
-            ->assertJson($this->validMealData);
+            ->assertJson($validMealData);
 
-        $validMealData = $this->validMealData;
         $validMealData['date'] .= ' 00:00:00';
         $this->assertDatabaseHas('meals', $validMealData);
     }
