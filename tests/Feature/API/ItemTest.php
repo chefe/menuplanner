@@ -66,7 +66,7 @@ class ItemTest extends TestCase
 
         $this->actingAs($user)
             ->post('/api/menuplan/'.$menuplan->id.'/items', $this->validItemData)
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJson($this->validItemData);
 
         $this->assertDatabaseHas('items', $this->validItemData);

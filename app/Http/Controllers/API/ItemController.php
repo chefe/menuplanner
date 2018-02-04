@@ -6,6 +6,7 @@ use App\Item;
 use App\Menuplan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ItemResource;
 
 class ItemController extends Controller
 {
@@ -13,7 +14,7 @@ class ItemController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        return $menuplan->items;
+        return ItemResource::collection($menuplan->items);
     }
 
     public function store(Request $request, Menuplan $menuplan)
@@ -22,7 +23,7 @@ class ItemController extends Controller
 
         $data = $this->getValidatedData($request);
 
-        return $menuplan->items()->create($data);
+        return $menuplan->items()->create($data)->asResource();
     }
 
     public function update(Request $request, Item $item)
@@ -31,7 +32,7 @@ class ItemController extends Controller
 
         $data = $this->getValidatedData($request);
 
-        return tap($item)->update($data);
+        return tap($item)->update($data)->asResource();
     }
 
     public function destroy(Item $item)
