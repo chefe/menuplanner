@@ -37,11 +37,12 @@
             let that = this;
 
             router.beforeEach((to, from, next) => {
-                that.error.show = false;
+                that.clearError();
                 next();
             });
 
             window.axios.interceptors.request.use(function (config) {
+                that.clearError();
                 that.$Progress.start();
                 return config;
             }, function (error) {
@@ -59,6 +60,9 @@
 
         },
         methods: {
+            clearError() {
+                this.error.show = false;
+            },
             handleError(error) {
                 if (error.response.status == 422) {
                     this.handleValidationError(error.response.data);
