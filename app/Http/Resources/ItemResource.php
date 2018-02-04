@@ -15,7 +15,7 @@ class ItemResource extends Resource
     public function toArray($request)
     {
         return array_merge(parent::toArray($request), [
-            'can_be_delted' => $this->ingredients()->count() == 0
+            'can_be_deleted' => $this->ingredients()->count() == 0
         ]);
     }
 }
