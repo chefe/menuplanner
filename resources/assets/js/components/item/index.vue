@@ -16,7 +16,7 @@
                     <tr>
                         <th width="50%" class="p-1 text-left">Title</th>
                         <th width="40%" class="p-1 text-left">Unit</th>
-                        <th width="10%"></th>
+                        <th width="10%" style="min-width:40px"></th>
                     </tr>
                 </thead>
                 <tbody>
