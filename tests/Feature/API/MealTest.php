@@ -31,7 +31,7 @@ class MealTest extends TestCase
     private function getValidMealData(Menuplan $menuplan)
     {
         return array_merge($this->validMealData, [
-            'date' => $menuplan->start->format('Y-m-d')
+            'date' => $menuplan->start->format('Y-m-d'),
         ]);
     }
 
