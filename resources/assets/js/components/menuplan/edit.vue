@@ -15,9 +15,9 @@
                 <a class="btn-secondary mr-2" @click="cancelDelete">No</a>
                 <a class="btn-danger" @click="deleteMenuplan">Yes</a>
             </div>
-            <div v-else class="px-2 py-4">
+            <div v-else class="px-2 py-4 flex items-center">
                 <a class="btn-danger mr-2" @click="confirmDelete">Delete Menuplan</a>
-                <span class="text-grey-dark">This action can to be reverted!</span>
+                <span class="text-grey-dark">This action can not be reverted!</span>
             </div>
         </center-panel>
     </div>
