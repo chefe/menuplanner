@@ -27,6 +27,7 @@ const routes = [
     { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue') },
     { path: '/menuplan/:id/meal/create', component: require('./components/meal/create.vue') },
     { path: '/meal/:id/edit', component: require('./components/meal/edit.vue') },
+    { path: '/menuplan/:id/items', component: require('./components/item/index.vue') },
 	{ path: '*', component: require('./components/not-found.vue') },
 ];
 
