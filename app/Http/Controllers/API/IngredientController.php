@@ -38,6 +38,10 @@ class IngredientController extends Controller
 
         $data = $request->validate([
             'quantity' => 'required|numeric|min:0.001',
+            'item_id' => [
+                'required',
+                new ItemInMenuplan($ingredient->meal->menuplan),
+            ],
         ]);
 
         return tap($ingredient)->update($data);
