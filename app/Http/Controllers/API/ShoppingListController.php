@@ -9,6 +9,8 @@ class ShoppingListController extends Controller
 {
     public function index(Menuplan $menuplan)
     {
+        $this->authorize('view', $menuplan);
+
         return $menuplan->ingredients
             ->groupBy('item_id')
             ->filter(function ($ingredients) {
