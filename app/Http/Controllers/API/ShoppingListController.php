@@ -17,6 +17,8 @@ class ShoppingListController extends Controller
                 return [
                     'item_id' => $ingredients->first()->item_id,
                     'quantity' => $ingredients->sum('quantity'),
+                    'title' => $ingredients->first()->item->title,
+                    'unit' => $ingredients->first()->item->unit,
                     'meals' => $ingredients->map(function ($i) {
                         return [
                             'id' => $i->meal_id,

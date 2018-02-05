@@ -12,4 +12,9 @@ class Ingredient extends Model
     {
         return $this->belongsTo(Meal::class);
     }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }
