@@ -2,12 +2,10 @@
 
 namespace Tests\Feature\API;
 
-use App\User;
 use App\Meal;
+use App\User;
 use App\Menuplan;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ShoppingListTest extends TestCase
