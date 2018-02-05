@@ -14,25 +14,26 @@
 
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">Ingredients</h2>
-                    <div class="flex items-center mb-2" v-for="ingredient in meal.ingredients" :key="ingredient.id">
+                    <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="w-1/3 pr-2">
-                            <input class="form-control" type="number"/>
+                            <input @change="updateIngredient(ingredient)" class="form-control text-right" type="number" v-model="ingredient.quantity" />
                         </div>
-                        <div class="w-1/6">g</div>
+                        <div class="w-1/6" v-text="getUnitForItemId(ingredient.item_id)"></div>
                         <div class="w-1/2 pr-2">
-                            <select class="w-full block appearance-none bg-white border p-1 h-8">
-                                <option>Demo</option>
+                            <select @change="updateIngredient(ingredient)" class="w-full block appearance-none bg-white border p-1 h-8" v-model="ingredient.item_id">
+                                <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
                             </select>
                         </div>
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="w-1/3 pr-2">
-                            <input class="form-control" type="number"/>
+                            <input @change="addIngredient()" class="form-control text-right" type="number" v-model="newIngredient.quantity"/>
                         </div>
-                        <div class="w-1/6">g</div>
+                        <div class="w-1/6" v-text="getUnitForItemId(newIngredient.item_id)"></div>
                         <div class="w-1/2 pr-2">
-                            <select class="w-full block appearance-none bg-white border p-1 h-8">
-                                <option>Demo</option>
+                            <select @change="addIngredient()" class="w-full block appearance-none bg-white border p-1 h-8" v-model="newIngredient.item_id">
+                                <option disabled value="0">Select an item</option>
+                                <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
                             </select>
                         </div>
                     </div>
@@ -70,6 +71,12 @@
         data() {
             return {
                 endpoint: '',
+                ingredients: [],
+                items: [],
+                newIngredient: {
+                    item_id: 0,
+                    quantity: 0
+                },
                 meal: {
                     description: '',
                     menuplan: {
@@ -81,11 +88,24 @@
         mounted() {
             this.endpoint = '/api/meal/' + this.$route.params.id;
             this.fetchMeal();
+            this.fetchIngredients();
         },
         methods: {
+            fetchIngredients() {
+                axios.get(this.endpoint + '/ingredients').then(response => {
+                    this.ingredients = response.data;
+                });
+            },
             fetchMeal() {
                 axios.get(this.endpoint).then(response => {
                     this.meal = response.data;
+                    this.fetchItems(this.meal.menuplan_id);
+                });
+            },
+            fetchItems(menuplanId) {
+                let endpoint = '/api/menuplan/' + menuplanId + '/items';
+                axios.get(endpoint).then(response => {
+                    this.items = response.data;
                 });
             },
             save() {
@@ -95,6 +115,28 @@
             },
             cancel() {
                 router.go(-1);
+            },
+            updateIngredient(ingredient) {
+                let endpoint = '/api/ingredient/' + ingredient.id;
+                let data = { quantity: ingredient.quantity, item_id: ingredient.item_id };
+                axios.put(endpoint, data).then(response => {
+                });
+            },
+            getUnitForItemId(itemId) {
+                let items = this.items.filter(i => {
+                    return i.id == itemId;
+                });
+                
+                return items.length > 0 ? items[0].unit : '';
+            },
+            addIngredient() {
+                if (this.newIngredient.item_id != 0 && this.newIngredient.quantity > 0) {
+                    axios.post(this.endpoint + '/ingredients', this.newIngredient).then(response => {
+                        this.ingredients.push(response.data);
+                        this.newIngredient.item_id = 0;
+                        this.newIngredient.quantity = 0;
+                    });
+                }
             }
         }
     }
