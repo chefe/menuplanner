@@ -1,6 +1,5 @@
-# menuplanner
-[![TravisCI Status](https://travis-ci.org/chefe/menuplanner.svg?branch=master)](https://travis-ci.org/chefe/menuplanner)
-[![StyleCI Status](https://styleci.io/repos/119275915/shield?branch=master&style=flat)](https://styleci.io/repos/119275915)
+# menuplanner [![TravisCI Status](https://travis-ci.org/chefe/menuplanner.svg?branch=master)](https://travis-ci.org/chefe/menuplanner) [![StyleCI Status](https://styleci.io/repos/119275915/shield?branch=master&style=flat)](https://styleci.io/repos/119275915)
+An application to plan your meals for a given timeframe
 
 ## Installation
 1. Begin by cloning this repository to your machine, and installing all Composer & NPM dependencies.
