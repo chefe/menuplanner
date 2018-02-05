@@ -45,4 +45,6 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
     Route::post('/meal/{meal}/ingredients', 'IngredientController@store');
     Route::put('/ingredient/{ingredient}', 'IngredientController@update');
     Route::delete('/ingredient/{ingredient}', 'IngredientController@destroy');
+
+    Route::get('/menuplan/{menuplan}/shopping-list', 'ShoppingListController@index');
 });

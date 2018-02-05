@@ -21,6 +21,11 @@ class Menuplan extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function ingredients()
+    {
+        return $this->hasManyThrough(Ingredient::class, Meal::class);
+    }
+
     public function asResource()
     {
         return new MenuplanResource($this);
