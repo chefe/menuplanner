@@ -51,7 +51,7 @@ class MenuplanController extends Controller
         return $request->validate([
             'title' => 'required|string|min:3',
             'start' => 'required|date_format:Y-m-d',
-            'end' => 'required|date_format:Y-m-d|after:start',
+            'end' => 'required|date_format:Y-m-d|after_or_equal:start',
             'people' => 'required|integer|min:1',
         ]);
     }
