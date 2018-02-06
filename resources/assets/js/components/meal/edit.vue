@@ -15,27 +15,33 @@
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">Ingredients</h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
-                        <div class="w-1/3 pr-2">
+                        <div class="flex-1 pr-2">
                             <input @change="updateIngredient(ingredient)" class="form-control text-right" type="number" v-model="ingredient.quantity" />
                         </div>
-                        <div class="w-1/6" v-text="getUnitForItemId(ingredient.item_id)"></div>
-                        <div class="w-1/2 pr-2">
+                        <div class="w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
+                        <div class="flex-1">
                             <select @change="updateIngredient(ingredient)" class="w-full block appearance-none bg-white border p-1 h-8" v-model="ingredient.item_id">
                                 <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
                             </select>
                         </div>
+                        <div class="w-8 text-center">
+                            <a @click="deleteIngredient(ingredient)" class="cursor-pointer">
+                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
+                            </a>
+                        </div>
                     </div>
                     <div class="flex items-center mb-2">
-                        <div class="w-1/3 pr-2">
+                        <div class="flex-1 pr-2">
                             <input @change="addIngredient()" class="form-control text-right" type="number" v-model="newIngredient.quantity"/>
                         </div>
-                        <div class="w-1/6" v-text="getUnitForItemId(newIngredient.item_id)"></div>
-                        <div class="w-1/2 pr-2">
+                        <div class="w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
+                        <div class="flex-1">
                             <select @change="addIngredient()" class="w-full block appearance-none bg-white border p-1 h-8" v-model="newIngredient.item_id">
                                 <option disabled value="0">Select an item</option>
                                 <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
                             </select>
                         </div>
+                        <div class="w-8"></div>
                     </div>
                 </div>
             </div>
@@ -135,6 +141,16 @@
                         this.ingredients.push(response.data);
                         this.newIngredient.item_id = 0;
                         this.newIngredient.quantity = 0;
+                    });
+                }
+            },
+            deleteIngredient(ingredient) {
+                if (confirm('Are you sure?')) {
+                    let endpoint = '/api/ingredient/' + ingredient.id;
+                    axios.delete(endpoint).then(response => {
+                        this.ingredients = this.ingredients.filter(i => {
+                            return i.id != ingredient.id; 
+                        });
                     });
                 }
             }
