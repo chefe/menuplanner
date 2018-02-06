@@ -12,7 +12,7 @@
             <input type="date" name="start" v-model="menuplan.start" class="form-control" required />
         </form-item>
         <form-item caption="End">
-            <input type="date" name="end" v-model="menuplan.end" class="form-control" required />
+            <input type="date" name="end" v-model="menuplan.end" :min="menuplan.start" class="form-control" required />
         </form-item>
         <form-item caption="People">
             <input type="number" name="people" v-model="menuplan.people" min="1" class="form-control" required />
