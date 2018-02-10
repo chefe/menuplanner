@@ -14,7 +14,9 @@ class ItemController extends Controller
     {
         $this->authorize('view', $menuplan);
 
-        return ItemResource::collection($menuplan->items);
+        return ItemResource::collection($menuplan->items->sortBy(function ($item) {
+            return strtoupper($item->title);
+        }));
     }
 
     public function store(Request $request, Menuplan $menuplan)

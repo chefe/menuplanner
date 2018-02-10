@@ -121,6 +121,9 @@
                     let item = response.data;
                     item.editing = false;
                     this.items.push(item);
+                    this.items = this.items.sort((a, b) => {
+                        return a.title.localeCompare(b.title);
+                    });
                     this.cancelAdding();
                 });
             },

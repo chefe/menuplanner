@@ -30,6 +30,10 @@ class ItemTest extends TestCase
         $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
         $otherItems = factory(Item::class, 3)->create();
 
+        $items[0]->update(['title' => 'A']);
+        $items[1]->update(['title' => 'B']);
+        $items[2]->update(['title' => 'C']);
+
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/items')
             ->assertStatus(200)
@@ -142,5 +146,26 @@ class ItemTest extends TestCase
             ->assertStatus(403);
 
         $this->assertDatabaseHas('items', $item->toArray());
+    }
+
+    /** @test */
+    public function items_of_a_menuplan_are_sorted_by_title()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+
+        $items[0]->update(['title' => 'C']);
+        $items[1]->update(['title' => 'A']);
+        $items[2]->update(['title' => 'B']);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id.'/items')
+            ->assertStatus(200)
+            ->assertJson([
+                ['title' => $items[1]->title],
+                ['title' => $items[2]->title],
+                ['title' => $items[0]->title],
+            ]);
     }
 }
