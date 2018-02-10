@@ -77,9 +77,9 @@ class ShoppingListTest extends TestCase
             ->assertStatus(200)
             ->assertJsonCount(3)
             ->assertJson([
-                ['item_id' => $items[1]->id, 'quantity' => 1],
-                ['item_id' => $items[2]->id, 'quantity' => 1],
-                ['item_id' => $items[0]->id, 'quantity' => 1],
+                ['item_id' => $items[1]->id],
+                ['item_id' => $items[2]->id],
+                ['item_id' => $items[0]->id],
             ]);
     }
 
@@ -96,7 +96,7 @@ class ShoppingListTest extends TestCase
             ->get('/api/menuplan/'.$menuplan->id.'/shopping-list')
             ->assertStatus(200)
             ->assertJson([
-                ['item_id' => $item->id, 'quantity' => 1.001],
+                ['quantity' => 1.001],
             ]);
     }
 }
