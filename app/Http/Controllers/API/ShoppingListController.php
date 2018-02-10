@@ -28,6 +28,6 @@ class ShoppingListController extends Controller
                         ];
                     }),
                 ];
-            })->values();
+            })->sortBy('title')->values();
     }
 }

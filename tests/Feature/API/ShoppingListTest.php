@@ -21,6 +21,11 @@ class ShoppingListTest extends TestCase
         $meals = factory(Meal::class, 2)->create(['menuplan_id' => $menuplan->id]);
         $items = factory(Item::class, 4)->create(['menuplan_id' => $menuplan->id]);
 
+        $items[0]->update(['title' => 'A']);
+        $items[1]->update(['title' => 'B']);
+        $items[2]->update(['title' => 'C']);
+        $items[2]->update(['title' => 'D']);
+
         $meals[0]->ingredients()->create(['quantity' => 1.25, 'item_id' => $items[0]->id]);
         $meals[0]->ingredients()->create(['quantity' => 200, 'item_id' => $items[1]->id]);
         $meals[0]->ingredients()->create(['quantity' => 2, 'item_id' => $items[2]->id]);
@@ -49,5 +54,32 @@ class ShoppingListTest extends TestCase
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/shopping-list')
             ->assertStatus(403);
+    }
+
+    /** @test */
+    public function the_shopping_list_is_sorted_alphabetiically_by_the_item_title()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+
+        $items[0]->update(['title' => 'C']);
+        $items[1]->update(['title' => 'A']);
+        $items[2]->update(['title' => 'B']);
+
+        $meal->ingredients()->create(['quantity' => 1, 'item_id' => $items[2]->id]);
+        $meal->ingredients()->create(['quantity' => 1, 'item_id' => $items[1]->id]);
+        $meal->ingredients()->create(['quantity' => 1, 'item_id' => $items[0]->id]);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id.'/shopping-list')
+            ->assertStatus(200)
+            ->assertJsonCount(3)
+            ->assertJson([
+                ['item_id' => $items[1]->id, 'quantity' => 1],
+                ['item_id' => $items[2]->id, 'quantity' => 1],
+                ['item_id' => $items[0]->id, 'quantity' => 1],
+            ]);
     }
 }
