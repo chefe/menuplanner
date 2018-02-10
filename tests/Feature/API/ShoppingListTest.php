@@ -82,4 +82,21 @@ class ShoppingListTest extends TestCase
                 ['item_id' => $items[0]->id, 'quantity' => 1],
             ]);
     }
+
+    /** @test */
+    public function quantity_of_shopping_list_items_is_rounded_up_to_three_decimal_digits()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $item = factory(Item::class)->create(['menuplan_id' => $menuplan->id]);
+        $meal->ingredients()->create(['quantity' => 1.000001, 'item_id' => $item->id]);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id.'/shopping-list')
+            ->assertStatus(200)
+            ->assertJson([
+                ['item_id' => $item->id, 'quantity' => 1.001],
+            ]);
+    }
 }
