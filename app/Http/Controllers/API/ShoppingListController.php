@@ -12,6 +12,7 @@ class ShoppingListController extends Controller
         $this->authorize('view', $menuplan);
 
         return $menuplan->ingredients
+            ->load('meal')
             ->groupBy('item_id')
             ->filter(function ($ingredients) {
                 return $ingredients->isEmpty() == false;
@@ -23,8 +24,12 @@ class ShoppingListController extends Controller
                     'unit' => $ingredients->first()->item->unit,
                     'meals' => $ingredients->map(function ($i) {
                         return [
-                            'id' => $i->meal_id,
+                            'id' => $i->meal->id,
                             'quantity' => $i->quantity,
+                            'title' => $i->meal->title,
+                            'date' => $i->meal->date->format('Y-m-d'),
+                            'start' => $i->meal->start,
+                            'end' => $i->meal->end,
                         ];
                     }),
                 ];

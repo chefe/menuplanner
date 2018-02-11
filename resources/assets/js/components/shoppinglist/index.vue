@@ -12,18 +12,14 @@
 
         <div class="bg-white m-2 p-2 shadow border">
             <table class="w-full">
-                <thead>
-                    <tr>
-                        <th width="50%" class="p-1 text-left">Title</th>
-                        <th width="40%" class="p-1 text-right">Quantity</th>
-                        <th width="10%" class="p-1 text-left">Unit</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr v-for="item in shoppingList" :key="item.id">
-                        <td class="p-1" v-text="item.title"></td>
                         <td class="p-1 text-right" v-text="item.quantity"></td>
                         <td class="p-1" v-text="item.unit"></td>
+                        <td class="p-1" v-text="item.title"></td>
+                        <td>
+                            <small v-text="quantityPerMealString(item)"></small>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -48,6 +44,11 @@
                     this.shoppingList = response.data;
                 });
             },
+            quantityPerMealString(item) {
+                return item.meals.map(m => {
+                    return m.title + ' '  + m.quantity + ' ' + item.unit;
+                }).join(', ');
+            }
         }
     }
 </script>
