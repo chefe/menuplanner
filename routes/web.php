@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/meal/{meal}/edit', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/items', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/shopping-list', 'HomeController@index');
+
+    Route::get('/menuplan/{menuplan}/shopping-list/pdf', 'ShoppingListPdfController@show');
 });
 
 Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
