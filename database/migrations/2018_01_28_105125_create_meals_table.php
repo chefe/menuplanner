@@ -21,6 +21,7 @@ class CreateMealsTable extends Migration
             $table->time('start');
             $table->time('end');
             $table->integer('people')->nullable();
+            $table->integer('ingredients_for')->default(4);
             $table->integer('menuplan_id')->unsigned();
             $table->foreign('menuplan_id')->references('id')->on('menuplans');
             $table->timestamps();

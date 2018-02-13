@@ -19,7 +19,7 @@ class ShoppingListController extends Controller
             })->map(function ($ingredients) {
                 return [
                     'item_id' => $ingredients->first()->item_id,
-                    'quantity' => round($ingredients->sum('quantity') + 0.0005, 3, PHP_ROUND_HALF_DOWN),
+                    'quantity' => round($ingredients->sum('quantity_for_shopping_list') + 0.0005, 3, PHP_ROUND_HALF_DOWN),
                     'title' => $ingredients->first()->item->title,
                     'unit' => $ingredients->first()->item->unit,
                     'meals' => $ingredients->map(function ($i) {

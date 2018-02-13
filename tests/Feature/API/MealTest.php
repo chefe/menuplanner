@@ -25,6 +25,7 @@ class MealTest extends TestCase
             'start' => '12:00',
             'end' => '13:00',
             'people' => 8,
+            'ingredients_for' => 4,
         ];
     }
 

@@ -61,6 +61,7 @@ class MealController extends Controller
             'start' => 'required|date_format:H:i',
             'end' => 'required|date_format:H:i|min:start',
             'people' => 'nullable|integer|min:1',
+            'ingredients_for' => 'required|integer|min:1',
         ]);
 
         if (! isset($validated['description']) || $validated['description'] == null) {

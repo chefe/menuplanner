@@ -13,7 +13,11 @@
                 </div>
 
                 <div class="bg-white shadow border p-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">Ingredients</h2>
+                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">
+                        <span></span>Ingredients for</span>
+                        <input class="text-grey-darkest" type="number" name="ingredients_for" v-model="meal.ingredients_for" min="1" required />
+                        <span>people</span>
+                    </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="flex-1 pr-2">
                             <input @change="updateIngredient(ingredient)" class="form-control text-right" type="number" v-model="ingredient.quantity" />
