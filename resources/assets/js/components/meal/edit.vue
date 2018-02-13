@@ -9,7 +9,7 @@
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white shadow border p-2 mb-4">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">Descriptions</h2>
-                    <textarea class="w-full border" rows="10" v-model="meal.description" placeholder="Enter description ..."></textarea>
+                    <trix-editor input="trix4Description" placeholder="Enter description ..."></trix-editor>
                 </div>
 
                 <div class="bg-white shadow border p-2">
@@ -77,6 +77,9 @@
 </template>
 
 <script>
+    import 'trix';
+    import 'trix/dist/trix.css';
+    
     export default {
         data() {
             return {
@@ -110,6 +113,12 @@
                 axios.get(this.endpoint).then(response => {
                     this.meal = response.data;
                     this.fetchItems(this.meal.menuplan_id);
+                    document.querySelector("trix-editor").editor.insertHTML(this.meal.description);
+                    
+                    let vm = this;
+                    document.querySelector("trix-editor").addEventListener('trix-change', (e) => {
+                        vm.meal.description = e.currentTarget.innerHTML;
+                    });
                 });
             },
             fetchItems(menuplanId) {
