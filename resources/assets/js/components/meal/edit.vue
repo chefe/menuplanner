@@ -2,8 +2,12 @@
     <div class="container mx-auto">
         <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
             <h1 class="flex-1">Edit Meal</h1>
-            <a class="btn-secondary mr-2" @click="cancel">Cancel</a>
-            <a class="btn-primary" @click="save">Save</a>
+            <router-link :to="'/menuplan/' + meal.menuplan_id" class="text-grey-darkest ml-4">
+                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 0h9v9H0V0zm2 2v5h5V2H2zm-2 9h9v9H0v-9zm2 2v5h5v-5H2zm9-13h9v9h-9V0zm2 2v5h5V2h-5zm-2 9h9v9h-9v-9zm2 2v5h5v-5h-5z"/></svg>
+            </router-link>
+            <router-link to="/" class="text-grey-darkest ml-4">
+                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
+            </router-link>
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
@@ -53,21 +57,21 @@
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">Settings</h2>
                     <form-item caption="Title">
-                        <input class="form-control" type="text" name="title" v-model="meal.title" 
+                        <input class="form-control" type="text" name="title" v-model.lazy="meal.title" 
                             placeholder="Please provide a title" required />
                     </form-item>
                     <form-item caption="Date">
-                        <input class="form-control" type="date" name="date" v-model="meal.date"
+                        <input class="form-control" type="date" name="date" v-model.lazy="meal.date"
                                :min="meal.menuplan.start" :max="meal.menuplan.end" required />
                     </form-item>
                     <form-item caption="Start">
-                        <input class="form-control" type="time" name="start" v-model="meal.start" required />
+                        <input class="form-control" type="time" name="start" v-model.lazy="meal.start" required />
                     </form-item>
                     <form-item caption="End">
-                        <input class="form-control" type="time" name="end" v-model="meal.end" required />
+                        <input class="form-control" type="time" name="end" v-model.lazy="meal.end" required />
                     </form-item>
                     <form-item caption="People">
-                        <input class="form-control" type="number" name="people" v-model="meal.people" 
+                        <input class="form-control" type="number" name="people" v-model.lazy="meal.people" 
                             min="1" :placeholder="meal.menuplan.people" required />
                     </form-item>
                 </div>
@@ -96,12 +100,19 @@
                         people: 0
                     }
                 },
+                timeout: undefined
             }
         },
         mounted() {
             this.endpoint = '/api/meal/' + this.$route.params.id;
             this.fetchMeal();
             this.fetchIngredients();
+        },
+        watch: {
+            meal: {
+                handler: function (val, oldVal) { axios.put(this.endpoint, this.meal); },
+                deep: true
+            }
         },
         methods: {
             fetchIngredients() {
@@ -117,7 +128,11 @@
                     
                     let vm = this;
                     document.querySelector("trix-editor").addEventListener('trix-change', (e) => {
-                        vm.meal.description = e.currentTarget.innerHTML;
+                        let html = e.currentTarget.innerHTML;
+                        clearTimeout(this.timeout);
+                        this.timeout = setTimeout(() => {
+                            vm.meal.description = html;
+                        }, 1000);
                     });
                 });
             },
@@ -126,14 +141,6 @@
                 axios.get(endpoint).then(response => {
                     this.items = response.data;
                 });
-            },
-            save() {
-                axios.put(this.endpoint, this.meal).then(response => {
-                    router.go(-1);
-                });
-            },
-            cancel() {
-                router.go(-1);
             },
             updateIngredient(ingredient) {
                 let endpoint = '/api/ingredient/' + ingredient.id;
