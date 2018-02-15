@@ -22,11 +22,11 @@
                 <tbody>
                     <tr v-for="item in items" :key="item.id">
                         <td class="p-1">
-                            <span v-show="!item.editing" v-text="item.title"></span>
+                            <span v-show="!item.editing" v-text="item.title" @dblclick="item.editing = true"></span>
                             <input v-show="item.editing" type="text" class="form-control" v-model="item.title">
                         </td>
                         <td class="p-1">
-                            <span v-show="!item.editing" v-text="item.unit"></span>
+                            <span v-show="!item.editing" v-text="item.unit" @dblclick="item.editing = true"></span>
                             <input v-show="item.editing" type="text" class="form-control" v-model="item.unit">
                         </td>
                         <td class="text-right">
@@ -39,11 +39,11 @@
                             <a v-show="item.editing" @click="cancel(item)" class="cursor-pointer">
                                 <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
                             </a>
-                            <template v-show="!item.editing">
-                                <a v-show="item.can_be_deleted" @click="deleteItem(item)" class="cursor-pointer">
+                            <template>
+                                <a v-show="!item.editing && item.can_be_deleted" @click="deleteItem(item)" class="cursor-pointer">
                                     <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
                                 </a>
-                                <span v-show="!item.can_be_deleted" class="text-grey cursor-not-allowed">
+                                <span v-show="!item.editing && !item.can_be_deleted" class="text-grey cursor-not-allowed">
                                     <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
                                 </span>
                             </template>
