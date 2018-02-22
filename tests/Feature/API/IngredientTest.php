@@ -68,7 +68,7 @@ class IngredientTest extends TestCase
 
         $this->actingAs($this->user)
             ->post('/api/meal/'.$meal->id.'/ingredients', $this->validIngredientData)
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJson($this->validIngredientData);
 
         $this->assertDatabaseHas('ingredients', $this->validIngredientData);
