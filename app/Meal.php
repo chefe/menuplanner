@@ -35,6 +35,7 @@ class Meal extends Model
     {
         $startTimeParts = explode(':', $this->start);
         $endTimeParts = explode(':', $this->end);
+
         return vsprintf('%02d:%02d - %02d:%02d', [
             $startTimeParts[0],
             $startTimeParts[1],

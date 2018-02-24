@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use PDF;
 use App\Menuplan;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class MenuplanPdfController extends Controller
 {
-    /** */
     public function show(Menuplan $menuplan)
     {
         $menuplan->load('meals');
@@ -22,14 +20,16 @@ class MenuplanPdfController extends Controller
             $meals = $menuplan->meals->filter(function ($item) use ($date) {
                 return $item->date->format('Y-m-d') == $date;
             })->sortBy('start');
+
             return [$date => $meals];
         });
 
         $meals = $menuplan->meals->sort(function ($m) {
-            return $m->date . '-' . $m->start;
+            return $m->date.'-'.$m->start;
         });
 
         $data = compact('menuplan', 'days', 'meals');
+
         return PDF::loadView('pdfs.menuplan', $data)
             ->download('menuplan.pdf');
     }
