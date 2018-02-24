@@ -20,8 +20,6 @@ class Ingredient extends Model
 
     public function getQuantityForShoppingListAttribute()
     {
-        $people = ($this->meal->people == null ? $this->meal->menuplan->people : $this->meal->people);
-
-        return $this->quantity * ($people / $this->meal->ingredients_for);
+        return $this->quantity * ($this->meal->absolut_people / $this->meal->ingredients_for);
     }
 }

@@ -25,19 +25,11 @@ class MenuplanPdfController extends Controller
             return [$date => $meals];
         });
 
-        $durationFormatter = function ($meal) {
-            $startTimeParts = explode(':', $meal->start);
-            $endTimeParts = explode(':', $meal->end);
-            return vsprintf('%02d:%02d - %02d:%02d', [
-                $startTimeParts[0],
-                $startTimeParts[1],
-                $endTimeParts[0],
-                $endTimeParts[1],
-            ]);
-        };
+        $meals = $menuplan->meals->sort(function ($m) {
+            return $m->date . '-' . $m->start;
+        });
 
-        $data = compact('menuplan', 'days', 'durationFormatter');
-
+        $data = compact('menuplan', 'days', 'meals');
         return PDF::loadView('pdfs.menuplan', $data)
             ->download('menuplan.pdf');
     }
