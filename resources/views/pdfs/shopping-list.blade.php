@@ -17,9 +17,25 @@
         td, th {
             padding: 0.25em;
         }
+        .text-grey {
+            color: #b8c2cc;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0px;
+        }
+        .pagenum:before {
+            content: counter(page);
+        }
     </style>
 </head>
 <body>
+    <div class="footer text-grey">
+        Page <span class="pagenum"></span>
+    </div>
+
     <h1 class="center">Shopping List "{{ $menuplan->title }}"</h1>
     <table>
         <tbody>
