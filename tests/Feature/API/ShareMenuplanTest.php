@@ -263,7 +263,7 @@ class ShareMenuplanTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 ['menuplan_id' => $invitationOne->menuplan_id],
-                ['menuplan_id' => $invitationTwo->menuplan_id]
+                ['menuplan_id' => $invitationTwo->menuplan_id],
             ]);
     }
 }
