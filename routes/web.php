@@ -53,9 +53,10 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
 
     Route::get('/menuplan/{menuplan}/shopping-list', 'ShoppingListController@index');
 
-    Route::get('/menuplan/{menuplan}/invitation', 'InvitationController@index');
-    Route::post('/menuplan/{menuplan}/invitation', 'InvitationController@store');
+    Route::get('/menuplan/{menuplan}/invitation', 'MenuplanInvitationController@index');
+    Route::post('/menuplan/{menuplan}/invitation', 'MenuplanInvitationController@store');
     Route::post('/invitation/{invitation}/accept', 'AcceptInvitationController@store');
     Route::delete('/invitation/{invitation}/decline', 'AcceptInvitationController@destroy');
+    Route::get('/invitation', 'InvitationController@index');
     Route::delete('/invitation/{invitation}', 'InvitationController@destroy');
 });

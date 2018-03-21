@@ -28,4 +28,9 @@ class Invitation extends Model
     {
         return $user->email == $this->email && $this->user_id == null;
     }
+
+    public function scopeOpen($query)
+    {
+        $query->where('user_id', null);
+    }
 }

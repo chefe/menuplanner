@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Menuplan::class);
     }
+
+    public function getOpenInvitations()
+    {
+        return Invitation::open()->where('email', $this->email)->get();
+    }
 }

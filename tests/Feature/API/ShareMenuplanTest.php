@@ -240,4 +240,30 @@ class ShareMenuplanTest extends TestCase
             'id' => $invitation->id,
         ]);
     }
+
+    /** @test */
+    public function a_user_can_get_all_his_invitations()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $thirdUser = factory(User::class)->create();
+
+        $menuplanOne = factory(Menuplan::class)->create(['user_id' => $anotherUser->id]);
+        $invitationOne = $menuplanOne->invitations()->create([
+            'email' => $user->email,
+        ]);
+
+        $menuplanOne = factory(Menuplan::class)->create(['user_id' => $thirdUser->id]);
+        $invitationTwo = $menuplanOne->invitations()->create([
+            'email' => $user->email,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/api/invitation')
+            ->assertStatus(200)
+            ->assertJson([
+                ['menuplan_id' => $invitationOne->menuplan_id],
+                ['menuplan_id' => $invitationTwo->menuplan_id]
+            ]);
+    }
 }
