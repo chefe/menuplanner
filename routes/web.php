@@ -55,5 +55,7 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
 
     Route::get('/menuplan/{menuplan}/invitation', 'InvitationController@index');
     Route::post('/menuplan/{menuplan}/invitation', 'InvitationController@store');
+    Route::post('/invitation/{invitation}/accept', 'AcceptInvitationController@store');
+    Route::delete('/invitation/{invitation}/decline', 'AcceptInvitationController@destroy');
     Route::delete('/invitation/{invitation}', 'InvitationController@destroy');
 });

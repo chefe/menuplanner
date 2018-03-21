@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Menuplan;
+use App\Invitation;
 use App\Policies\MenuplanPolicy;
+use App\Policies\InvitationPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Menuplan::class => MenuplanPolicy::class,
+        Invitation::class => InvitationPolicy::class,
     ];
 
     /**

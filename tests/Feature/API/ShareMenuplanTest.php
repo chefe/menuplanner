@@ -135,4 +135,109 @@ class ShareMenuplanTest extends TestCase
             'email' => 'john@example.com',
         ]);
     }
+
+    /** @test */
+    public function a_user_can_accept_an_invitation_to_a_menuplan()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create(['email' => $anotherUser->email]);
+
+        $this->assertNull($invitation->user);
+
+        $this->actingAs($anotherUser)
+            ->post('/api/invitation/'.$invitation->id.'/accept')
+            ->assertStatus(200);
+
+        $this->assertNotNull($invitation->fresh()->user);
+    }
+
+    /** @test */
+    public function a_user_can_not_accept_foreign_invitations()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create(['email' => $anotherUser->email]);
+
+        $this->actingAs($user)
+            ->post('/api/invitation/'.$invitation->id.'/accept')
+            ->assertStatus(403);
+    }
+
+    /** @test */
+    public function a_user_can_decline_an_invitation_to_a_menuplan()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create(['email' => $anotherUser->email]);
+
+        $this->actingAs($anotherUser)
+            ->delete('/api/invitation/'.$invitation->id.'/decline')
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('invitations', [
+            'id' => $invitation->id,
+        ]);
+    }
+
+    /** @test */
+    public function a_user_can_not_decline_an_foreign_invitations()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create(['email' => $anotherUser->email]);
+
+        $this->actingAs($user)
+            ->delete('/api/invitation/'.$invitation->id.'/decline')
+            ->assertStatus(403);
+
+        $this->assertDatabaseHas('invitations', [
+            'id' => $invitation->id,
+        ]);
+    }
+
+    /** @test */
+    public function a_user_can_leave_his_invitations()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create([
+            'email' => $anotherUser->email,
+            'user_id' => $anotherUser->id
+        ]);
+
+        $this->actingAs($anotherUser)
+            ->delete('/api/invitation/'.$invitation->id)
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('invitations', [
+            'id' => $invitation->id,
+        ]);
+    }
+
+    /** @test */
+    public function a_user_can_not_leave_foreign_invitations()
+    {
+        $user = factory(User::class)->create();
+        $anotherUser = factory(User::class)->create();
+        $thirdUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $invitation = $menuplan->invitations()->create([
+            'email' => $anotherUser->email,
+            'user_id' => $anotherUser->id
+        ]);
+
+        $this->actingAs($thirdUser)
+            ->delete('/api/invitation/'.$invitation->id)
+            ->assertStatus(403);
+
+        $this->assertDatabaseHas('invitations', [
+            'id' => $invitation->id,
+        ]);
+    }
 }

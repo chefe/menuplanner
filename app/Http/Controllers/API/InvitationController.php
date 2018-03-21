@@ -33,7 +33,7 @@ class InvitationController extends Controller
 
     public function destroy(Invitation $invitation)
     {
-        $this->authorize('update', $invitation->menuplan);
+        $this->authorize('delete', $invitation);
 
         $invitation->delete();
     }

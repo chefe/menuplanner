@@ -12,4 +12,20 @@ class Invitation extends Model
     {
         return $this->belongsTo(Menuplan::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function accept()
+    {
+        $this->user_id = auth()->id();
+        $this->save();
+    }
+
+    public function canBeAcceptedBy($user)
+    {
+        return $user->email == $this->email && $this->user_id == null;
+    }
 }
