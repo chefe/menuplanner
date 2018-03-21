@@ -208,7 +208,7 @@ class ShareMenuplanTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $invitation = $menuplan->invitations()->create([
             'email' => $anotherUser->email,
-            'user_id' => $anotherUser->id
+            'user_id' => $anotherUser->id,
         ]);
 
         $this->actingAs($anotherUser)
@@ -229,7 +229,7 @@ class ShareMenuplanTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $invitation = $menuplan->invitations()->create([
             'email' => $anotherUser->email,
-            'user_id' => $anotherUser->id
+            'user_id' => $anotherUser->id,
         ]);
 
         $this->actingAs($thirdUser)

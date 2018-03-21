@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Invitation;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AcceptInvitationController extends Controller
@@ -12,6 +11,7 @@ class AcceptInvitationController extends Controller
     {
         if ($invitation->canBeAcceptedBy(auth()->user())) {
             $invitation->accept();
+
             return response(null, 200);
         }
 
@@ -22,6 +22,7 @@ class AcceptInvitationController extends Controller
     {
         if ($invitation->canBeAcceptedBy(auth()->user())) {
             $invitation->delete();
+
             return response(null, 200);
         }
 
