@@ -10,6 +10,6 @@ $factory->define(Invitation::class, function (Faker $faker) {
         'menuplan_id' => function () {
             return factory(Menuplan::class)->create()->id;
         },
-        'user_id' => null
+        'user_id' => null,
     ];
 });

@@ -27,6 +27,7 @@ class InvitationController extends Controller
         }
 
         $menuplan->invitations()->create($data);
+
         return response(null, 201);
     }
 

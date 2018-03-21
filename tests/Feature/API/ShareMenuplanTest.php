@@ -6,7 +6,6 @@ use App\User;
 use App\Menuplan;
 use App\Invitation;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ShareMenuplanTest extends TestCase
@@ -22,11 +21,11 @@ class ShareMenuplanTest extends TestCase
         $menuplan->invitations()->create(['email' => 'jane@example.com']);
 
         $this->actingAs($user)
-            ->get('/api/menuplan/' . $menuplan->id . '/invitation')
+            ->get('/api/menuplan/'.$menuplan->id.'/invitation')
             ->assertStatus(200)
             ->assertJson([
                 ['email' => 'john@example.com'],
-                ['email' => 'jane@example.com']
+                ['email' => 'jane@example.com'],
             ]);
     }
 
@@ -39,7 +38,7 @@ class ShareMenuplanTest extends TestCase
         $menuplan->invitations()->create(['email' => 'jane@example.com']);
 
         $this->actingAs($user)
-            ->get('/api/menuplan/' . $menuplan->id . '/invitation')
+            ->get('/api/menuplan/'.$menuplan->id.'/invitation')
             ->assertStatus(403);
     }
 
@@ -51,8 +50,8 @@ class ShareMenuplanTest extends TestCase
         $menuplan->invitations()->create(['email' => 'john@example.com']);
 
         $this->actingAs($user)
-            ->post('/api/menuplan/' . $menuplan->id . '/invitation', [
-                'email' => 'jane@example.com'
+            ->post('/api/menuplan/'.$menuplan->id.'/invitation', [
+                'email' => 'jane@example.com',
             ])->assertStatus(201);
 
         $this->assertDatabaseHas('invitations', [
@@ -69,8 +68,8 @@ class ShareMenuplanTest extends TestCase
         $menuplan->invitations()->create(['email' => 'john@example.com']);
 
         $this->actingAs($user)
-            ->post('/api/menuplan/' . $menuplan->id . '/invitation', [
-                'email' => 'john@example.com'
+            ->post('/api/menuplan/'.$menuplan->id.'/invitation', [
+                'email' => 'john@example.com',
             ])->assertStatus(200);
 
         $this->assertDatabaseHas('invitations', [
@@ -86,8 +85,8 @@ class ShareMenuplanTest extends TestCase
         $menuplan = factory(Menuplan::class)->create();
 
         $this->actingAs($user)
-            ->post('/api/menuplan/' . $menuplan->id . '/invitation', [
-                'email' => 'john@example.com'
+            ->post('/api/menuplan/'.$menuplan->id.'/invitation', [
+                'email' => 'john@example.com',
             ])->assertStatus(403);
     }
 
@@ -105,7 +104,7 @@ class ShareMenuplanTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->delete('/api/invitation/'. $invitationOne->id)
+            ->delete('/api/invitation/'.$invitationOne->id)
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('invitations', [
@@ -128,7 +127,7 @@ class ShareMenuplanTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->delete('/api/invitation/'. $invitationOne->id)
+            ->delete('/api/invitation/'.$invitationOne->id)
             ->assertStatus(403);
 
         $this->assertDatabaseHas('invitations', [
