@@ -34,6 +34,9 @@ class User extends Authenticatable
 
     public function getOpenInvitations()
     {
-        return Invitation::open()->where('email', $this->email)->get();
+        return Invitation::with('menuplan')
+            ->open()
+            ->where('email', $this->email)
+            ->get();
     }
 }
