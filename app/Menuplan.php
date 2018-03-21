@@ -26,8 +26,18 @@ class Menuplan extends Model
         return $this->hasManyThrough(Ingredient::class, Meal::class);
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
     public function asResource()
     {
         return new MenuplanResource($this);
+    }
+
+    public function hasInvitationFor($email)
+    {
+        return $this->invitations()->where('email', $email)->count() > 0;
     }
 }

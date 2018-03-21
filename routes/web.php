@@ -51,4 +51,8 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
     Route::delete('/ingredient/{ingredient}', 'IngredientController@destroy');
 
     Route::get('/menuplan/{menuplan}/shopping-list', 'ShoppingListController@index');
+
+    Route::get('/menuplan/{menuplan}/invitation', 'InvitationController@index');
+    Route::post('/menuplan/{menuplan}/invitation', 'InvitationController@store');
+    Route::delete('/invitation/{invitation}', 'InvitationController@destroy');
 });
