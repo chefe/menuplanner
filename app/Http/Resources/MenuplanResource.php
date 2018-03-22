@@ -11,7 +11,7 @@ class MenuplanResource extends Resource
         return array_merge(parent::toArray($request), [
             'start' => $this->start->format('Y-m-d'),
             'end' => $this->end->format('Y-m-d'),
-            'is_shared' => $request->user()->id != $this->user_id
+            'is_shared' => $request->user()->id != $this->user_id,
         ]);
     }
 }
