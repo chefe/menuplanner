@@ -95,7 +95,6 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_get_data_from_a_meal()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);

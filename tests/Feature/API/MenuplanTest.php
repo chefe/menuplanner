@@ -42,9 +42,8 @@ class MenuplanTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_shared_and_own_menuplans()
+    public function a_user_can_get_his_own_and_shared_menuplans()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $ownMenuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
 
