@@ -42,6 +42,26 @@ class MenuplanTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_shared_and_own_menuplans()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        $ownMenuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+
+        $anotherUser = factory(User::class)->create();
+        $anotherMenuplan = factory(Menuplan::class)->create(['user_id' => $anotherUser->id]);
+        $anotherMenuplan->invitations()->create(['email' => $user->email, 'user_id' => $user->id]);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan')
+            ->assertStatus(200)
+            ->assertJson([
+                ['id' => $ownMenuplan->id, 'is_shared' => false],
+                ['id' => $anotherMenuplan->id, 'is_shared' => true],
+            ]);
+    }
+
+    /** @test */
     public function a_user_can_get_data_from_a_menuplan()
     {
         $user = factory(User::class)->create();

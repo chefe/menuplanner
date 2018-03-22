@@ -11,7 +11,11 @@ class MenuplanController extends Controller
 {
     public function index(Request $request)
     {
-        return MenuplanResource::collection($request->user()->menuplans);
+        $menuplans = $request->user()->menuplans->merge(
+            $request->user()->sharedMenuplans
+        );
+
+        return MenuplanResource::collection($menuplans);
     }
 
     public function store(Request $request)

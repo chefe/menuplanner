@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany(Menuplan::class);
     }
 
+    public function sharedMenuplans()
+    {
+        return $this->belongsToMany(Menuplan::class, 'invitations');
+    }
+
     public function getOpenInvitations()
     {
         return Invitation::with('menuplan')
