@@ -21,7 +21,7 @@
                 </router-link>
             </template>
 
-            <div v-for="menuplan in menuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
+            <div v-for="menuplan in ownMenuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
                 <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
                     <span class="mr-2" v-text="menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(menuplan)"></small>
@@ -37,6 +37,19 @@
             <div v-if="menuplans.length == 0" class="flex text-sm p-3 border-b items-center">
                 <router-link to="/menuplan/create" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
                     Create your first menuplan
+                </router-link>
+            </div>
+        </center-panel>
+
+        <center-panel v-if="sharedMenuplans.length > 0">
+            <template slot="header">
+                <span class="flex-1">Shared Menuplans</span>
+            </template>
+
+            <div v-for="menuplan in sharedMenuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
+                <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
+                    <span class="mr-2" v-text="menuplan.title"></span>
+                    <small class="text-grey" v-text="getDuration(menuplan)"></small>
                 </router-link>
             </div>
         </center-panel>
@@ -57,6 +70,14 @@
         mounted() {
             this.fetchMenuplans();
             this.fetchInvitations();
+        },
+        computed: {
+            ownMenuplans() {
+                return this.menuplans.filter(m => m.is_shared == false);
+            },
+            sharedMenuplans() {
+                return this.menuplans.filter(m => m.is_shared == true);
+            }
         },
         methods: {
             fetchMenuplans() {
