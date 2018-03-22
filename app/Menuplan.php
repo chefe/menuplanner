@@ -31,6 +31,11 @@ class Menuplan extends Model
         return $this->hasMany(Invitation::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'invitations');
+    }
+
     public function asResource()
     {
         return new MenuplanResource($this);

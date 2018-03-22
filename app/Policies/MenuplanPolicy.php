@@ -19,7 +19,8 @@ class MenuplanPolicy
      */
     public function view(User $user, Menuplan $menuplan)
     {
-        return $menuplan->user_id == $user->id;
+        return $menuplan->user_id == $user->id
+            || $menuplan->users->contains($user);
     }
 
     /**

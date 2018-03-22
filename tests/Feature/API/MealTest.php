@@ -59,6 +59,27 @@ class MealTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_get_the_meals_of_a_shared_menuplans()
+    {
+        $user = factory(User::class)->create();
+
+        $anotherUser = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $anotherUser->id]);
+        $menuplan->invitations()->create(['email' => $user->email, 'user_id' => $user->id]);
+        $meals = factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
+
+        $this->actingAs($user)
+            ->get('/api/menuplan/'.$menuplan->id.'/meals')
+            ->assertStatus(200)
+            ->assertJsonCount(3)
+            ->assertJson([
+                ['title' => $meals[0]->title],
+                ['title' => $meals[1]->title],
+                ['title' => $meals[2]->title],
+            ]);
+    }
+
+    /** @test */
     public function a_user_can_only_get_the_meals_of_his_menuplans()
     {
         $mainUser = factory(User::class)->create();
