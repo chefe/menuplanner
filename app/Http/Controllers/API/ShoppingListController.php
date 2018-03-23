@@ -19,13 +19,13 @@ class ShoppingListController extends Controller
             })->map(function ($ingredients) {
                 return [
                     'item_id' => $ingredients->first()->item_id,
-                    'quantity' => round($ingredients->sum('quantity_for_shopping_list') + 0.0005, 3, PHP_ROUND_HALF_DOWN),
+                    'quantity' => $this->round($ingredients->sum('quantity_for_shopping_list')),
                     'title' => $ingredients->first()->item->title,
                     'unit' => $ingredients->first()->item->unit,
                     'meals' => $ingredients->map(function ($i) {
                         return [
                             'id' => $i->meal->id,
-                            'quantity' => $i->quantity,
+                            'quantity' => $this->round($i->quantity_for_shopping_list),
                             'title' => $i->meal->title,
                             'date' => $i->meal->date->format('Y-m-d'),
                             'start' => $i->meal->start,
@@ -34,5 +34,10 @@ class ShoppingListController extends Controller
                     }),
                 ];
             })->sortBy('title')->values();
+    }
+
+    private function round($number)
+    {
+        return round($number + 0.0005, 3, PHP_ROUND_HALF_DOWN);
     }
 }

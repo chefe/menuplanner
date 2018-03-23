@@ -39,9 +39,18 @@ class ShoppingListTest extends TestCase
             ->assertStatus(200)
             ->assertJsonCount(3)
             ->assertJson([
-                ['item_id' => $items[0]->id, 'quantity' => 7],
-                ['item_id' => $items[1]->id, 'quantity' => 1200],
-                ['item_id' => $items[2]->id, 'quantity' => 6],
+                ['item_id' => $items[0]->id, 'quantity' => 7, 'meals' => [
+                    ['id' => $meals[0]->id, 'quantity' => 2.5],
+                    ['id' => $meals[1]->id, 'quantity' => 4.5]
+                ]],
+                ['item_id' => $items[1]->id, 'quantity' => 1200, 'meals' => [
+                    ['id' => $meals[0]->id, 'quantity' => 400],
+                    ['id' => $meals[0]->id, 'quantity' => 800],
+                ]],
+                ['item_id' => $items[2]->id, 'quantity' => 6, 'meals' => [
+                    ['id' => $meals[0]->id, 'quantity' => 4],
+                    ['id' => $meals[1]->id, 'quantity' => 2]
+                ]],
             ]);
     }
 
