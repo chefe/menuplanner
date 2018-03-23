@@ -49,8 +49,8 @@
             },
             quantityPerMealString(item) {
                 return item.meals.map(m => {
-                    return m.title + ' '  + m.quantity + ' ' + item.unit;
-                }).join(', ');
+                    return m.title + ' ['  + m.quantity + item.unit + ']';
+                }).join(' / ');
             }
         }
     }
