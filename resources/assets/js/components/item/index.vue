@@ -22,12 +22,12 @@
                 <tbody>
                     <tr v-for="item in items" :key="item.id">
                         <td class="p-1">
-                            <span v-show="!item.editing" v-text="item.title" @dblclick="item.editing = true"></span>
-                            <input v-show="item.editing" type="text" class="form-control" v-model="item.title">
+                            <span v-show="!item.editing" v-text="item.title" @dblclick="changeToEditMode(item, 'title')"></span>
+                            <input :ref="'title-' + item.id" v-show="item.editing" type="text" @keydown.enter="save(item)" class="form-control" v-model="item.title">
                         </td>
                         <td class="p-1">
-                            <span v-show="!item.editing" v-text="item.unit" @dblclick="item.editing = true"></span>
-                            <input v-show="item.editing" type="text" class="form-control" v-model="item.unit">
+                            <span v-show="!item.editing" v-text="item.unit" @dblclick="changeToEditMode(item, 'unit')"></span>
+                            <input :ref="'unit-' + item.id" v-show="item.editing" type="text" @keydown.enter="save(item)" class="form-control" v-model="item.unit">
                         </td>
                         <td class="text-right">
                             <a v-show="!item.editing" @click="edit(item)" class="cursor-pointer">
@@ -51,10 +51,10 @@
                     </tr>
                     <tr>
                         <td class="p-1">
-                            <input type="text" class="form-control" v-model="newitem.title" placeholder="Title">
+                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.title" placeholder="Title">
                         </td>
                         <td class="p-1">
-                            <input type="text" class="form-control" v-model="newitem.unit" placeholder="Unit">
+                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.unit" placeholder="Unit">
                         </td>
                         <td class="text-right">
                             <a @click="addItem()" class="cursor-pointer">
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+    import Vue from 'vue';
+
     export default {
         data() {
             return {
@@ -115,6 +117,18 @@
                         return i.id != item.id; 
                     });
                 });
+            },
+            changeToEditMode(item, field) {
+                item.editing = true;
+                let vm = this;
+                Vue.nextTick(function () {
+                    vm.$refs[field + '-' + item.id][0].focus();
+                })
+            },
+            tryToAddItem() {
+                if (this.newitem.title != '' && this.newitem.unit != '') {
+                    this.addItem();
+                }
             },
             addItem() {
                 axios.post(this.endpoint, this.newitem).then(response => {
