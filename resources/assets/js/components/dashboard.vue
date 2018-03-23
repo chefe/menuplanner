@@ -1,9 +1,9 @@
 <template>
     <div>
-        <center-panel v-if="invitations.length > 0">
+        <center-panel v-if="openInvitations.length > 0">
             <template slot="header">Invitations</template>
 
-            <div v-for="invitation in invitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
+            <div v-for="invitation in openInvitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
                 <div class="flex-1 text-grey-dark">
                     <span class="mr-2" v-text="invitation.menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(invitation.menuplan)"></small>
@@ -51,6 +51,9 @@
                     <span class="mr-2" v-text="menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(menuplan)"></small>
                 </router-link>
+                <span title="Verlassen" @click="leaveMenuplan(menuplan)" class="text-grey-dark hover:text-grey-darkest cursor-pointer">
+                    <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
+                </span>
             </div>
         </center-panel>
     </div>
@@ -77,6 +80,9 @@
             },
             sharedMenuplans() {
                 return this.menuplans.filter(m => m.is_shared == true);
+            },
+            openInvitations() {
+                return this.invitations.filter(i => i.user_id == null);
             }
         },
         methods: {
@@ -108,15 +114,32 @@
                 let that = this;
                 axios.post('api/invitation/' + invitation.id + '/accept')
                     .then(function (response) {
-                        that.fetchInvitations();
+                        that.fetchInASecond();
                     })
             },
             declineInvitation(invitation) {
                 let that = this;
                 axios.delete('api/invitation/' + invitation.id + '/decline')
                     .then(function (response) {
-                        that.fetchInvitations();
+                        that.fetchInASecond();
                     })
+            },
+            leaveMenuplan(menuplan) {
+                let that = this;
+                let invitation = this.invitations.filter(i => i.menuplan_id == menuplan.id);
+                if (invitation.length > 0) {
+                    axios.delete('api/invitation/' + invitation[0].id + '/decline')
+                        .then(function (response) {
+                            that.fetchInASecond();
+                        })
+                }
+            }, 
+            fetchInASecond() {
+                let that = this;
+                setTimeout(function() {
+                    that.fetchInvitations();
+                    that.fetchMenuplans();
+                }, 1000);
             },
             getDuration(menuplan) {
                 return moment(menuplan.start).format('Do MMM') + 
