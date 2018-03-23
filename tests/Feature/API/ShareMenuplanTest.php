@@ -212,7 +212,7 @@ class ShareMenuplanTest extends TestCase
         ]);
 
         $this->actingAs($anotherUser)
-            ->delete('/api/invitation/'.$invitation->id)
+            ->delete('/api/invitation/'.$invitation->id.'/decline')
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('invitations', [

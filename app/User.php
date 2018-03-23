@@ -37,11 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Menuplan::class, 'invitations');
     }
 
-    public function getOpenInvitations()
+    public function getInvitations()
     {
         return Invitation::with('menuplan')
-            ->open()
             ->where('email', $this->email)
+            ->orWhere('user_id', $this->id)
             ->get();
     }
 }

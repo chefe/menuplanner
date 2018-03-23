@@ -20,7 +20,7 @@ class AcceptInvitationController extends Controller
 
     public function destroy(Invitation $invitation)
     {
-        if ($invitation->canBeAcceptedBy(auth()->user())) {
+        if ($invitation->canBeDeclinedBy(auth()->user())) {
             $invitation->delete();
 
             return response(null, 200);

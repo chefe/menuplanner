@@ -9,12 +9,12 @@ class InvitationController extends Controller
 {
     public function index()
     {
-        return auth()->user()->getOpenInvitations();
+        return auth()->user()->getInvitations();
     }
 
     public function destroy(Invitation $invitation)
     {
-        $this->authorize('delete', $invitation);
+        $this->authorize('update', $invitation->menuplan);
 
         $invitation->delete();
     }
