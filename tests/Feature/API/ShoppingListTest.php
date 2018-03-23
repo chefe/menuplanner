@@ -41,7 +41,7 @@ class ShoppingListTest extends TestCase
             ->assertJson([
                 ['item_id' => $items[0]->id, 'quantity' => 7, 'meals' => [
                     ['id' => $meals[0]->id, 'quantity' => 2.5],
-                    ['id' => $meals[1]->id, 'quantity' => 4.5]
+                    ['id' => $meals[1]->id, 'quantity' => 4.5],
                 ]],
                 ['item_id' => $items[1]->id, 'quantity' => 1200, 'meals' => [
                     ['id' => $meals[0]->id, 'quantity' => 400],
@@ -49,7 +49,7 @@ class ShoppingListTest extends TestCase
                 ]],
                 ['item_id' => $items[2]->id, 'quantity' => 6, 'meals' => [
                     ['id' => $meals[0]->id, 'quantity' => 4],
-                    ['id' => $meals[1]->id, 'quantity' => 2]
+                    ['id' => $meals[1]->id, 'quantity' => 2],
                 ]],
             ]);
     }
