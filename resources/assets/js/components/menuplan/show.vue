@@ -22,7 +22,7 @@
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white p-2 shadow border">
                     <p class="text-xl border-b text-grey-darkest" v-text="day.format('dddd, Do MMM')"></p>
-                    <router-link :to="'/meal/' + meal.id + '/edit'" v-for="meal in getMealsForDate(day)" :key="meal.id" class="block no-underline border p-2 mt-3">
+                    <router-link :to="'/meal/' + meal.id + '/edit'" v-for="meal in getMealsForDate(day)" :key="meal.id" class="block no-underline bg-grey-lighter shadow p-2 mt-3">
                         <p class="text-grey-darker" v-text="meal.title"></p>
                         <small class="text-grey" v-text="getMealTime(meal)"></small>
                     </router-link>
