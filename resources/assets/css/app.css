@@ -1,3 +1,6 @@
+@import 'trix/dist/trix.css';
+@import 'vue-multiselect/dist/vue-multiselect.min.css';
+
 @tailwind preflight;
 
 /* Add components here... */
@@ -32,4 +35,34 @@ body {
 }
 .fade-enter, .fade-leave-to {
     opacity: 0;
+}
+
+.multiselect {
+    color: #000;
+}
+
+.multiselect, 
+.multiselect__tags {
+    min-height: 32px;
+}
+
+.multiselect__select {
+    height: 30px;
+    width: 30px;
+}
+
+.multiselect__tags {
+    @apply border;
+    border-radius: 0;
+    padding-top: 4px;
+    padding-left: 0;
+}
+
+.multiselect__single, 
+.multiselect__input {
+    margin-bottom: 6px;
+}
+
+.multiselect__content-wrapper {
+    border-radius: 0 !important;
 }

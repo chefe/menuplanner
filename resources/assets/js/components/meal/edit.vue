@@ -23,14 +23,23 @@
                         <span>people</span>
                     </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
-                        <div class="flex-1 pr-2">
+                        <div class="w-16 sm:flex-1 pr-2">
                             <input @change="updateIngredient(ingredient)" class="form-control text-right" type="number" v-model="ingredient.quantity" />
                         </div>
-                        <div class="w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
+                        <div class="w-16 sm:w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
                         <div class="flex-1">
-                            <select @change="updateIngredient(ingredient)" class="w-full block appearance-none bg-white border p-1 h-8" v-model="ingredient.item_id">
-                                <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
-                            </select>
+                            <multiselect 
+                                @input="i => ingredient.item_id = i.id"
+                                @select="updateIngredient(ingredient)"
+                                :value="getItemByIngredient(ingredient)" 
+                                :custom-label="i => i.title"
+                                :options="items" 
+                                :allowEmpty="false"
+                                :showLabels="false"
+                                :option-height="32"
+                            >
+                                <span slot="noResult">Nothing found!</span>
+                            </multiselect>
                         </div>
                         <div class="w-8 text-center">
                             <a @click="deleteIngredient(ingredient)" class="cursor-pointer">
@@ -39,15 +48,23 @@
                         </div>
                     </div>
                     <div class="flex items-center mb-2">
-                        <div class="flex-1 pr-2">
+                        <div class="w-16 sm:flex-1 pr-2">
                             <input @change="addIngredient()" class="form-control text-right" type="number" v-model="newIngredient.quantity"/>
                         </div>
-                        <div class="w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
+                        <div class="w-16 sm:w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
                         <div class="flex-1">
-                            <select @change="addIngredient()" class="w-full block appearance-none bg-white border p-1 h-8" v-model="newIngredient.item_id">
-                                <option disabled value="0">Select an item</option>
-                                <option v-for="item in items" v-text="item.title" :value="item.id" :key="item.id"></option>
-                            </select>
+                            <multiselect 
+                                @input="i => newIngredient.item_id = i.id"
+                                @select="addIngredient()"
+                                :value="getItemByIngredient(newIngredient)" 
+                                :custom-label="i => i.title"
+                                :options="items" 
+                                :allowEmpty="false"
+                                :showLabels="false"
+                                :option-height="32"
+                            >
+                                <span slot="noResult">Nothing found!</span>
+                            </multiselect>
                         </div>
                         <div class="w-8"></div>
                     </div>
@@ -81,10 +98,13 @@
 </template>
 
 <script>
-    import 'trix';
-    import 'trix/dist/trix.css';
+    import Trix from 'trix';
+    import Multiselect from 'vue-multiselect'
     
     export default {
+        components: {
+            Multiselect
+        },
         data() {
             return {
                 endpoint: '',
@@ -156,7 +176,7 @@
                 return items.length > 0 ? items[0].unit : '';
             },
             addIngredient() {
-                if (this.newIngredient.item_id != 0 && this.newIngredient.quantity > 0) {
+                if (this.newIngredient.item != {} && this.newIngredient.quantity > 0) {
                     axios.post(this.endpoint + '/ingredients', this.newIngredient).then(response => {
                         this.ingredients.push(response.data);
                         this.newIngredient.item_id = 0;
@@ -173,6 +193,11 @@
                         });
                     });
                 }
+            },
+            getItemByIngredient(ingredient) {
+                let id = ingredient != undefined ? ingredient.item_id : 0;
+                let filtered = this.items.filter(i => i.id == id);
+                return filtered.length > 0 ? filtered[0] : undefined; 
             }
         }
     }
