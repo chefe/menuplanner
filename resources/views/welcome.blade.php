@@ -15,23 +15,22 @@
 </head>
 <body class="bg-brand-lightest font-sans font-normal">
     <div class="flex flex-col">
-        @if(Route::has('login'))
-            <div class="absolute pin-t pin-r mt-4 mr-4">
-                @auth
-                    <a href="{{ url('/') }}" class="no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Home</a>
-                @else
-                    <a href="{{ route('login') }}" class="no-underline hover:underline text-sm font-normal text-brand-dark uppercase pr-6">Login</a>
-                    <a href="{{ route('register') }}" class="no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Register</a>
-                @endauth
-            </div>
-        @endif
 
         <div class="min-h-screen flex items-center justify-center">
-            <div class="flex flex-col justify-around h-full">
+            <div class="flex flex-col justify-around h-full bg-white shadow p-8">
                 <div>
-                    <h1 class="text-grey-darker text-center font-hairline tracking-wide text-7xl mb-6">
+                    <h1 class="text-grey-darker text-center font-hairline tracking-wide text-7xl mb-8 p-8">
                         {{ config('app.name', 'Menuplanner') }}
                     </h1>
+                    
+                    <div class="flex text-center">
+                        @auth
+                            <a href="{{ url('/') }}" class="flex-1 no-underline text-sm font-normal text-brand-dark uppercase">Home</a>
+                        @else
+                            <a href="{{ route('login') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Login</a>
+                            <a href="{{ route('register') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Register</a>
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>
