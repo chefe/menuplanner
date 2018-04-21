@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">Edit Meal</h1>
+            <h1 class="flex-1">{{ $t('meal.edit.editMeal') }}</h1>
             <router-link :to="'/menuplan/' + meal.menuplan_id" class="text-grey-darkest ml-4">
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 0h9v9H0V0zm2 2v5h5V2H2zm-2 9h9v9H0v-9zm2 2v5h5v-5H2zm9-13h9v9h-9V0zm2 2v5h5V2h-5zm-2 9h9v9h-9v-9zm2 2v5h5v-5h-5z"/></svg>
             </router-link>
@@ -12,15 +12,15 @@
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white shadow border p-2 mb-4">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">Descriptions</h2>
-                    <trix-editor input="trix4Description" placeholder="Enter description ..."></trix-editor>
+                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.description') }}</h2>
+                    <trix-editor input="trix4Description" :placeholder="$t('meal.edit.enterDescription')"></trix-editor>
                 </div>
 
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">
-                        <span>Ingredients for</span>
+                        <span>{{ $t('meal.edit.ingredientsFor') }}</span>
                         <input class="text-grey-darkest w-16 text-right" type="number" name="ingredients_for" v-model="meal.ingredients_for" min="1" required />
-                        <span>people</span>
+                        <span>{{ $t('meal.edit.people') }}</span>
                     </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="w-16 sm:flex-1 pr-2">
@@ -37,8 +37,9 @@
                                 :allowEmpty="false"
                                 :showLabels="false"
                                 :option-height="32"
+                                :placeholder="$t('meal.edit.selectPlaceholder')"
                             >
-                                <span slot="noResult">Nothing found!</span>
+                                <span slot="noResult">{{ $t('meal.edit.nothingFound') }}</span>
                             </multiselect>
                         </div>
                         <div class="w-8 text-center">
@@ -62,8 +63,9 @@
                                 :allowEmpty="false"
                                 :showLabels="false"
                                 :option-height="32"
+                                :placeholder="$t('meal.edit.selectPlaceholder')"
                             >
-                                <span slot="noResult">Nothing found!</span>
+                                <span slot="noResult">{{ $t('meal.edit.nothingFound') }}</span>
                             </multiselect>
                         </div>
                         <div class="w-8"></div>
@@ -72,22 +74,22 @@
             </div>
             <div class="w-full md:w-1/3 p-2">
                 <div class="bg-white shadow border p-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">Settings</h2>
-                    <form-item caption="Title">
+                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
+                    <form-item :caption="$t('general.title')">
                         <input class="form-control" type="text" name="title" v-model.lazy="meal.title" 
-                            placeholder="Please provide a title" required />
+                            :placeholder="$t('general.provideTitle')" required />
                     </form-item>
-                    <form-item caption="Date">
+                    <form-item :caption="$t('general.date')">
                         <input class="form-control" type="date" name="date" v-model.lazy="meal.date"
                                :min="meal.menuplan.start" :max="meal.menuplan.end" required />
                     </form-item>
-                    <form-item caption="Start">
+                    <form-item :caption="$t('general.start')">
                         <input class="form-control" type="time" name="start" v-model.lazy="meal.start" required />
                     </form-item>
-                    <form-item caption="End">
+                    <form-item :caption="$t('general.end')">
                         <input class="form-control" type="time" name="end" v-model.lazy="meal.end" required />
                     </form-item>
-                    <form-item caption="People">
+                    <form-item :caption="$t('general.people')">
                         <input class="form-control" type="number" name="people" v-model.lazy="meal.people" 
                             min="1" :placeholder="meal.menuplan.people" required />
                     </form-item>

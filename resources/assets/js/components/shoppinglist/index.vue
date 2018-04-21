@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">Shopping List</h1>
+            <h1 class="flex-1">{{ $t('shoppinglist.index.shoppinglist') }}</h1>
             <a :href="'/menuplan/' + $route.params.id + '/shopping-list/pdf'" class="text-grey-darkest ml-4">
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
             </a>

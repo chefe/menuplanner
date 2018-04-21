@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">Items</h1>
+            <h1 class="flex-1">{{ $t('item.index.items') }}</h1>
             <router-link :to="'/menuplan/' + $route.params.id" class="text-grey-darkest ml-4">
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 0h9v9H0V0zm2 2v5h5V2H2zm-2 9h9v9H0v-9zm2 2v5h5v-5H2zm9-13h9v9h-9V0zm2 2v5h5V2h-5zm-2 9h9v9h-9v-9zm2 2v5h5v-5h-5z"/></svg>
             </router-link>
@@ -14,8 +14,8 @@
             <table class="w-full">
                 <thead>
                     <tr>
-                        <th width="50%" class="p-1 text-left">Title</th>
-                        <th width="40%" class="p-1 text-left">Unit</th>
+                        <th width="50%" class="p-1 text-left">{{ $t('general.title') }}</th>
+                        <th width="40%" class="p-1 text-left">{{ $t('item.index.unit') }}</th>
                         <th width="10%" style="min-width:40px"></th>
                     </tr>
                 </thead>
@@ -51,10 +51,10 @@
                     </tr>
                     <tr>
                         <td class="p-1">
-                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.title" placeholder="Title">
+                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.title" :placeholder="$t('general.title')">
                         </td>
                         <td class="p-1">
-                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.unit" placeholder="Unit">
+                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.unit" :placeholder="$t('item.index.unit')">
                         </td>
                         <td class="text-right">
                             <a @click="addItem()" class="cursor-pointer">

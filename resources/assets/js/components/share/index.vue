@@ -1,7 +1,7 @@
 <template>
     <center-panel>
         <template slot="header">
-            <span class="flex-1">Share Menuplan</span>
+            <span class="flex-1">{{ $t('menuplan.share.shareMenuplan') }}</span>
         </template>
 
         <div v-for="invitation in invitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
@@ -16,15 +16,15 @@
 
         <div class="flex text-sm p-3 border-b items-center">
             <input v-model="email" @keydown.enter="inviteEmail" type="email" placeholder="john@example.com" class="form-control flex-1 mr-2">
-            <a class="btn-primary" @click="inviteEmail">Share</a>
+            <a class="btn-primary" @click="inviteEmail">{{ $t('menuplan.share.share') }}</a>
         </div>
 
         <div class="flex text-sm p-3 border-b items-center">
             <router-link :to="'/menuplan/' + menuplanId" class="flex-1 btn-secondary mr-4">
-                View menuplan
+                {{ $t('menuplan.share.viewMenuplan') }}
             </router-link>
             <router-link :to="'/'" class="flex-1 btn-secondary">
-                Back to the dashboard
+                {{ $t('menuplan.share.backToDashboard') }}
             </router-link>
         </div>
     </center-panel>
@@ -76,7 +76,9 @@
                 });
             },
             getStatus(invitation) {
-                return invitation.user_id == null ? 'Pending' : 'Accepted';
+                return invitation.user_id == null ? 
+                    this.$t('menuplan.share.pending') : 
+                    this.$t('menuplan.share.accepted');
             }
         }
     }

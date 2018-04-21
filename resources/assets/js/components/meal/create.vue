@@ -1,29 +1,29 @@
 <template>
     <center-panel>
-        <template slot="header">Create Meal</template>
+        <template slot="header">{{ $t('meal.create.createMeal') }}</template>
         <form @submit.prevent="save">
-            <form-item caption="Title">
+            <form-item :caption="$t('general.title')">
                 <input type="text" name="title" v-model="meal.title" class="form-control"
-                       placeholder="Please provide a title" required />
+                       :placeholder="$t('general.provideTitle')" required />
             </form-item>
-            <form-item caption="Date">
+            <form-item :caption="$t('general.date')">
                 <input type="date" name="date" v-model="meal.date" class="form-control" 
                        :min="meal.menuplan.start" :max="meal.menuplan.end" required />
             </form-item>
-            <form-item caption="Start">
+            <form-item :caption="$t('general.start')">
                 <input type="time" name="start" v-model="meal.start" class="form-control" required />
             </form-item>
-            <form-item caption="End">
+            <form-item :caption="$t('general.end')">
                 <input type="time" name="end" v-model="meal.end" class="form-control" required />
             </form-item>
-            <form-item caption="People">
+            <form-item :caption="$t('general.people')">
                 <input type="number" name="people" v-model="meal.people" min="1" 
                        class="form-control" :placeholder="meal.menuplan.people" />
             </form-item>
             
             <div class="w-full sm:w-2/3 ml-auto flex sm:py-2 sm:pr-2 flex-col sm:flex-row">
-                <a class="btn-secondary flex-1 sm:mr-2" @click="cancel">Cancel</a>
-                <button type="submit" class="btn-primary flex-1">Save</button>
+                <a class="btn-secondary flex-1 sm:mr-2" @click="cancel">{{ $t('general.cancel') }}</a>
+                <button type="submit" class="btn-primary flex-1">{{ $t('general.save') }}</button>
             </div>
         </form>
     </center-panel>
