@@ -6,13 +6,12 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-
 /** Include vue-i18n and use it */
 import VueI18n from 'vue-i18n'
 import messages from './messages.js'
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: document.querySelector('html').getAttribute('lang'),
   messages, 
 });
 

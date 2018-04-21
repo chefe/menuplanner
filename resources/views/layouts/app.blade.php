@@ -25,12 +25,16 @@
                         </a>
                     </div>
                     <div class="flex-1 text-right pr-4">
+                        @if (app()->getLocale() == 'en')
+                            <a class="no-underline hover:underline text-grey-darker pr-3 text-sm" href="{{ url('/locale/de') }}">[DE]</a>
+                        @else
+                            <a class="no-underline hover:underline text-grey-darker pr-3 text-sm" href="{{ url('/locale/en') }}">[EN]</a>
+                        @endif
+
                         @guest
                             <a class="no-underline hover:underline text-grey-darker pr-3 text-sm" href="{{ url('/login') }}">Login</a>
                             <a class="no-underline hover:underline text-grey-darker text-sm" href="{{ url('/register') }}">Register</a>
                         @else
-                            <span class="text-grey-darker text-sm pr-4">{{ Auth::user()->name }}</span>
-
                             <a href="{{ route('logout') }}"
                                 class="no-underline hover:underline text-grey-darker text-sm"
                                 onclick="event.preventDefault();
