@@ -27,7 +27,7 @@
                         <small class="text-grey" v-text="getMealTime(meal)"></small>
                     </router-link>
                     <a @click="addMeal(day)" class="block no-underline border border-dashed text-grey bg-transparent p-2 mt-3 cursor-pointer">
-                        Add new meal
+                        {{ $t('menuplan.show.addNewMeal') }}
                     </a>
                 </div>
             </div>
@@ -55,6 +55,13 @@
             this.endpoint = '/api/menuplan/' + this.$route.params.id;
             this.fetchMenuplan();
             this.fetchMeals();
+        },
+        watch: {
+            '$i18n.locale': function (val) {
+                moment.locale(val);
+                this.setupDays();
+                this.foreReevaluateOfDurationProperty();
+            }
         },
         computed: {
             duration() {
@@ -96,6 +103,11 @@
                     path: '/menuplan/' + this.$route.params.id + '/meal/create', 
                     query: { date: date.format('YYYY-MM-DD') }
                 });
+            },
+            foreReevaluateOfDurationProperty() {
+                let start = this.menuplan.start;
+                this.menuplan.start = '2000-01-01';
+                this.menuplan.start = start;
             }
         }
     }

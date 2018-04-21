@@ -6,6 +6,16 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+
+/** Include vue-i18n and use it */
+import VueI18n from 'vue-i18n'
+import messages from './messages.js'
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'en',
+  messages, 
+});
+
 /** Include vue-progressbar and configure it */
 import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {
@@ -43,4 +53,5 @@ window.router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router: router,
+    i18n: i18n,
 });

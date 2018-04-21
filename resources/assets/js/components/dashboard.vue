@@ -1,21 +1,25 @@
 <template>
     <div>
         <center-panel v-if="openInvitations.length > 0">
-            <template slot="header">Invitations</template>
+            <template slot="header">{{ $t('dashboard.invitations') }}</template>
 
             <div v-for="invitation in openInvitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
                 <div class="flex-1 text-grey-dark">
                     <span class="mr-2" v-text="invitation.menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(invitation.menuplan)"></small>
                 </div>
-                <span style="padding: .25rem;padding: 4px" class="btn-primary mr-2" @click="acceptInvitation(invitation)">Accept</span>
-                <span style="padding: .25rem;padding: 4px" class="btn-danger" @click="declineInvitation(invitation)">Decline</span>
+                <span style="padding: .25rem;padding: 4px" class="btn-primary mr-2" @click="acceptInvitation(invitation)">
+                    {{ $t('dashboard.accept')}}
+                </span>
+                <span style="padding: .25rem;padding: 4px" class="btn-danger" @click="declineInvitation(invitation)">
+                    {{ $t('dashboard.decline')}}
+                </span>
             </div>
         </center-panel>
 
         <center-panel>
             <template slot="header">
-                <span class="flex-1">Menuplans</span>
+                <span class="flex-1">{{ $t('dashboard.menuplans') }}</span>
                 <router-link to="/menuplan/create" class="text-grey-dark hover:text-grey-darkest no-underline">
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
                 </router-link>
@@ -36,14 +40,14 @@
 
             <div v-if="menuplans.length == 0" class="flex text-sm p-3 border-b items-center">
                 <router-link to="/menuplan/create" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
-                    Create your first menuplan
+                    {{ $t('dashboard.createFirstMenuplan') }}
                 </router-link>
             </div>
         </center-panel>
 
         <center-panel v-if="sharedMenuplans.length > 0">
             <template slot="header">
-                <span class="flex-1">Shared Menuplans</span>
+                <span class="flex-1">{{ $t('dashboard.sharedMenuplans') }}</span>
             </template>
 
             <div v-for="menuplan in sharedMenuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
@@ -51,7 +55,7 @@
                     <span class="mr-2" v-text="menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(menuplan)"></small>
                 </router-link>
-                <span title="Verlassen" @click="leaveMenuplan(menuplan)" class="text-grey-dark hover:text-grey-darkest cursor-pointer">
+                <span :title="$t('dashboard.leave')" @click="leaveMenuplan(menuplan)" class="text-grey-dark hover:text-grey-darkest cursor-pointer">
                     <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
                 </span>
             </div>
@@ -71,8 +75,12 @@
             }
         },
         mounted() {
+            moment.locale(this.$i18n.locale);
             this.fetchMenuplans();
             this.fetchInvitations();
+        },
+        watch: {
+            '$i18n.locale': val => moment.locale(val)
         },
         computed: {
             ownMenuplans() {

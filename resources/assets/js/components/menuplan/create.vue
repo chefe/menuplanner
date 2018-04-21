@@ -1,6 +1,6 @@
 <template>
     <center-panel>
-        <template slot="header">Create Menuplan</template>
+        <template slot="header">{{ $t('menuplan.create.createMenuplan') }}</template>
         <menuplan-form 
             :menuplan="menuplan" 
             @submit="save"
