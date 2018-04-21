@@ -90,10 +90,10 @@
 </head>
 <body>
     <div class="footer text-grey">
-        Page <span class="pagenum"></span>
+        @lang('app.page') <span class="pagenum"></span>
     </div>
 
-    <h1 class="text-center">Menuplan "{{ $menuplan->title }}"</h1>
+    <h1 class="text-center">@lang('app.menuplan') "{{ $menuplan->title }}"</h1>
     <table class="w-full">
         @foreach ($days->chunk(4) as $chunk)
             <tr>
@@ -125,7 +125,7 @@
             <p class="text-grey mt-3">
                 {{ $meal->date->format('Y-m-d') }}
                 | {{ $meal->duration }}
-                | {{ $meal->absolut_people }} people
+                | {{ $meal->absolut_people }} @lang('app.people')
             </p>
 
             <div class="mt-3">{!! $meal->description !!}</div>

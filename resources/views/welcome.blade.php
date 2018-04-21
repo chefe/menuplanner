@@ -25,10 +25,16 @@
                     
                     <div class="flex text-center">
                         @auth
-                            <a href="{{ url('/') }}" class="flex-1 no-underline text-sm font-normal text-brand-dark uppercase">Home</a>
+                            <a href="{{ url('/') }}" class="flex-1 no-underline text-sm font-normal text-brand-dark uppercase">
+                                Home
+                            </a>
                         @else
-                            <a href="{{ route('login') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Login</a>
-                            <a href="{{ route('register') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">Register</a>
+                            <a href="{{ route('login') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">
+                                @lang('app.login')
+                            </a>
+                            <a href="{{ route('register') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">
+                                @lang('app.register')
+                            </a>
                         @endauth
                     </div>
                 </div>

@@ -33,10 +33,10 @@
 </head>
 <body>
     <div class="footer text-grey">
-        Page <span class="pagenum"></span>
+        @lang('app.page') <span class="pagenum"></span>
     </div>
 
-    <h1 class="center">Shopping List "{{ $menuplan->title }}"</h1>
+    <h1 class="center">@lang('app.shoppinglist') "{{ $menuplan->title }}"</h1>
     <table>
         <tbody>
             @foreach ($items as $item)

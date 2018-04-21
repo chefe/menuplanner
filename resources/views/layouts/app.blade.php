@@ -32,13 +32,13 @@
                         @endif
 
                         @guest
-                            <a class="no-underline hover:underline text-grey-darker pr-3 text-sm" href="{{ url('/login') }}">Login</a>
-                            <a class="no-underline hover:underline text-grey-darker text-sm" href="{{ url('/register') }}">Register</a>
+                            <a class="no-underline hover:underline text-grey-darker pr-3 text-sm" href="{{ url('/login') }}">@lang('app.login')</a>
+                            <a class="no-underline hover:underline text-grey-darker text-sm" href="{{ url('/register') }}">@lang('app.register')</a>
                         @else
                             <a href="{{ route('logout') }}"
                                 class="no-underline hover:underline text-grey-darker text-sm"
                                 onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">Logout</a>
+                                document.getElementById('logout-form').submit();">@lang('app.logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
