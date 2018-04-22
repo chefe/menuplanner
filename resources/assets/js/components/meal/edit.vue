@@ -19,12 +19,20 @@
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">
                         <span>{{ $t('meal.edit.ingredientsFor') }}</span>
-                        <input class="text-grey-darkest w-16 text-right" type="number" name="ingredients_for" v-model="meal.ingredients_for" min="1" required />
+                        <input class="text-grey-darkest w-16 text-right" 
+                               type="number" 
+                               name="ingredients_for" 
+                               v-model="meal.ingredients_for" 
+                               min="1" 
+                               required />
                         <span>{{ $t('meal.edit.people') }}</span>
                     </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="w-16 sm:flex-1 pr-2">
-                            <input @change="updateIngredient(ingredient)" class="form-control text-right" type="number" v-model="ingredient.quantity" />
+                            <input @change="updateIngredient(ingredient)" 
+                                   class="form-control text-right" 
+                                   type="number" 
+                                   v-model="ingredient.quantity" />
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
                         <div class="flex-1">
@@ -50,7 +58,10 @@
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="w-16 sm:flex-1 pr-2">
-                            <input @change="addIngredient()" class="form-control text-right" type="number" v-model="newIngredient.quantity"/>
+                            <input @change="addIngredient()" 
+                                   class="form-control text-right" 
+                                   type="number" 
+                                   v-model="newIngredient.quantity"/>
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
                         <div class="flex-1">
@@ -76,12 +87,21 @@
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.title">
-                        <input class="form-control" type="text" name="title" v-model.lazy="meal.title" 
-                            :placeholder="$t('general.provideTitle')" required />
+                        <input class="form-control" 
+                               type="text" 
+                               name="title" 
+                               v-model.lazy="meal.title" 
+                               :placeholder="$t('general.provideTitle')" 
+                               required />
                     </form-item>
                     <form-item caption="general.date">
-                        <input class="form-control" type="date" name="date" v-model.lazy="meal.date"
-                               :min="meal.menuplan.start" :max="meal.menuplan.end" required />
+                        <input class="form-control" 
+                               type="date" 
+                               name="date" 
+                               v-model.lazy="meal.date"
+                               :min="meal.menuplan.start" 
+                               :max="meal.menuplan.end" 
+                               required />
                     </form-item>
                     <form-item caption="general.start">
                         <input class="form-control" type="time" name="start" v-model.lazy="meal.start" required />
@@ -90,8 +110,13 @@
                         <input class="form-control" type="time" name="end" v-model.lazy="meal.end" required />
                     </form-item>
                     <form-item caption="general.people">
-                        <input class="form-control" type="number" name="people" v-model.lazy="meal.people" 
-                            min="1" :placeholder="meal.menuplan.people" required />
+                        <input class="form-control" 
+                               type="number" 
+                               name="people" 
+                               v-model.lazy="meal.people" 
+                               min="1" 
+                               :placeholder="meal.menuplan.people" 
+                               required />
                     </form-item>
                 </div>
             </div>

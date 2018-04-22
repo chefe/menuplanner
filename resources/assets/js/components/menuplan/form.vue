@@ -2,20 +2,34 @@
     <form @submit.prevent="submit">
         <form-item caption="general.title">
             <input type="text" 
-                    name="title" 
-                    v-model="menuplan.title" 
-                    :placeholder="$t('general.provideTitle')" 
-                    class="form-control"
-                    required />
+                   name="title" 
+                   v-model="menuplan.title" 
+                   :placeholder="$t('general.provideTitle')" 
+                   class="form-control"
+                   required />
         </form-item>
         <form-item caption="general.start">
-            <input type="date" name="start" v-model="menuplan.start" class="form-control" required />
+            <input type="date" 
+                   name="start" 
+                   v-model="menuplan.start" 
+                   class="form-control" 
+                   required />
         </form-item>
         <form-item caption="general.end">
-            <input type="date" name="end" v-model="menuplan.end" :min="menuplan.start" class="form-control" required />
+            <input type="date" 
+                   name="end" 
+                   v-model="menuplan.end" 
+                   :min="menuplan.start" 
+                   class="form-control" 
+                   required />
         </form-item>
         <form-item caption="general.people">
-            <input type="number" name="people" v-model="menuplan.people" min="1" class="form-control" required />
+            <input type="number" 
+                   name="people" 
+                   v-model="menuplan.people" 
+                   min="1" 
+                   class="form-control" 
+                   required />
         </form-item>
         
         <div class="w-full sm:w-2/3 ml-auto flex sm:py-2 sm:pr-2 flex-col sm:flex-row">

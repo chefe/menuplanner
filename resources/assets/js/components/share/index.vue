@@ -15,7 +15,11 @@
         </div>
 
         <div class="flex text-sm p-3 border-b items-center">
-            <input v-model="email" @keydown.enter="inviteEmail" type="email" placeholder="john@example.com" class="form-control flex-1 mr-2">
+            <input v-model="email" 
+                   @keydown.enter="inviteEmail" 
+                   type="email" 
+                   placeholder="john@example.com" 
+                   class="form-control flex-1 mr-2">
             <a class="btn-primary" @click="inviteEmail">{{ $t('menuplan.share.share') }}</a>
         </div>
 

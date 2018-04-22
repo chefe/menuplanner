@@ -23,11 +23,21 @@
                     <tr v-for="item in items" :key="item.id">
                         <td class="p-1">
                             <span v-show="!item.editing" v-text="item.title" @dblclick="changeToEditMode(item, 'title')"></span>
-                            <input :ref="'title-' + item.id" v-show="item.editing" type="text" @keydown.enter="save(item)" class="form-control" v-model="item.title">
+                            <input :ref="'title-' + item.id" 
+                                   v-show="item.editing" 
+                                   type="text" 
+                                   @keydown.enter="save(item)" 
+                                   class="form-control" 
+                                   v-model="item.title">
                         </td>
                         <td class="p-1">
                             <span v-show="!item.editing" v-text="item.unit" @dblclick="changeToEditMode(item, 'unit')"></span>
-                            <input :ref="'unit-' + item.id" v-show="item.editing" type="text" @keydown.enter="save(item)" class="form-control" v-model="item.unit">
+                            <input :ref="'unit-' + item.id" 
+                                   v-show="item.editing" 
+                                   type="text" 
+                                   @keydown.enter="save(item)" 
+                                   class="form-control" 
+                                   v-model="item.unit">
                         </td>
                         <td class="text-right">
                             <a v-show="!item.editing" @click="edit(item)" class="cursor-pointer">
@@ -51,10 +61,18 @@
                     </tr>
                     <tr>
                         <td class="p-1">
-                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.title" :placeholder="$t('general.title')">
+                            <input type="text" 
+                                   class="form-control" 
+                                   @keydown.enter="tryToAddItem" 
+                                   v-model="newitem.title" 
+                                   :placeholder="$t('general.title')">
                         </td>
                         <td class="p-1">
-                            <input type="text" class="form-control" @keydown.enter="tryToAddItem" v-model="newitem.unit" :placeholder="$t('item.index.unit')">
+                            <input type="text" 
+                                   class="form-control" 
+                                   @keydown.enter="tryToAddItem" 
+                                   v-model="newitem.unit" 
+                                   :placeholder="$t('item.index.unit')">
                         </td>
                         <td class="text-right">
                             <a @click="addItem()" class="cursor-pointer">

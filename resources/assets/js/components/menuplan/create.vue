@@ -1,10 +1,7 @@
 <template>
     <center-panel>
         <template slot="header">{{ $t('menuplan.create.createMenuplan') }}</template>
-        <menuplan-form 
-            :menuplan="menuplan" 
-            @submit="save"
-            @cancel="cancel">
+        <menuplan-form :menuplan="menuplan" @submit="save" @cancel="cancel">
         </menuplan-form>
     </center-panel>
 </template>
