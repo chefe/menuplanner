@@ -75,6 +75,9 @@
                                 :showLabels="false"
                                 :option-height="32"
                                 :placeholder="$t('meal.edit.selectPlaceholder')"
+                                :taggable="true"
+                                @tag="showAddItemModal"
+                                :tagPlaceholder="$t('meal.edit.tagPlaceholder')"
                             >
                                 <span slot="noResult">{{ $t('meal.edit.nothingFound') }}</span>
                             </multiselect>
@@ -121,16 +124,25 @@
                 </div>
             </div>
         </div>
+
+        <add-item-modal :caption="addItemModal.caption" 
+                        :show="addItemModal.show"
+                        :menuplanId="meal.menuplan_id"
+                        @addItem="addItem"
+                        @hide="addItemModal.show = false"
+        ></add-item-modal>
     </div>
 </template>
 
 <script>
     import Trix from 'trix';
     import Multiselect from 'vue-multiselect'
+    import AddItemModal from '../item/add-item-modal'
     
     export default {
         components: {
-            Multiselect
+            Multiselect,
+            AddItemModal
         },
         data() {
             return {
@@ -147,7 +159,11 @@
                         people: 0
                     }
                 },
-                timeout: undefined
+                timeout: undefined,
+                addItemModal: {
+                    caption: '',
+                    show: false
+                }
             }
         },
         mounted() {
@@ -225,6 +241,17 @@
                 let id = ingredient != undefined ? ingredient.item_id : 0;
                 let filtered = this.items.filter(i => i.id == id);
                 return filtered.length > 0 ? filtered[0] : undefined; 
+            },
+            showAddItemModal(caption) {
+                this.addItemModal.caption = caption;
+                this.addItemModal.show = true;
+            },
+            addItem(item) {
+                this.items.push(item);
+                this.items = this.items.sort((a, b) => {
+                    return a.title.localeCompare(b.title);
+                });
+                this.newIngredient.item_id = item.id;
             }
         }
     }

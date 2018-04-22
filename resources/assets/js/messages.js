@@ -44,6 +44,8 @@ export default {
                 settings: 'Settings',
                 selectPlaceholder: 'Select option',
                 enterDescription: 'Enter description ...',
+                addItem: 'Add Item',
+                tagPlaceholder: 'add',
             }
         },
         item: {
@@ -119,6 +121,8 @@ export default {
                 settings: 'Einstellungen',
                 selectPlaceholder: 'Option auswählen',
                 enterDescription: 'Beschreibung einfügen ...',
+                addItem: 'Nahrungsmittel hinzufügen',
+                tagPlaceholder: 'hinzufügen',
             }
         },
         item: {
