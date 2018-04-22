@@ -18,12 +18,24 @@ body {
     @apply .bg-green-light .p-2 .rounded .text-green-darkest .no-underline .text-center .cursor-pointer;
 }
 
+.btn-primary-small {
+    @apply .btn-primary .p-1;
+}
+
 .btn-secondary {
     @apply .bg-grey-light .p-2 .rounded .text-grey-darkest .no-underline .text-center .cursor-pointer;
 }
 
+.btn-secondary-small {
+    @apply .btn-secondary .p-1;
+}
+
 .btn-danger {
     @apply .bg-red-light .p-2 .rounded .text-red-darkest .no-underline .text-center .cursor-pointer;
+}
+
+.btn-danger-small {
+    @apply .btn-danger .p-1;
 }
 
 .form-control {

@@ -8,10 +8,10 @@
                     <span class="mr-2" v-text="invitation.menuplan.title"></span>
                     <small class="text-grey" v-text="getDuration(invitation.menuplan)"></small>
                 </div>
-                <span style="padding: .25rem;padding: 4px" class="btn-primary mr-2" @click="acceptInvitation(invitation)">
+                <span class="btn-primary-small mr-2" @click="acceptInvitation(invitation)">
                     {{ $t('dashboard.accept')}}
                 </span>
-                <span style="padding: .25rem;padding: 4px" class="btn-danger" @click="declineInvitation(invitation)">
+                <span class="btn-danger-small" @click="declineInvitation(invitation)">
                     {{ $t('dashboard.decline')}}
                 </span>
             </div>
