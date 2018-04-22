@@ -20,6 +20,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                     <tr>
+                        <td class="p-1">
+                            <input type="text" 
+                                   class="form-control" 
+                                   @keydown.enter="tryToAddItem" 
+                                   v-model="newitem.title" 
+                                   :placeholder="$t('general.title')">
+                        </td>
+                        <td class="p-1">
+                            <input type="text" 
+                                   class="form-control" 
+                                   @keydown.enter="tryToAddItem" 
+                                   v-model="newitem.unit" 
+                                   :placeholder="$t('item.index.unit')">
+                        </td>
+                        <td class="text-right">
+                            <a @click="addItem()" class="cursor-pointer">
+                                <icon name="checkmark"></icon>
+                            </a>
+                            <a @click="cancelAdding()" class="cursor-pointer">
+                                <icon name="close"></icon>
+                            </a>
+                        </td>
+                    </tr>
                     <tr v-for="item in items" :key="item.id">
                         <td class="p-1">
                             <span v-show="!item.editing" v-text="item.title" @dblclick="changeToEditMode(item, 'title')"></span>
@@ -57,30 +81,6 @@
                                     <icon name="trash"></icon>
                                 </span>
                             </template>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-1">
-                            <input type="text" 
-                                   class="form-control" 
-                                   @keydown.enter="tryToAddItem" 
-                                   v-model="newitem.title" 
-                                   :placeholder="$t('general.title')">
-                        </td>
-                        <td class="p-1">
-                            <input type="text" 
-                                   class="form-control" 
-                                   @keydown.enter="tryToAddItem" 
-                                   v-model="newitem.unit" 
-                                   :placeholder="$t('item.index.unit')">
-                        </td>
-                        <td class="text-right">
-                            <a @click="addItem()" class="cursor-pointer">
-                                <icon name="checkmark"></icon>
-                            </a>
-                            <a @click="cancelAdding()" class="cursor-pointer">
-                                <icon name="close"></icon>
-                            </a>
                         </td>
                     </tr>
                 </tbody>
