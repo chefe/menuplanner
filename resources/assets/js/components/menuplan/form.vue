@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="submit">
-        <form-item :caption="$t('general.title')">
+        <form-item caption="general.title">
             <input type="text" 
                     name="title" 
                     v-model="menuplan.title" 
@@ -8,13 +8,13 @@
                     class="form-control"
                     required />
         </form-item>
-        <form-item :caption="$t('general.start')">
+        <form-item caption="general.start">
             <input type="date" name="start" v-model="menuplan.start" class="form-control" required />
         </form-item>
-        <form-item :caption="$t('general.end')">
+        <form-item caption="general.end">
             <input type="date" name="end" v-model="menuplan.end" :min="menuplan.start" class="form-control" required />
         </form-item>
-        <form-item :caption="$t('general.people')">
+        <form-item caption="general.people">
             <input type="number" name="people" v-model="menuplan.people" min="1" class="form-control" required />
         </form-item>
         

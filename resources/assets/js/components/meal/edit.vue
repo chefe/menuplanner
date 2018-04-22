@@ -75,21 +75,21 @@
             <div class="w-full md:w-1/3 p-2">
                 <div class="bg-white shadow border p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
-                    <form-item :caption="$t('general.title')">
+                    <form-item caption="general.title">
                         <input class="form-control" type="text" name="title" v-model.lazy="meal.title" 
                             :placeholder="$t('general.provideTitle')" required />
                     </form-item>
-                    <form-item :caption="$t('general.date')">
+                    <form-item caption="general.date">
                         <input class="form-control" type="date" name="date" v-model.lazy="meal.date"
                                :min="meal.menuplan.start" :max="meal.menuplan.end" required />
                     </form-item>
-                    <form-item :caption="$t('general.start')">
+                    <form-item caption="general.start">
                         <input class="form-control" type="time" name="start" v-model.lazy="meal.start" required />
                     </form-item>
-                    <form-item :caption="$t('general.end')">
+                    <form-item caption="general.end">
                         <input class="form-control" type="time" name="end" v-model.lazy="meal.end" required />
                     </form-item>
-                    <form-item :caption="$t('general.people')">
+                    <form-item caption="general.people">
                         <input class="form-control" type="number" name="people" v-model.lazy="meal.people" 
                             min="1" :placeholder="meal.menuplan.people" required />
                     </form-item>

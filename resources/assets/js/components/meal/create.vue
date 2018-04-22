@@ -2,21 +2,21 @@
     <center-panel>
         <template slot="header">{{ $t('meal.create.createMeal') }}</template>
         <form @submit.prevent="save">
-            <form-item :caption="$t('general.title')">
+            <form-item caption="general.title">
                 <input type="text" name="title" v-model="meal.title" class="form-control"
                        :placeholder="$t('general.provideTitle')" required />
             </form-item>
-            <form-item :caption="$t('general.date')">
+            <form-item caption="general.date">
                 <input type="date" name="date" v-model="meal.date" class="form-control" 
                        :min="meal.menuplan.start" :max="meal.menuplan.end" required />
             </form-item>
-            <form-item :caption="$t('general.start')">
+            <form-item caption="general.start">
                 <input type="time" name="start" v-model="meal.start" class="form-control" required />
             </form-item>
-            <form-item :caption="$t('general.end')">
+            <form-item caption="general.end">
                 <input type="time" name="end" v-model="meal.end" class="form-control" required />
             </form-item>
-            <form-item :caption="$t('general.people')">
+            <form-item caption="general.people">
                 <input type="number" name="people" v-model="meal.people" min="1" 
                        class="form-control" :placeholder="meal.menuplan.people" />
             </form-item>
