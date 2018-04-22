@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import { bus } from '../eventbus.js';
+    import { bus } from '../../eventbus.js';
 
     export default {
         data() {

@@ -24,9 +24,9 @@ Vue.use(VueProgressBar, {
 });
 
 /** Define global components */
-Vue.component('status', require('./components/status.vue'));
-Vue.component('center-panel', require('./components/center-panel.vue'));
-Vue.component('form-item', require('./components/form-item.vue'));
+Vue.component('status', require('./components/utilities/status.vue'));
+Vue.component('center-panel', require('./components/utilities/center-panel.vue'));
+Vue.component('form-item', require('./components/utilities/form-item.vue'));
 
 /** Define routes for router */
 const routes = [
