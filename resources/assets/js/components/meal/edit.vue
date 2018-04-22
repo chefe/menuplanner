@@ -3,10 +3,10 @@
         <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
             <h1 class="flex-1">{{ $t('meal.edit.editMeal') }}</h1>
             <router-link :to="'/menuplan/' + meal.menuplan_id" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 0h9v9H0V0zm2 2v5h5V2H2zm-2 9h9v9H0v-9zm2 2v5h5v-5H2zm9-13h9v9h-9V0zm2 2v5h5V2h-5zm-2 9h9v9h-9v-9zm2 2v5h5v-5h-5z"/></svg>
+                <icon name="tile" size="8"></icon>
             </router-link>
             <router-link to="/" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
+                <icon name="list" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="w-8 text-center">
                             <a @click="deleteIngredient(ingredient)" class="cursor-pointer">
-                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
+                                <icon name="trash"></icon>
                             </a>
                         </div>
                     </div>

@@ -6,16 +6,16 @@
                 <small class="text-grey-dark" v-text="duration"></small>
             </h1>
             <a :href="'/menuplan/' + $route.params.id + '/pdf'" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                <icon name="download" size="8"></icon>
             </a>
             <router-link :to="'/menuplan/' + $route.params.id + '/shopping-list'" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16 6v2h2l2 12H0L2 8h2V6a6 6 0 1 1 12 0zm-2 0a4 4 0 1 0-8 0v2h8V6zM4 10v2h2v-2H4zm10 0v2h2v-2h-2z"/></svg>
+                <icon name="cart" size="8"></icon>
             </router-link>
             <router-link :to="'/menuplan/' + $route.params.id + '/items'" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M18 9.87V20H2V9.87a4.25 4.25 0 0 0 3-.38V14h10V9.5a4.26 4.26 0 0 0 3 .37zM3 0h4l-.67 6.03A3.43 3.43 0 0 1 3 9C1.34 9 .42 7.73.95 6.15L3 0zm5 0h4l.7 6.3c.17 1.5-.91 2.7-2.42 2.7h-.56A2.38 2.38 0 0 1 7.3 6.3L8 0zm5 0h4l2.05 6.15C19.58 7.73 18.65 9 17 9a3.42 3.42 0 0 1-3.33-2.97L13 0z"/></svg>
+                <icon name="store" size="8"></icon>
             </router-link>
             <router-link to="/" class="text-grey-darkest ml-4">
-                <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
+                <icon name="list" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap">

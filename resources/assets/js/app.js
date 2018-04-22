@@ -15,6 +15,10 @@ const i18n = new VueI18n({
   messages, 
 });
 
+/** Include vue svg icon */
+import VueSVGIcon from 'vue-svgicon'
+Vue.use(VueSVGIcon)
+
 /** Include vue-progressbar and configure it */
 import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {
@@ -27,6 +31,7 @@ Vue.use(VueProgressBar, {
 Vue.component('status', require('./components/utilities/status.vue'));
 Vue.component('center-panel', require('./components/utilities/center-panel.vue'));
 Vue.component('form-item', require('./components/utilities/form-item.vue'));
+Vue.component('icon', require('./components/utilities/icon.vue'));
 
 /** Define routes for router */
 const routes = [
