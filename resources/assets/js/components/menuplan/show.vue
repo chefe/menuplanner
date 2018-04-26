@@ -27,7 +27,11 @@
                                  :key="meal.id" 
                                  class="block no-underline px-2 py-4">
                         <p class="text-grey-darker" v-text="meal.title"></p>
-                        <small class="text-grey" v-text="getMealTime(meal)"></small>
+                        <small class="text-grey">
+                            {{ getMealTime(meal) }} &middot; 
+                            {{ getMealPeople(meal) }} 
+                            {{ $t('general.people') }}
+                        </small>
                     </router-link>
                     <a @click="addMeal(day)" 
                        class="block no-underline text-grey px-2 py-3 cursor-pointer flex">
@@ -102,6 +106,9 @@
             },
             getMealTime(meal) {
                 return meal.start + ' - ' + meal.end;
+            },
+            getMealPeople(meal) {
+                return meal.people ? meal.people : this.menuplan.people;
             },
             addMeal(date) {
                 router.push({ 
