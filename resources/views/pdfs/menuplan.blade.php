@@ -2,6 +2,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
+        * {
+            font-family: sans-serif;
+        }
         small {
             font-size: 80%;
         }
@@ -74,6 +77,9 @@
         .w-full {
             width: 100%;
         }
+        .italic {
+            font-style: italic;
+        }
         .footer {
             width: 100%;
             text-align: center;
@@ -97,13 +103,13 @@
                 @foreach ($chunk as $date => $datemeals)
                     <td style="width: 25%;vertical-align: top">
                         <div class="p-2">
-                            <p class="text-xl border-b text-grey-darkest">
+                            <p class="text-xl border-b">
                                 {{ Carbon\Carbon::parse($date)->formatLocalized('%a, %e %b') }}
                             </p>
                             @foreach ($datemeals as $meal)
                                 <a class="block py-2 mt-3">
-                                    <p class="text-grey-darker">{{ $meal->title }}</p>
-                                    <small class="text-grey-dark">{{ $meal->duration }}</small>
+                                    <p>{{ $meal->title }}</p>
+                                    <small>{{ $meal->duration }}</small>
                                 </a>
                             @endforeach
                         </div>
@@ -119,12 +125,12 @@
 
     @foreach ($meals as $meal)
         <div class="p-2 mt-3" style="page-break-inside: avoid">
-            <p class="text-3xl border-b text-grey-darker">{{ $meal->title }}</p>
+            <p class="text-3xl border-b">{{ $meal->title }}</p>
 
-            <p class="text-grey-dark mt-3">
+            <p class="mt-3 italic">
                 {{ $meal->date->formatLocalized('%A, %e %b') }}
-                &middot; {{ $meal->duration }}
-                &middot; {{ $meal->absolut_people }} @lang('app.people')
+                &mdash; {{ $meal->duration }}
+                &mdash; {{ $meal->absolut_people }} @lang('app.people')
             </p>
 
             <div class="mt-3">{!! $meal->description !!}</div>
