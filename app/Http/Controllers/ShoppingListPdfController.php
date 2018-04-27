@@ -14,6 +14,7 @@ class ShoppingListPdfController extends Controller
         $data = compact('items', 'menuplan');
 
         return PDF::loadView('pdfs.shopping-list', $data)
+            ->setPaper('a4')
             ->download('shopping-list.pdf');
     }
 }

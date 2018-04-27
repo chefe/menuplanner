@@ -31,6 +31,7 @@ class MenuplanPdfController extends Controller
         $data = compact('menuplan', 'days', 'meals');
 
         return PDF::loadView('pdfs.menuplan', $data)
+            ->setPaper('a4')
             ->download('menuplan.pdf');
     }
 }
