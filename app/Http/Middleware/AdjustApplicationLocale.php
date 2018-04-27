@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App;
 use Closure;
+use Carbon\Carbon;
 
 class AdjustApplicationLocale
 {
@@ -15,7 +17,11 @@ class AdjustApplicationLocale
      */
     public function handle($request, Closure $next)
     {
-        app()->setLocale($this->getLocale());
+        $locale = $this->getLocale();
+        App::setLocale($locale);
+
+        Carbon::setLocale($locale);
+        setlocale(LC_TIME, $this->convertToLocaleNameForSystem($locale));
 
         return $next($request);
     }
@@ -23,5 +29,10 @@ class AdjustApplicationLocale
     private function getLocale()
     {
         return session()->get('locale', 'en');
+    }
+    
+    private function convertToLocaleNameForSystem($locale)
+    {
+        return $locale == 'de' ? 'German' : 'English';
     }
 }

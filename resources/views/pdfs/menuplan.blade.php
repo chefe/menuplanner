@@ -57,9 +57,6 @@
         .text-grey-darkest {
             color: #3d4852;
         }
-        .border-b {
-            border-bottom-width: 1px;
-        }
         .text-grey {
             color: #b8c2cc;
         }
@@ -100,11 +97,13 @@
                 @foreach ($chunk as $date => $datemeals)
                     <td style="width: 25%;vertical-align: top">
                         <div class="p-2">
-                            <p class="text-xl border-b text-grey-darkest">{{ $date }}</p>
+                            <p class="text-xl border-b text-grey-darkest">
+                                {{ Carbon\Carbon::parse($date)->formatLocalized('%a, %e %b') }}
+                            </p>
                             @foreach ($datemeals as $meal)
                                 <a class="block py-2 mt-3">
                                     <p class="text-grey-darker">{{ $meal->title }}</p>
-                                    <small class="text-grey">{{ $meal->duration }}</small>
+                                    <small class="text-grey-dark">{{ $meal->duration }}</small>
                                 </a>
                             @endforeach
                         </div>
@@ -122,10 +121,10 @@
         <div class="p-2 mt-3" style="page-break-inside: avoid">
             <p class="text-3xl border-b text-grey-darker">{{ $meal->title }}</p>
 
-            <p class="text-grey mt-3">
-                {{ $meal->date->format('Y-m-d') }}
-                | {{ $meal->duration }}
-                | {{ $meal->absolut_people }} @lang('app.people')
+            <p class="text-grey-dark mt-3">
+                {{ $meal->date->formatLocalized('%A, %e %b') }}
+                &middot; {{ $meal->duration }}
+                &middot; {{ $meal->absolut_people }} @lang('app.people')
             </p>
 
             <div class="mt-3">{!! $meal->description !!}</div>
