@@ -30,7 +30,7 @@ class AdjustApplicationLocale
     {
         return session()->get('locale', 'en');
     }
-    
+
     private function convertToLocaleNameForSystem($locale)
     {
         return $locale == 'de' ? 'German' : 'English';
