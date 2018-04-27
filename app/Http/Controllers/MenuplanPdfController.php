@@ -24,8 +24,8 @@ class MenuplanPdfController extends Controller
             return [$date => $meals];
         });
 
-        $meals = $menuplan->meals->sort(function ($m) {
-            return $m->date.'-'.$m->start;
+        $meals = $menuplan->meals->sortBy(function ($m) {
+            return $m->date->format('Y-m-d').'-'.$m->start;
         });
 
         $data = compact('menuplan', 'days', 'meals');

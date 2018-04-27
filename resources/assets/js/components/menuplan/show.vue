@@ -21,11 +21,11 @@
         <div class="flex flex-wrap bg-white rounded shadow-b border-b-2 mx-2">
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white">
-                    <p class="text-xl border-b text-grey-darkest px-2 py-3" v-text="day.format('dddd, Do MMM')"></p>
+                    <p class="text-xl border-b text-grey-darkest px-2 py-3 mb-2" v-text="day.format('dddd, Do MMM')"></p>
                     <router-link :to="'/meal/' + meal.id + '/edit'" 
                                  v-for="meal in getMealsForDate(day)" 
                                  :key="meal.id" 
-                                 class="block no-underline px-2 py-4">
+                                 class="block no-underline px-2 py-4 hover:bg-grey-lighter rounded">
                         <p class="text-grey-darker" v-text="meal.title"></p>
                         <small class="text-grey">
                             {{ getMealTime(meal) }} &middot; 
@@ -34,7 +34,7 @@
                         </small>
                     </router-link>
                     <a @click="addMeal(day)" 
-                       class="block no-underline text-grey px-2 py-3 cursor-pointer flex">
+                       class="block no-underline text-grey px-2 py-3 cursor-pointer flex hover:bg-grey-lighter rounded">
                        <icon name="add"></icon>
                         <span class="ml-2">{{ $t('menuplan.show.addNewMeal') }}</span>
                     </a>
@@ -102,6 +102,8 @@
             getMealsForDate(date) {
                 return this.meals.filter(function (meal) {
                     return moment(meal.date).format('YYYYMMDD') == date.format('YYYYMMDD');
+                }).sort(function (a, b) {
+                    return a.start.localeCompare(b.start);
                 });
             },
             getMealTime(meal) {
