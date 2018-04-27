@@ -97,17 +97,17 @@
     </div>
 
     <h1 class="text-center">@lang('app.menuplan') "{{ $menuplan->title }}"</h1>
-    <table class="w-full">
-        @foreach ($days->chunk(4) as $chunk)
+    <table class="w-full page-break">
+        @foreach ($days->chunk(5) as $chunk)
             <tr>
                 @foreach ($chunk as $date => $datemeals)
-                    <td style="width: 25%;vertical-align: top">
+                    <td style="width: 20%;vertical-align: top">
                         <div class="p-2">
                             <p class="text-xl border-b">
                                 {{ Carbon\Carbon::parse($date)->formatLocalized('%a, %e %b') }}
                             </p>
                             @foreach ($datemeals as $meal)
-                                <a class="block py-2 mt-3">
+                                <a class="block py-2">
                                     <p>{{ $meal->title }}</p>
                                     <small>{{ $meal->duration }}</small>
                                 </a>
@@ -117,7 +117,7 @@
                 @endforeach
 
                 @for($x = $chunk->count(); $x < 4; $x++)
-                    <td style="width: 25%"></td>
+                    <td style="width: 20%"></td>
                 @endfor
             </tr>
         @endforeach
