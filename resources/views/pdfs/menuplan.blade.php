@@ -116,7 +116,7 @@
                     </td>
                 @endforeach
 
-                @for($x = $chunk->count(); $x < 4; $x++)
+                @for($x = $chunk->count(); $x < 5; $x++)
                     <td style="width: 20%"></td>
                 @endfor
             </tr>
@@ -139,8 +139,14 @@
                 @foreach ($meal->ingredients->chunk(3) as $chunk)
                     <tr>
                         @foreach ($chunk as $ingredient)
-                            <td>{{ $ingredient->quantity_for_shopping_list . $ingredient->item->unit . ' ' . $ingredient->item->title }}</td>
+                            <td class="text-right" style="width: 10%">{{ $ingredient->quantity_for_shopping_list . ' ' . $ingredient->item->unit }}</td>
+                            <td class="text-left" style="width: 23%">{{ $ingredient->item->title }}</td>
                         @endforeach
+
+                        @for($x = $chunk->count(); $x < 3; $x++)
+                            <td style="width: 10%"></td>
+                            <td style="width: 23%"></td>
+                        @endfor
                     </tr>
                 @endforeach
             </table>
