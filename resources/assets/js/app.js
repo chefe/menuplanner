@@ -32,6 +32,7 @@ Vue.component('status', require('./components/utilities/status.vue'));
 Vue.component('center-panel', require('./components/utilities/center-panel.vue'));
 Vue.component('form-item', require('./components/utilities/form-item.vue'));
 Vue.component('icon', require('./components/utilities/icon.vue'));
+Vue.component('editor', require('./components/utilities/editor.vue'));
 
 /** Define routes for router */
 const routes = [

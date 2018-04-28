@@ -13,7 +13,7 @@
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2 mb-4">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.description') }}</h2>
-                    <trix-editor input="trix4Description" :placeholder="$t('meal.edit.enterDescription')"></trix-editor>
+                    <editor v-model="meal.description" :placeholder="$t('meal.edit.enterDescription')"></editor>
                 </div>
 
                 <div class="bg-white rounded border-b-2 p-2">
@@ -135,7 +135,6 @@
 </template>
 
 <script>
-    import Trix from 'trix';
     import Multiselect from 'vue-multiselect'
     import AddItemModal from '../item/add-item-modal'
     
@@ -187,16 +186,6 @@
                 axios.get(this.endpoint).then(response => {
                     this.meal = response.data;
                     this.fetchItems(this.meal.menuplan_id);
-                    document.querySelector("trix-editor").editor.insertHTML(this.meal.description);
-                    
-                    let vm = this;
-                    document.querySelector("trix-editor").addEventListener('trix-change', (e) => {
-                        let html = e.currentTarget.innerHTML;
-                        clearTimeout(this.timeout);
-                        this.timeout = setTimeout(() => {
-                            vm.meal.description = html;
-                        }, 1000);
-                    });
                 });
             },
             fetchItems(menuplanId) {
