@@ -11,12 +11,12 @@
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
-                <div class="bg-white shadow border p-2 mb-4">
+                <div class="bg-white rounded border-b-2 p-2 mb-4">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.description') }}</h2>
                     <trix-editor input="trix4Description" :placeholder="$t('meal.edit.enterDescription')"></trix-editor>
                 </div>
 
-                <div class="bg-white shadow border p-2">
+                <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">
                         <span>{{ $t('meal.edit.ingredientsFor') }}</span>
                         <input class="text-grey-darkest w-16 text-right" 
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="w-full md:w-1/3 p-2">
-                <div class="bg-white shadow border p-2">
+                <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.title">
                         <input class="form-control" 

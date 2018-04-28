@@ -10,7 +10,7 @@
             </router-link>
         </div>
 
-        <div class="bg-white m-2 p-2 shadow border">
+        <div class="bg-white m-2 p-2 rounded border-b-2">
             <table class="w-full">
                 <thead>
                     <tr>
