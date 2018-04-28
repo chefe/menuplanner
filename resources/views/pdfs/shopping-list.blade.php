@@ -48,12 +48,13 @@
                     <small>
                         {{
                             collect($item['meals'])->map(function ($meal) use ($item) {
-                                return sprintf('%s [%s%s]', 
+                                return sprintf('%s, %s [%s%s]', 
                                     $meal['title'],
+                                    Carbon\Carbon::parse($meal['date'])->formatLocalized('%a %e'),
                                     $meal['quantity'],
                                     $item['unit']
                                 );
-                            })->implode(' / ')
+                            })->implode(' · ')
                         }}
                     </small>
                 </td>

@@ -31,6 +31,8 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         data() {
             return {
@@ -49,8 +51,10 @@
             },
             quantityPerMealString(item) {
                 return item.meals.map(m => {
-                    return m.title + ' ['  + m.quantity + item.unit + ']';
-                }).join(' / ');
+                    return m.title + ', '
+                        + moment(m.date).format('ddd Do') 
+                        + ' ['  + m.quantity + item.unit + ']';
+                }).join(' · ');
             }
         }
     }
