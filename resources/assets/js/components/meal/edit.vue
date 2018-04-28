@@ -19,7 +19,7 @@
                 <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">
                         <span>{{ $t('meal.edit.ingredientsFor') }}</span>
-                        <input class="text-grey-darkest w-16 text-right" 
+                        <input class="text-grey-darkest border-b border-dashed w-16 text-right" 
                                type="number" 
                                name="ingredients_for" 
                                v-model="meal.ingredients_for" 

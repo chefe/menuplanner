@@ -39,7 +39,7 @@ body {
 }
 
 .form-control {
-    @apply .w-full .border .p-1 .h-8;
+    @apply w-full border-b border-dashed p-1 h-8;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -64,7 +64,10 @@ body {
 }
 
 .multiselect__tags {
-    @apply border;
+    @apply border-t-0;
+    @apply border-l-0;
+    @apply border-r-0;
+    @apply border-dashed;
     border-radius: 0;
     padding-top: 4px;
     padding-left: 0;
