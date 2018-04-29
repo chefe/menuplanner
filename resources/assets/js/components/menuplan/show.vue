@@ -19,17 +19,28 @@
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white">
                     <p class="text-xl border-b text-grey-darkest px-2 py-3 mb-2" v-text="day.format('dddd, Do MMM')"></p>
-                    <router-link :to="'/meal/' + meal.id + '/edit'" 
-                                 v-for="meal in getMealsForDate(day)" 
-                                 :key="meal.id" 
-                                 class="block no-underline px-2 py-4 hover:bg-grey-lighter rounded">
-                        <p class="text-grey-darker" v-text="meal.title"></p>
-                        <small class="text-grey">
-                            {{ getMealTime(meal) }} &middot; 
-                            {{ getMealPeople(meal) }} 
-                            {{ $t('general.people') }}
-                        </small>
-                    </router-link>
+                    <div v-for="event in getEventsForDate(day)" :key="event.id">
+                        <router-link v-if="event.meal"
+                                    :to="'/meal/' + event.meal.id + '/edit'" 
+                                    class="block no-underline px-2 py-4 hover:bg-grey-lighter rounded">
+                            <p class="text-grey-darker" v-text="event.meal.title"></p>
+                            <small class="text-grey">
+                                {{ getMealTime(event.meal) }} &middot; 
+                                {{ getMealPeople(event.meal) }} 
+                                {{ $t('general.people') }}
+                            </small>
+                        </router-link>
+                        <router-link v-if="event.purchase"
+                            :to="'/purchase/' + event.purchase.id"
+                            class="block no-underline px-2 py-2 hover:bg-grey-lighter rounded flex align-center">
+                            <span class="block h-1 my-1 bg-grey-light w-full rounded"></span>
+                            <div class="mx-2 flex">
+                                <icon name="store" class="text-grey-light"></icon>
+                                <small class="mx-1 text-grey-darker" v-text="event.purchase.time"></small>
+                            </div>
+                            <span class="block h-1 my-1 bg-grey-light w-full rounded"></span>
+                        </router-link>
+                    </div>
                     <a @click="addMeal(day)" 
                        class="block no-underline text-grey px-2 py-3 cursor-pointer flex hover:bg-grey-lighter rounded">
                        <icon name="add"></icon>
@@ -50,6 +61,7 @@
                 endpoint: '',
                 days: [],
                 meals: [],
+                purchases: [],
                 menuplan: {
                     title: '',
                     start: '',
@@ -61,6 +73,7 @@
             this.endpoint = '/api/menuplan/' + this.$route.params.id;
             this.fetchMenuplan();
             this.fetchMeals();
+            this.fetchPurchases();
         },
         watch: {
             '$i18n.locale': function (val) {
@@ -87,6 +100,11 @@
                     this.meals = response.data;
                 });
             },
+            fetchPurchases() {
+                axios.get(this.endpoint + '/purchases').then(response => {
+                    this.purchases = response.data;
+                });
+            },
             setupDays() {
                 let start = moment(this.menuplan.start);
                 let days = moment(this.menuplan.end).diff(start, 'days');
@@ -96,11 +114,31 @@
                     this.days.push(start.clone().add(i, 'd'));
                 }
             },
-            getMealsForDate(date) {
-                return this.meals.filter(function (meal) {
+            getEventsForDate(date) {
+                let events = [];
+                
+                this.meals.filter(function (meal) {
                     return moment(meal.date).format('YYYYMMDD') == date.format('YYYYMMDD');
-                }).sort(function (a, b) {
-                    return a.start.localeCompare(b.start);
+                }).forEach(m => {
+                    events.push({
+                        id: 'm'+m.id,
+                        meal: m,
+                        time: m.start
+                    });
+                });
+
+                this.purchases.filter(function (purchase) {
+                    return moment(purchase.date).format('YYYYMMDD') == date.format('YYYYMMDD');
+                }).forEach(p => {
+                    events.push({
+                        id: 'p'+p.id,
+                        purchase: p,
+                        time: p.time
+                    });
+                });
+                
+                return events.sort(function (a, b) {
+                    return a.time.localeCompare(b.time);
                 });
             },
             getMealTime(meal) {
