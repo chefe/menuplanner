@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Http\Resources\PurchaseResource;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Resources\PurchaseResource;
 
 class Purchase extends Model
 {

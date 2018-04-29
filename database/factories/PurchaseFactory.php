@@ -11,6 +11,7 @@ $factory->define(App\Purchase::class, function (Faker $faker) {
         },
         'time' => function (array $purchase) use ($faker) {
             $plan = Menuplan::find($purchase['menuplan_id']);
+
             return $faker->dateTimeBetween($plan->start, $plan->end->endOfDay());
         },
     ];

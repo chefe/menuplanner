@@ -6,8 +6,6 @@ use App\User;
 use App\Menuplan;
 use App\Purchase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class PurchaseTest extends TestCase
@@ -25,7 +23,7 @@ class PurchaseTest extends TestCase
         $getDateAndTimeFromPurchase = function ($purchase) {
             return [
                 'time' => $purchase->time->format('H:i'),
-                'date' => $purchase->time->format('Y-m-d')
+                'date' => $purchase->time->format('Y-m-d'),
             ];
         };
 
@@ -141,21 +139,21 @@ class PurchaseTest extends TestCase
     {
         return [
             'date' => $menuplan->start->format('Y-m-d'),
-            'time' => '09:00'
+            'time' => '09:00',
         ];
     }
 
     private function assertDatabaseHasPurchase($purchaseData)
     {
         $this->assertDatabaseHas('purchases', [
-            'time' => $purchaseData['date'].' '.$purchaseData['time'].':00'
+            'time' => $purchaseData['date'].' '.$purchaseData['time'].':00',
         ]);
     }
 
     private function assertDatabaseMissingPurchase($purchaseData)
     {
         $this->assertDatabaseMissing('purchases', [
-            'time' => $purchaseData['date'].' '.$purchaseData['time'].':00'
+            'time' => $purchaseData['date'].' '.$purchaseData['time'].':00',
         ]);
     }
 }

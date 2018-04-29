@@ -16,7 +16,7 @@ class PurchaseResource extends JsonResource
     {
         return array_merge(parent::toArray($request), [
             'date' => $this->time->format('Y-m-d'),
-            'time' => $this->time->format('H:i')
+            'time' => $this->time->format('H:i'),
         ]);
     }
 }
