@@ -60,4 +60,9 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
     Route::delete('/invitation/{invitation}/decline', 'AcceptInvitationController@destroy');
     Route::get('/invitation', 'InvitationController@index');
     Route::delete('/invitation/{invitation}', 'InvitationController@destroy');
+
+    Route::get('/menuplan/{menuplan}/purchases', 'PurchaseController@index');
+    Route::post('/menuplan/{menuplan}/purchases', 'PurchaseController@store');
+    Route::put('/purchase/{purchase}', 'PurchaseController@update');
+    Route::delete('/purchase/{purchase}', 'PurchaseController@destroy');
 });
