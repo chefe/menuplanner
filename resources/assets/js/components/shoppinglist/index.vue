@@ -8,9 +8,6 @@
             <router-link :to="'/menuplan/' + $route.params.id" class="text-grey-darkest ml-4">
                 <icon name="tile" size="8"></icon>
             </router-link>
-            <router-link to="/" class="text-grey-darkest ml-4">
-                <icon name="list" size="8"></icon>
-            </router-link>
         </div>
 
         <div class="bg-white m-2 p-2 rounded border-b-2">

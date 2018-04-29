@@ -116,3 +116,12 @@ register({
     data: '<path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>'
   }
 })
+
+register({
+  'bulletlist': {
+    width: 16,
+    height: 16,
+    viewBox: '0 0 20 20',
+    data: '<path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"/>'
+  }
+})

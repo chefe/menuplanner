@@ -5,9 +5,6 @@
             <router-link :to="'/menuplan/' + meal.menuplan_id" class="text-grey-darkest ml-4">
                 <icon name="tile" size="8"></icon>
             </router-link>
-            <router-link to="/" class="text-grey-darkest ml-4">
-                <icon name="list" size="8"></icon>
-            </router-link>
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">

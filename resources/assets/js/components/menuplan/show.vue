@@ -12,10 +12,7 @@
                 <icon name="cart" size="8"></icon>
             </router-link>
             <router-link :to="'/menuplan/' + $route.params.id + '/items'" class="text-grey-darkest ml-4">
-                <icon name="store" size="8"></icon>
-            </router-link>
-            <router-link to="/" class="text-grey-darkest ml-4">
-                <icon name="list" size="8"></icon>
+                <icon name="bulletlist" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap bg-white rounded shadow-b border-b-2 mx-2">
