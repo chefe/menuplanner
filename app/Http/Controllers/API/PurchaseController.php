@@ -18,6 +18,13 @@ class PurchaseController extends Controller
         return PurchaseResource::collection($menuplan->purchases);
     }
 
+    public function show(Purchase $purchase)
+    {
+        $this->authorize('view', $purchase->menuplan);
+
+        return $purchase->asResource();
+    }
+
     public function store(Request $request, Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);

@@ -63,6 +63,7 @@ Route::middleware('auth')->prefix('/api')->namespace('API')->group(function () {
 
     Route::get('/menuplan/{menuplan}/purchases', 'PurchaseController@index');
     Route::post('/menuplan/{menuplan}/purchases', 'PurchaseController@store');
+    Route::get('/purchase/{purchase}', 'PurchaseController@show');
     Route::put('/purchase/{purchase}', 'PurchaseController@update');
     Route::delete('/purchase/{purchase}', 'PurchaseController@destroy');
 });

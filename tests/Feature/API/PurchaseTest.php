@@ -71,6 +71,32 @@ class PurchaseTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_get_a_purchase()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $purchase = factory(Purchase::class)->create(['menuplan_id' => $menuplan->id]);
+
+        $this->actingAs($user)
+            ->get('/api/purchase/'.$purchase->id)
+            ->assertStatus(200)
+            ->assertJson([
+                'menuplan_id' => $menuplan->id
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_get_only_his_purchases()
+    {
+        $user = factory(User::class)->create();
+        $purchase = factory(Purchase::class)->create();
+    
+        $this->actingAs($user)
+                ->get('/api/purchase/'.$purchase->id)
+                ->assertStatus(403);
+    }
+
+    /** @test */
     public function a_user_can_update_a_purchase()
     {
         $this->withoutExceptionHandling();
