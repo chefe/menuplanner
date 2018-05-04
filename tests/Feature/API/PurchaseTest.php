@@ -81,7 +81,7 @@ class PurchaseTest extends TestCase
             ->get('/api/purchase/'.$purchase->id)
             ->assertStatus(200)
             ->assertJson([
-                'menuplan_id' => $menuplan->id
+                'menuplan_id' => $menuplan->id,
             ]);
     }
 
@@ -90,7 +90,7 @@ class PurchaseTest extends TestCase
     {
         $user = factory(User::class)->create();
         $purchase = factory(Purchase::class)->create();
-    
+
         $this->actingAs($user)
                 ->get('/api/purchase/'.$purchase->id)
                 ->assertStatus(403);
