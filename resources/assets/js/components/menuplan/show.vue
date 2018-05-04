@@ -31,7 +31,7 @@
                             </small>
                         </router-link>
                         <router-link v-if="event.purchase"
-                            :to="'/purchase/' + event.purchase.id"
+                            :to="'/purchase/' + event.purchase.id + '/edit'"
                             class="block no-underline px-2 py-2 hover:bg-grey-lighter rounded flex align-center">
                             <span class="block h-1 my-1 bg-grey-light w-full rounded"></span>
                             <div class="mx-2 flex">

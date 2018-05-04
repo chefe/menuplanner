@@ -59,12 +59,20 @@ export default {
                 shoppinglist: 'Shopping List'
             }
         },
+        purchase: {
+            edit: {
+                editPurchase: 'Edit Purchase',
+                notes: 'Notes',
+                enterNotes: 'Enter notes ...'
+            }
+        },
         notfound: {
             pageNotFound: 'Page could not be found!',
             back: 'Back',
         },
         general: {
             title: 'Title',
+            time: 'Time',
             start: 'Start',
             end: 'End',
             date: 'Date',
@@ -136,12 +144,20 @@ export default {
                 shoppinglist: 'Einkaufsliste'
             }
         },
+        purchase: {
+            edit: {
+                editPurchase: 'Einkauf bearbeiten',
+                notes: 'Notizen',
+                enterNotes: 'Notizen hinzufügen ...'
+            }
+        },
         notfound: {
             pageNotFound: 'Ungültige Seite!',
             back: 'Zurück',
         },
         general: {
             title: 'Bezeichnung',
+            time: 'Zeit',
             start: 'Start',
             end: 'Ende',
             date: 'Datum',

@@ -42,6 +42,7 @@ const routes = [
     { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue') },
     { path: '/menuplan/:id/meal/create', component: require('./components/meal/create.vue') },
     { path: '/meal/:id/edit', component: require('./components/meal/edit.vue') },
+    { path: '/purchase/:id/edit', component: require('./components/purchase/edit.vue') },
     { path: '/menuplan/:id/items', component: require('./components/item/index.vue') },
     { path: '/menuplan/:id/shopping-list', component: require('./components/shoppinglist/index.vue') },
     { path: '/menuplan/:id/share', component: require('./components/share/index.vue') },

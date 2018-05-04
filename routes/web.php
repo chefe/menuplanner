@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/menuplan/{menuplan}/edit', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/meal/create', 'HomeController@index');
     Route::get('/meal/{meal}/edit', 'HomeController@index');
+    Route::get('/purchase/{purchase}/edit', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/items', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/shopping-list', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/share', 'HomeController@index');
