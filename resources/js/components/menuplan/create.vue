@@ -11,7 +11,7 @@
 
     export default {
         components: {
-            'menuplan-form': require('./form.vue')
+            'menuplan-form': require('./form.vue').default
         },
         data() {
             return {

@@ -15,7 +15,7 @@ export default {
         classes() {
             return `h-${this.size} w-${this.size} fill-current`;
         }
-    }, 
+    },
     mounted() {
         require('../../icons')
     }

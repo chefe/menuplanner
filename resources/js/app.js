@@ -12,7 +12,7 @@ import messages from './messages.js'
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: document.querySelector('html').getAttribute('lang'),
-  messages, 
+  messages,
 });
 
 /** Include vue svg icon */
@@ -28,25 +28,25 @@ Vue.use(VueProgressBar, {
 });
 
 /** Define global components */
-Vue.component('status', require('./components/utilities/status.vue'));
-Vue.component('center-panel', require('./components/utilities/center-panel.vue'));
-Vue.component('form-item', require('./components/utilities/form-item.vue'));
-Vue.component('icon', require('./components/utilities/icon.vue'));
-Vue.component('editor', require('./components/utilities/editor.vue'));
+Vue.component('status', require('./components/utilities/status.vue').default);
+Vue.component('center-panel', require('./components/utilities/center-panel.vue').default);
+Vue.component('form-item', require('./components/utilities/form-item.vue').default);
+Vue.component('icon', require('./components/utilities/icon.vue').default);
+Vue.component('editor', require('./components/utilities/editor.vue').default);
 
 /** Define routes for router */
 const routes = [
-    { path: '/', component: require('./components/dashboard.vue') },
-    { path: '/menuplan/create', component: require('./components/menuplan/create.vue') },
-    { path: '/menuplan/:id', component: require('./components/menuplan/show.vue') },
-    { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue') },
-    { path: '/menuplan/:id/meal/create', component: require('./components/meal/create.vue') },
-    { path: '/meal/:id/edit', component: require('./components/meal/edit.vue') },
-    { path: '/purchase/:id/edit', component: require('./components/purchase/edit.vue') },
-    { path: '/menuplan/:id/items', component: require('./components/item/index.vue') },
-    { path: '/menuplan/:id/shopping-list', component: require('./components/shoppinglist/index.vue') },
-    { path: '/menuplan/:id/share', component: require('./components/share/index.vue') },
-	{ path: '*', component: require('./components/not-found.vue') },
+    { path: '/', component: require('./components/dashboard.vue').default },
+    { path: '/menuplan/create', component: require('./components/menuplan/create.vue').default },
+    { path: '/menuplan/:id', component: require('./components/menuplan/show.vue').default },
+    { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue').default },
+    { path: '/menuplan/:id/meal/create', component: require('./components/meal/create.vue').default },
+    { path: '/meal/:id/edit', component: require('./components/meal/edit.vue').default },
+    { path: '/purchase/:id/edit', component: require('./components/purchase/edit.vue').default },
+    { path: '/menuplan/:id/items', component: require('./components/item/index.vue').default },
+    { path: '/menuplan/:id/shopping-list', component: require('./components/shoppinglist/index.vue').default },
+    { path: '/menuplan/:id/share', component: require('./components/share/index.vue').default },
+	{ path: '*', component: require('./components/not-found.vue').default },
 ];
 
 /** Setup router */

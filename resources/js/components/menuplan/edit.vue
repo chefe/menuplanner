@@ -28,7 +28,7 @@
 
     export default {
         components: {
-            'menuplan-form': require('./form.vue')
+            'menuplan-form': require('./form.vue').default
         },
         data() {
             return {
@@ -37,7 +37,7 @@
                     start: '',
                     end: '',
                     people: 1
-                }, 
+                },
                 endpoint: '',
                 confirmMode: false,
             }
@@ -59,7 +59,7 @@
             },
             cancel() {
                 router.go(-1);
-            }, 
+            },
             confirmDelete() {
                 this.confirmMode = true;
             },
