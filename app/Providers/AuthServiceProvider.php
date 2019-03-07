@@ -2,10 +2,7 @@
 
 namespace App\Providers;
 
-use App\Menuplan;
-use App\Invitation;
-use App\Policies\MenuplanPolicy;
-use App\Policies\InvitationPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -16,8 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Menuplan::class => MenuplanPolicy::class,
-        Invitation::class => InvitationPolicy::class,
+        // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
