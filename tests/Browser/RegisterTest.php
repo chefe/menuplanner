@@ -34,8 +34,8 @@ class RegisterTest extends DuskTestCase
             $browser->visit('/register')
                 ->type('name', $user->name)
                 ->type('email', $user->email)
-                ->type('password', 'secret')
-                ->type('password_confirmation', 'secret')
+                ->type('password', 'password')
+                ->type('password_confirmation', 'password')
                 ->press('Register')
                 ->assertPathIs('/')
                 ->assertSee('Menuplans');
