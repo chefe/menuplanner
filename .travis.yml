@@ -4,10 +4,15 @@ php:
   - 7.2
   - 7.3
 
+addons:
+  sonarcloud:
+    organization: "chefe_menuplanner"
+
 before_script:
   - cp .env.travis .env
   - composer install --no-interaction
   - php artisan key:generate
+  - sonar-scanner
 
 cache:
   directories:
