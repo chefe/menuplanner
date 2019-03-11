@@ -6,7 +6,7 @@ php:
 
 addons:
   sonarcloud:
-    organization: "chefe_menuplanner"
+    organization: "chefe-github"
 
 before_script:
   - cp .env.travis .env
@@ -17,3 +17,4 @@ before_script:
 cache:
   directories:
     - vendor
+    - '$HOME/.sonar/cache'
