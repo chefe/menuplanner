@@ -20,6 +20,8 @@ class MenuplanController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Menuplan::class);
+
         $data = $this->getValidatedData($request);
 
         return Menuplan::create(array_merge($data, [
