@@ -15,11 +15,16 @@
 
 <script>
     export default {
-        props: ['header-accent'],
+        props: {
+            isCriticalAction: {
+                type: Boolean,
+                default: false
+            },
+        },
         computed: {
             headerClasses() {
                 return 'flex items-center font-medium text-lg p-3 sm:rounded-t ' +
-                    'bg-' + (this.headerAccent ? this.headerAccent : 'brand') + '-light';
+                    (this.isCriticalAction ? 'bg-red-light' : 'bg-brand-light');
             },
             contentClasses() {
                 return 'bg-white sm:rounded-b ' + (this.hasHeader ? '' : 'sm:rounded-t');

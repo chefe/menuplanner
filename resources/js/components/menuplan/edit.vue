@@ -6,7 +6,7 @@
             </menuplan-form>
         </center-panel>
 
-        <center-panel header-accent="red">
+        <center-panel :is-critical-action="true">
             <template slot="header">{{ $t('menuplan.edit.deleteMenuplan') }}</template>
 
             <div v-if="confirmMode" class="px-2 py-4 text-center">
