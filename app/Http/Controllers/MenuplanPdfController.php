@@ -11,7 +11,7 @@ class MenuplanPdfController extends Controller
     public function show(Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);
-        
+
         $menuplan->load('meals');
 
         $dayCount = $menuplan->end->diffInDays($menuplan->start);

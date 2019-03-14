@@ -209,7 +209,7 @@ class MenuplanTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get(url('/menuplan/' . $menuplan->id . '/pdf'))
+            ->get(url('/menuplan/'.$menuplan->id.'/pdf'))
             ->assertStatus(200)
             ->assertHeader('content-disposition', 'attachment; filename="menuplan.pdf"');
     }
@@ -221,7 +221,7 @@ class MenuplanTest extends TestCase
         $menuplan = factory(Menuplan::class)->create();
 
         $this->actingAs($user)
-            ->get(url('/menuplan/' . $menuplan->id . '/pdf'))
+            ->get(url('/menuplan/'.$menuplan->id.'/pdf'))
             ->assertStatus(403);
     }
 }
