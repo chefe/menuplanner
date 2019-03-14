@@ -199,4 +199,29 @@ class MenuplanTest extends TestCase
             ->delete('/api/menuplan/'.$menuplan->id)
             ->assertStatus(403);
     }
+
+    /** @test */
+    public function a_user_can_download_a_menuplan()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->actingAs($user)
+            ->get(url('/menuplan/' . $menuplan->id . '/pdf'))
+            ->assertStatus(200)
+            ->assertHeader('content-disposition', 'attachment; filename="menuplan.pdf"');
+    }
+
+    /** @test */
+    public function a_user_can_only_download_his_menuplans()
+    {
+        $user = factory(User::class)->create();
+        $menuplan = factory(Menuplan::class)->create();
+
+        $this->actingAs($user)
+            ->get(url('/menuplan/' . $menuplan->id . '/pdf'))
+            ->assertStatus(403);
+    }
 }
