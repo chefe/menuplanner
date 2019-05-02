@@ -18,7 +18,7 @@ class MenuplanTest extends TestCase
         $user = factory(User::class)->create();
         $ownMenuplans = factory(Menuplan::class, 4)
             ->create(['user_id' => $user->id]);
-        $otherMenuplans = factory(Menuplan::class, 10);
+        factory(Menuplan::class, 10);
 
         $this->actingAs($user)
             ->get('/api/menuplan')

@@ -67,15 +67,15 @@ class ShareMenuplanTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
         $menuplan->invitations()->create(['email' => 'john@example.com']);
 
-        $this->actingAs($user)
-            ->post('/api/menuplan/'.$menuplan->id.'/invitation', [
-                'email' => 'john@example.com',
-            ])->assertStatus(200);
-
         $this->assertDatabaseHas('invitations', [
             'menuplan_id' => $menuplan->id,
             'email' => 'john@example.com',
         ]);
+
+        $this->actingAs($user)
+            ->post('/api/menuplan/'.$menuplan->id.'/invitation', [
+                'email' => 'john@example.com',
+            ])->assertStatus(200);
     }
 
     /** @test */
@@ -95,8 +95,8 @@ class ShareMenuplanTest extends TestCase
     {
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $invitationOne = $menuplan->invitations()->create(['email' => 'john@example.com']);
-        $invitationTwo = $menuplan->invitations()->create(['email' => 'jane@example.com']);
+        $invitation = $menuplan->invitations()->create(['email' => 'john@example.com']);
+        $menuplan->invitations()->create(['email' => 'jane@example.com']);
 
         $this->assertDatabaseHas('invitations', [
             'menuplan_id' => $menuplan->id,
@@ -104,7 +104,7 @@ class ShareMenuplanTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->delete('/api/invitation/'.$invitationOne->id)
+            ->delete('/api/invitation/'.$invitation->id)
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('invitations', [
@@ -118,8 +118,8 @@ class ShareMenuplanTest extends TestCase
     {
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create();
-        $invitationOne = $menuplan->invitations()->create(['email' => 'john@example.com']);
-        $invitationTwo = $menuplan->invitations()->create(['email' => 'jane@example.com']);
+        $invitation = $menuplan->invitations()->create(['email' => 'john@example.com']);
+        $menuplan->invitations()->create(['email' => 'jane@example.com']);
 
         $this->assertDatabaseHas('invitations', [
             'menuplan_id' => $menuplan->id,
@@ -127,7 +127,7 @@ class ShareMenuplanTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->delete('/api/invitation/'.$invitationOne->id)
+            ->delete('/api/invitation/'.$invitation->id)
             ->assertStatus(403);
 
         $this->assertDatabaseHas('invitations', [
@@ -253,8 +253,8 @@ class ShareMenuplanTest extends TestCase
             'email' => $user->email,
         ]);
 
-        $menuplanOne = factory(Menuplan::class)->create(['user_id' => $thirdUser->id]);
-        $invitationTwo = $menuplanOne->invitations()->create([
+        $menuplanTwo = factory(Menuplan::class)->create(['user_id' => $thirdUser->id]);
+        $invitationTwo = $menuplanTwo->invitations()->create([
             'email' => $user->email,
         ]);
 

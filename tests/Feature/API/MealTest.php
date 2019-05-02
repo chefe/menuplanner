@@ -85,7 +85,7 @@ class MealTest extends TestCase
         $mainUser = factory(User::class)->create();
         $anotherUser = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create(['user_id' => $mainUser->id]);
-        $meals = factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($anotherUser)
             ->get('/api/menuplan/'.$menuplan->id.'/meals')
@@ -130,7 +130,7 @@ class MealTest extends TestCase
         $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
 
         $validMealData = $this->getValidMealData($menuplan);
-        $d = $this->actingAs($user)
+        $this->actingAs($user)
             ->post('/api/menuplan/'.$menuplan->id.'/meals', $validMealData)
             ->assertStatus(201)
             ->assertJson($validMealData);

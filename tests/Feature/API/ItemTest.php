@@ -53,7 +53,7 @@ class ItemTest extends TestCase
     {
         $user = factory(User::class)->create();
         $menuplan = factory(Menuplan::class)->create();
-        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/items')

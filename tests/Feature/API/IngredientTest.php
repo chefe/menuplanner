@@ -52,7 +52,7 @@ class IngredientTest extends TestCase
     public function a_user_can_only_get_the_ingredients_of_a_meal_from_his_menuplans()
     {
         $meal = factory(Meal::class)->create();
-        $ingredient = factory(Ingredient::class)->create(['meal_id' => $meal->id]);
+        factory(Ingredient::class)->create(['meal_id' => $meal->id]);
 
         $this->actingAs($this->user)
             ->get('/api/meal/'.$meal->id.'/ingredients')
