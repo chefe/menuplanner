@@ -15,7 +15,7 @@ class MenuplanPdfController extends Controller
         $menuplan->load('meals');
 
         $dayCount = $menuplan->end->diffInDays($menuplan->start);
-        $days = Collection::times($dayCount + 1, function ($number) use ($menuplan) {
+        $days = Collection::times($dayCount + 1, function ($number) {
             return $number - 1;
         })->mapWithKeys(function ($number) use ($menuplan) {
             $date = $menuplan->start->addDays($number)->format('Y-m-d');

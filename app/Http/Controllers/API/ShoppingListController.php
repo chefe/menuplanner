@@ -15,7 +15,7 @@ class ShoppingListController extends Controller
             ->load('meal')
             ->groupBy('item_id')
             ->filter(function ($ingredients) {
-                return $ingredients->isEmpty() == false;
+                return !$ingredients->isEmpty();
             })->map(function ($ingredients) {
                 return [
                     'item_id' => $ingredients->first()->item_id,
