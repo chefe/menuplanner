@@ -24,8 +24,6 @@
 </template>
 
 <script>
-    import { bus } from '../../eventbus.js';
-
     export default {
         components: {
             'menuplan-form': require('./form.vue').default

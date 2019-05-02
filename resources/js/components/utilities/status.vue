@@ -21,11 +21,9 @@
 </template>
 
 <script>
-    import { bus } from '../../eventbus.js';
-
     export default {
         data() {
-            return { 
+            return {
                 error: {
                     message: '',
                     points: [],
