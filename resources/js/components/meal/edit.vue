@@ -16,29 +16,29 @@
                 <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">
                         <span>{{ $t('meal.edit.ingredientsFor') }}</span>
-                        <input class="text-grey-darkest border-b border-dashed w-16 text-right" 
-                               type="number" 
-                               name="ingredients_for" 
-                               v-model="meal.ingredients_for" 
-                               min="1" 
+                        <input class="text-grey-darkest border-b border-dashed w-16 text-right"
+                               type="number"
+                               name="ingredients_for"
+                               v-model="meal.ingredients_for"
+                               min="1"
                                required />
                         <span>{{ $t('meal.edit.people') }}</span>
                     </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="w-16 sm:flex-1 pr-2">
-                            <input @change="updateIngredient(ingredient)" 
-                                   class="form-control text-right" 
-                                   type="number" 
+                            <input @change="updateIngredient(ingredient)"
+                                   class="form-control text-right"
+                                   type="number"
                                    v-model="ingredient.quantity" />
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
                         <div class="flex-1">
-                            <multiselect 
+                            <multiselect
                                 @input="i => ingredient.item_id = i.id"
                                 @select="updateIngredient(ingredient)"
-                                :value="getItemByIngredient(ingredient)" 
+                                :value="getItemByIngredient(ingredient)"
                                 :custom-label="i => i.title"
-                                :options="items" 
+                                :options="items"
                                 :allowEmpty="false"
                                 :showLabels="false"
                                 :option-height="32"
@@ -55,19 +55,19 @@
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="w-16 sm:flex-1 pr-2">
-                            <input @change="addIngredient()" 
-                                   class="form-control text-right" 
-                                   type="number" 
+                            <input @change="addIngredient()"
+                                   class="form-control text-right"
+                                   type="number"
                                    v-model="newIngredient.quantity"/>
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
                         <div class="flex-1">
-                            <multiselect 
+                            <multiselect
                                 @input="i => newIngredient.item_id = i.id"
                                 @select="addIngredient()"
-                                :value="getItemByIngredient(newIngredient)" 
+                                :value="getItemByIngredient(newIngredient)"
                                 :custom-label="i => i.title"
-                                :options="items" 
+                                :options="items"
                                 :allowEmpty="false"
                                 :showLabels="false"
                                 :option-height="32"
@@ -87,20 +87,20 @@
                 <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.title">
-                        <input class="form-control" 
-                               type="text" 
-                               name="title" 
-                               v-model.lazy="meal.title" 
-                               :placeholder="$t('general.provideTitle')" 
+                        <input class="form-control"
+                               type="text"
+                               name="title"
+                               v-model.lazy="meal.title"
+                               :placeholder="$t('general.provideTitle')"
                                required />
                     </form-item>
                     <form-item caption="general.date">
-                        <input class="form-control" 
-                               type="date" 
-                               name="date" 
+                        <input class="form-control"
+                               type="date"
+                               name="date"
                                v-model.lazy="meal.date"
-                               :min="meal.menuplan.start" 
-                               :max="meal.menuplan.end" 
+                               :min="meal.menuplan.start"
+                               :max="meal.menuplan.end"
                                required />
                     </form-item>
                     <form-item caption="general.start">
@@ -110,19 +110,19 @@
                         <input class="form-control" type="time" name="end" v-model.lazy="meal.end" required />
                     </form-item>
                     <form-item caption="general.people">
-                        <input class="form-control" 
-                               type="number" 
-                               name="people" 
-                               v-model.lazy="meal.people" 
-                               min="1" 
-                               :placeholder="meal.menuplan.people" 
+                        <input class="form-control"
+                               type="number"
+                               name="people"
+                               v-model.lazy="meal.people"
+                               min="1"
+                               :placeholder="meal.menuplan.people"
                                required />
                     </form-item>
                 </div>
             </div>
         </div>
 
-        <add-item-modal :caption="addItemModal.caption" 
+        <add-item-modal :caption="addItemModal.caption"
                         :show="addItemModal.show"
                         :menuplanId="meal.menuplan_id"
                         @addItem="addItem"
@@ -134,7 +134,7 @@
 <script>
     import Multiselect from 'vue-multiselect'
     import AddItemModal from '../item/add-item-modal'
-    
+
     export default {
         components: {
             Multiselect,
@@ -201,7 +201,7 @@
                 let items = this.items.filter(i => {
                     return i.id == itemId;
                 });
-                
+
                 return items.length > 0 ? items[0].unit : '';
             },
             addIngredient() {
@@ -214,19 +214,17 @@
                 }
             },
             deleteIngredient(ingredient) {
-                if (confirm('Are you sure?')) {
-                    let endpoint = '/api/ingredient/' + ingredient.id;
-                    axios.delete(endpoint).then(response => {
-                        this.ingredients = this.ingredients.filter(i => {
-                            return i.id != ingredient.id; 
-                        });
+                let endpoint = '/api/ingredient/' + ingredient.id;
+                axios.delete(endpoint).then(response => {
+                    this.ingredients = this.ingredients.filter(i => {
+                        return i.id != ingredient.id;
                     });
-                }
+                });
             },
             getItemByIngredient(ingredient) {
                 let id = ingredient != undefined ? ingredient.item_id : 0;
                 let filtered = this.items.filter(i => i.id == id);
-                return filtered.length > 0 ? filtered[0] : undefined; 
+                return filtered.length > 0 ? filtered[0] : undefined;
             },
             showAddItemModal(caption) {
                 this.addItemModal.caption = caption;
