@@ -28,7 +28,7 @@ class AdjustApplicationLocale
 
     private function getLocale()
     {
-        return session()->get('locale', 'en');
+        return session()->get('locale', config('app.locale'));
     }
 
     private function convertToLocaleNameForSystem($locale)
