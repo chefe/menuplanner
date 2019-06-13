@@ -14,5 +14,5 @@ mix.js('resources/js/app.js', 'public/js')
     ]
   })
   .purgeCss({
-      whitelistPatterns: [/^ql-/]
+      whitelistPatterns: [/^ql-/, /^multiselect/]
   });
