@@ -7,7 +7,6 @@ use App\User;
 use App\Menuplan;
 use Tests\TestCase;
 use Illuminate\Validation\ValidationException;
-use phpDocumentor\Reflection\DocBlock\Description;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MealTest extends TestCase
