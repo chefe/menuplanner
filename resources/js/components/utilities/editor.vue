@@ -21,7 +21,7 @@
             let vm = this;
             this.quill = new Quill(this.$el, options);
             this.quill.on('text-change', function(delta, oldDelta, source) {
-                vm.$emit('input', vm.quill.root.innerHTML);
+                vm.debounceInput();
             });
         },
         watch: {
@@ -30,6 +30,11 @@
                     this.quill.pasteHTML(newVal);
                 }
             }
+        },
+        methods: {
+            debounceInput: _.debounce(function () {
+                this.$emit('input', this.quill.root.innerHTML);
+            }, 500),
         }
     }
 </script>
