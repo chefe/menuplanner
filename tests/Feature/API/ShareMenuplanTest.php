@@ -4,7 +4,6 @@ namespace Tests\Feature\API;
 
 use App\User;
 use App\Menuplan;
-use App\Invitation;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
