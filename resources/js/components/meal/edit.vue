@@ -119,6 +119,11 @@
                                required />
                     </form-item>
                 </div>
+
+                <div class="bg-white rounded border-b-2 p-2 mt-2">
+                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('general.actions') }}</h2>
+                    <delete-button :delete-callback="deleteMeal"></delete-button>
+                </div>
             </div>
         </div>
 
@@ -236,6 +241,11 @@
                     return a.title.localeCompare(b.title);
                 });
                 this.newIngredient.item_id = item.id;
+            },
+            deleteMeal() {
+                axios.delete(this.endpoint).then(response => {
+                    router.push('/menuplan/' + this.meal.menuplan.id);
+                });
             }
         }
     }

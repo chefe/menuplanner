@@ -33,6 +33,7 @@ Vue.component('center-panel', require('./components/utilities/center-panel.vue')
 Vue.component('form-item', require('./components/utilities/form-item.vue').default);
 Vue.component('icon', require('./components/utilities/icon.vue').default);
 Vue.component('editor', require('./components/utilities/editor.vue').default);
+Vue.component('delete-button', require('./components/utilities/delete-button.vue').default);
 
 /** Define routes for router */
 const routes = [

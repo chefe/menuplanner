@@ -23,9 +23,9 @@ export default {
                 notRevertable: 'This action can not be reverted!',
             },
             share: {
-                shareMenuplan: 'Share Menuplan', 
+                shareMenuplan: 'Share Menuplan',
                 share: 'Share',
-                viewMenuplan: 'View menuplan', 
+                viewMenuplan: 'View menuplan',
                 backToDashboard: 'Back to the dashboard',
                 pending: 'Pending',
                 accepted: 'Accepted',
@@ -81,7 +81,11 @@ export default {
             cancel: 'Cancel',
             no: 'No',
             yes: 'Yes',
-            provideTitle: 'Please provide a title'
+            provideTitle: 'Please provide a title',
+            actions: 'Actions',
+            delete: 'Delete',
+            confirmTitle: 'Confirm',
+            confirmMessage: 'Are you sure?',
         }
     },
     de: {
@@ -108,9 +112,9 @@ export default {
                 notRevertable: 'Aktion kann nicht rückgängig gemacht werden!',
             },
             share: {
-                shareMenuplan: 'Menuplan teilen', 
+                shareMenuplan: 'Menuplan teilen',
                 share: 'Teilen',
-                viewMenuplan: 'Menuplan anzeigen', 
+                viewMenuplan: 'Menuplan anzeigen',
                 backToDashboard: 'Zurück zum Dashboard',
                 pending: 'Ausstehend',
                 accepted: 'Akzeptiert',
@@ -166,7 +170,11 @@ export default {
             cancel: 'Abbrechen',
             no: 'Nein',
             yes: 'Ja',
-            provideTitle: 'Gib einen Titel ein'
+            provideTitle: 'Gib einen Titel ein',
+            actions: 'Aktionen',
+            delete: 'Löschen',
+            confirmTitle: 'Bestätigen',
+            confirmMessage: 'Bist du sicher?',
         }
     }
 }

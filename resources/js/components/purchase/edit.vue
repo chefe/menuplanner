@@ -17,17 +17,21 @@
                 <div class="bg-white rounded border-b-2 p-2">
                     <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.date">
-                        <input class="form-control" 
-                               type="date" 
-                               name="date" 
+                        <input class="form-control"
+                               type="date"
+                               name="date"
                                v-model.lazy="purchase.date"
-                               :min="purchase.menuplan.start" 
-                               :max="purchase.menuplan.end" 
+                               :min="purchase.menuplan.start"
+                               :max="purchase.menuplan.end"
                                required />
                     </form-item>
                     <form-item caption="general.time">
                         <input class="form-control" type="time" name="start" v-model.lazy="purchase.time" required />
                     </form-item>
+                </div>
+                <div class="bg-white rounded border-b-2 p-2 mt-2">
+                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('general.actions') }}</h2>
+                    <delete-button :delete-callback="deletePurchase"></delete-button>
                 </div>
             </div>
         </div>
@@ -62,6 +66,11 @@
             fetchPurchase() {
                 axios.get(this.endpoint).then(response => {
                     this.purchase = response.data;
+                });
+            },
+            deletePurchase() {
+                axios.delete(this.endpoint).then(response => {
+                    router.push('/menuplan/' + this.purchase.menuplan.id);
                 });
             }
         }
