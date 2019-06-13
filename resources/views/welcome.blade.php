@@ -17,12 +17,12 @@
     <div class="flex flex-col">
 
         <div class="min-h-screen flex items-center justify-center">
-            <div class="flex flex-col justify-around h-full bg-white shadow p-8">
+            <div class="flex flex-col justify-around bg-white shadow p-8">
                 <div>
                     <h1 class="text-grey-darker text-center font-hairline tracking-wide text-7xl mb-8 p-8">
                         {{ config('app.name', 'Menuplanner') }}
                     </h1>
-                    
+
                     <div class="flex text-center">
                         @auth
                             <a href="{{ url('/') }}" class="flex-1 no-underline text-sm font-normal text-brand-dark uppercase">
