@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Menuplan;
 use App\Http\Controllers\Controller;
+use App\Menuplan;
 
 class ShoppingListController extends Controller
 {

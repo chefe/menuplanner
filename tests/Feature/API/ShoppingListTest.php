@@ -4,10 +4,10 @@ namespace Tests\Feature\API;
 
 use App\Item;
 use App\Meal;
-use App\User;
 use App\Menuplan;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ShoppingListTest extends TestCase
 {

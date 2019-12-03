@@ -1,8 +1,8 @@
 <?php
 
+use App\Ingredient;
 use App\Item;
 use App\Meal;
-use App\Ingredient;
 use Faker\Generator as Faker;
 
 $factory->define(Ingredient::class, function (Faker $faker) {

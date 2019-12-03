@@ -3,8 +3,8 @@
 namespace App\Rules;
 
 use App\Menuplan;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ItemInMenuplan implements Rule
 {

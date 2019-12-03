@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
-use App\Menuplan;
 use App\Http\Controllers\API\ShoppingListController;
+use App\Menuplan;
+use PDF;
 
 class ShoppingListPdfController extends Controller
 {

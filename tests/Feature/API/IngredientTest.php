@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\API;
 
+use App\Ingredient;
 use App\Item;
 use App\Meal;
-use App\User;
 use App\Menuplan;
-use App\Ingredient;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class IngredientTest extends TestCase
 {

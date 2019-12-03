@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
 use App\Menuplan;
+use App\User;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 

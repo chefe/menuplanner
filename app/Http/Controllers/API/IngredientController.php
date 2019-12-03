@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Meal;
-use App\Ingredient;
-use Illuminate\Http\Request;
-use App\Rules\ItemInMenuplan;
 use App\Http\Controllers\Controller;
+use App\Ingredient;
+use App\Meal;
+use App\Rules\ItemInMenuplan;
+use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
