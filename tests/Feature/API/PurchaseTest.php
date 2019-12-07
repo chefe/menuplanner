@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\API;
 
-use App\User;
 use App\Menuplan;
 use App\Purchase;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class PurchaseTest extends TestCase
 {

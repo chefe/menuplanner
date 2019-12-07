@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\API;
 
-use App\User;
 use App\Menuplan;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ShareMenuplanTest extends TestCase
 {

@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App;
-use Closure;
 use Carbon\Carbon;
+use Closure;
 
 class AdjustApplicationLocale
 {

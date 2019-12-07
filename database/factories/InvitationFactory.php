@@ -1,7 +1,7 @@
 <?php
 
-use App\Menuplan;
 use App\Invitation;
+use App\Menuplan;
 use Faker\Generator as Faker;
 
 $factory->define(Invitation::class, function (Faker $faker) {
