@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
 use App\Menuplan;
 use Illuminate\Support\Collection;
+use PDF;
 
 class MenuplanPdfController extends Controller
 {

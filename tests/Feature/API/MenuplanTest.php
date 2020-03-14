@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\API;
 
-use App\User;
 use App\Menuplan;
-use Tests\TestCase;
-use Illuminate\Validation\ValidationException;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Validation\ValidationException;
+use Tests\TestCase;
 
 class MenuplanTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Menuplan;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MenuplanResource;
+use App\Menuplan;
+use Illuminate\Http\Request;
 
 class MenuplanController extends Controller
 {

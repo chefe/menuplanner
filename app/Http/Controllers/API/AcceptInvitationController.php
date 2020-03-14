@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Invitation;
 use App\Http\Controllers\Controller;
+use App\Invitation;
 
 class AcceptInvitationController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\MenuplanResource;
+use Illuminate\Database\Eloquent\Model;
 
 class Menuplan extends Model
 {
