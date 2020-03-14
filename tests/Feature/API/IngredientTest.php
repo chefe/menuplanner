@@ -14,7 +14,7 @@ class IngredientTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
