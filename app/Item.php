@@ -2,8 +2,8 @@
 
 namespace App;
 
-use DateTimeInterface;
 use App\Http\Resources\ItemResource;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model

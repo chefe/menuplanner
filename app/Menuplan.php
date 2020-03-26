@@ -2,8 +2,8 @@
 
 namespace App;
 
-use DateTimeInterface;
 use App\Http\Resources\MenuplanResource;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Menuplan extends Model

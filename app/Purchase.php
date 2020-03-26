@@ -2,8 +2,8 @@
 
 namespace App;
 
-use DateTimeInterface;
 use App\Http\Resources\PurchaseResource;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model

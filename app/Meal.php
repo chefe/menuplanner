@@ -2,8 +2,8 @@
 
 namespace App;
 
-use DateTimeInterface;
 use App\Http\Resources\MealResource;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
