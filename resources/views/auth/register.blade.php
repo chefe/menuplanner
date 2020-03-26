@@ -9,7 +9,7 @@
             </div>
             <div class="bg-white p-3 rounded-b">
                 <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                    {{ csrf_field() }}
+                    @csrf
 
                     <div class="flex items-stretch mb-3">
                         <label for="name" class="text-right font-semibold text-grey-dark text-sm pt-2 pr-3 align-middle w-1/4">@lang('app.name')</label>

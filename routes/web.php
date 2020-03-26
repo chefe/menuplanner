@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/locale/{locale}', 'LocaleController@setLocale')->name('locale');
+Route::get('/locale/{locale}', 'LocaleController@store')->name('locale');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {

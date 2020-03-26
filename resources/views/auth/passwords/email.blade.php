@@ -15,7 +15,7 @@
                 @endif
 
                 <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                    {{ csrf_field() }}
+                    @csrf
 
                     <div class="flex items-stretch mb-3">
                         <label for="email" class="text-right font-semibold text-grey-dark text-sm pt-2 pr-3 align-middle w-1/4">@lang('app.email')</label>

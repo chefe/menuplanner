@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App;
+use Illuminate\Support\Facades\App;
 use Carbon\Carbon;
 use Closure;
 
