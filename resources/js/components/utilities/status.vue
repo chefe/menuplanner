@@ -4,9 +4,9 @@
 
         <transition name="fade">
             <div v-if="error.show" class="w-full mx-auto sm:w-3/4 lg:w-1/2 mb-8">
-                <div class="bg-red-lightest border-red rounded text-red-darkest px-4 py-3 shadow">
+                <div class="bg-red-100 border-red-500 rounded text-red-800 px-4 py-3 shadow">
                     <div class="flex">
-                        <div class="py-1 text-red mr-4">
+                        <div class="py-1 text-red-500 mr-4">
                             <icon name="information" size="6"></icon>
                         </div>
                         <div>

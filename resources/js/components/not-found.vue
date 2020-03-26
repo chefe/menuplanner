@@ -1,7 +1,7 @@
 <template>
     <center-panel>
         <div class="flex flex-col items-center justify-center h-64">
-            <span class="text-5xl text-grey-darker">{{ $t('notfound.pageNotFound') }}</span>
+            <span class="text-5xl text-gray-700">{{ $t('notfound.pageNotFound') }}</span>
             
             <button class="btn btn-primary text-xl mt-4" @click="back">{{ $t('notfound.back') }}</button>
         </div>

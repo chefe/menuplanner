@@ -57,10 +57,13 @@
         .text-3xl {
             font-size: 1.875rem;
         }
-        .text-grey-darkest {
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+        .text-gray-800 {
             color: #3d4852;
         }
-        .text-grey {
+        .text-gray-500 {
             color: #b8c2cc;
         }
         .border-b {
@@ -92,11 +95,11 @@
     </style>
 </head>
 <body>
-    <div class="footer text-grey">
+    <div class="footer text-gray-500">
         @lang('app.page') <span class="pagenum"></span>
     </div>
 
-    <h1 class="text-center">@lang('app.menuplan') "{{ $menuplan->title }}"</h1>
+    <h1 class="text-4xl text-center">@lang('app.menuplan') "{{ $menuplan->title }}"</h1>
     <table class="w-full page-break">
         @foreach ($days->chunk(5) as $chunk)
             <tr>

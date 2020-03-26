@@ -10,14 +10,14 @@
             <template slot="header">{{ $t('menuplan.edit.deleteMenuplan') }}</template>
 
             <div v-if="confirmMode" class="px-2 py-4 text-center">
-                <span class="text-grey-dark mr-2">{{ $t('menuplan.edit.sure') }}</span>
+                <span class="text-gray-600 mr-2">{{ $t('menuplan.edit.sure') }}</span>
                 <a class="btn-secondary mr-2" @click="cancelDelete">{{ $t('general.no') }}</a>
                 <a class="btn-danger" @click="deleteMenuplan">{{ $t('general.yes') }}</a>
             </div>
 
             <div v-else class="px-2 py-4 flex items-center">
                 <a class="btn-danger mr-2" @click="confirmDelete">{{ $t('menuplan.edit.deleteMenuplan') }}</a>
-                <span class="text-grey-dark">{{ $t('menuplan.edit.notRevertable') }}</span>
+                <span class="text-gray-600">{{ $t('menuplan.edit.notRevertable') }}</span>
             </div>
         </center-panel>
     </div>

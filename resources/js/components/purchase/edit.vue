@@ -1,21 +1,21 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">{{ $t('purchase.edit.editPurchase') }}</h1>
-            <router-link :to="'/menuplan/' + purchase.menuplan.id" class="text-grey-darkest ml-4">
+        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-gray-800 text-xl bg-white">
+            <h1 class="text-4xl flex-1">{{ $t('purchase.edit.editPurchase') }}</h1>
+            <router-link :to="'/menuplan/' + purchase.menuplan.id" class="text-gray-800 ml-4">
                 <icon name="tile" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2 mb-4">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('purchase.edit.notes') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('purchase.edit.notes') }}</h2>
                     <editor v-model="purchase.notes" :placeholder="$t('purchase.edit.enterNotes')"></editor>
                 </div>
             </div>
             <div class="w-full md:w-1/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.date">
                         <input class="form-control"
                                type="date"
@@ -30,7 +30,7 @@
                     </form-item>
                 </div>
                 <div class="bg-white rounded border-b-2 p-2 mt-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('general.actions') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('general.actions') }}</h2>
                     <delete-button :delete-callback="deletePurchase"></delete-button>
                 </div>
             </div>

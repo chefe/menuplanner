@@ -1,13 +1,24 @@
-@import 'vue-multiselect/dist/vue-multiselect.min.css';
-@import 'quill/dist/quill.snow.css';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
+@import '~quill/dist/quill.snow.css';
 
-@tailwind preflight;
+@tailwind base;
 
-/* Add components here... */
+html {
+    font-family: sans-serif;
+}
 
+ul {
+    list-style-type: disc;
+    padding-left: theme('padding.4');
+}
+
+ol {
+    list-style-type: decimal;
+    padding-left: theme('padding.4');
+}
+
+@tailwind components;
 @tailwind utilities;
-
-/* Add utilities here... */
 
 body {
     background-color: #dde5db;
@@ -15,7 +26,7 @@ body {
 }
 
 .btn-primary {
-    @apply .bg-green-light .p-2 .rounded .text-green-darkest .no-underline .text-center .cursor-pointer;
+    @apply .bg-green-400 .p-2 .rounded .text-green-800 .text-center .cursor-pointer;
 }
 
 .btn-primary-small {
@@ -23,7 +34,7 @@ body {
 }
 
 .btn-secondary {
-    @apply .bg-grey-light .p-2 .rounded .text-grey-darkest .no-underline .text-center .cursor-pointer;
+    @apply .bg-gray-400 .p-2 .rounded .text-gray-800 .text-center .cursor-pointer;
 }
 
 .btn-secondary-small {
@@ -31,7 +42,7 @@ body {
 }
 
 .btn-danger {
-    @apply .bg-red-light .p-2 .rounded .text-red-darkest .no-underline .text-center .cursor-pointer;
+    @apply .bg-red-600 .text-white .p-2 .rounded .text-center .cursor-pointer;
 }
 
 .btn-danger-small {
@@ -53,7 +64,7 @@ body {
     color: #000;
 }
 
-.multiselect, 
+.multiselect,
 .multiselect__tags {
     min-height: 32px;
 }
@@ -73,7 +84,7 @@ body {
     padding-left: 0;
 }
 
-.multiselect__single, 
+.multiselect__single,
 .multiselect__input {
     margin-bottom: 6px;
 }
@@ -82,7 +93,7 @@ body {
     border-radius: 0 !important;
 }
 
-.ql-toolbar.ql-snow, 
+.ql-toolbar.ql-snow,
 .ql-container.ql-snow {
     border: none;
 }

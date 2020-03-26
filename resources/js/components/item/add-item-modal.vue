@@ -1,14 +1,14 @@
 <template>
     <div v-if="show">
-        <div class="fixed pin bg-black opacity-50"></div>
-        <div class="fixed pin">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="fixed inset-0">
             <div class="min-h-screen flex items-center justify-center">
                 <center-panel>
                     <template slot="header">{{ $t('meal.edit.addItem') }}</template>
                     <form class="" @submit.prevent="submit">
                         <form-item caption="general.title">
                             <input class="form-control" v-model="caption" type="text" required>
-                        </form-item> 
+                        </form-item>
                         <form-item caption="item.index.unit">
                             <input class="form-control" v-model="unit" type="text" required>
                         </form-item>

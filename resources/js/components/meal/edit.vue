@@ -1,28 +1,28 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">{{ $t('meal.edit.editMeal') }}</h1>
-            <router-link :to="'/menuplan/' + meal.menuplan_id" class="text-grey-darkest ml-4">
-                <icon name="tile" size="8"></icon>
+        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b bg-white">
+            <h1 class="text-4xl text-gray-800 flex-1">{{ $t('meal.edit.editMeal') }}</h1>
+            <router-link :to="'/menuplan/' + meal.menuplan_id" class="ml-4">
+                <icon class="text-gray-800" name="tile" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2 mb-4">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.description') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('meal.edit.description') }}</h2>
                     <editor v-model="meal.description" :placeholder="$t('meal.edit.enterDescription')"></editor>
                 </div>
 
                 <div class="bg-white rounded border-b-2 p-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">
-                        <span>{{ $t('meal.edit.ingredientsFor') }}</span>
-                        <input class="text-grey-darkest border-b border-dashed w-16 text-right"
+                    <h2 class="text-2xl mb-2 pb-2 border-b">
+                        <span class="text-gray-800">{{ $t('meal.edit.ingredientsFor') }}</span>
+                        <input class="text-gray-800 border-b border-dashed w-16 text-right"
                                type="number"
                                name="ingredients_for"
                                v-model="meal.ingredients_for"
                                min="1"
                                required />
-                        <span>{{ $t('meal.edit.people') }}</span>
+                        <span class="text-gray-800">{{ $t('meal.edit.people') }}</span>
                     </h2>
                     <div class="flex items-center mb-2" v-for="ingredient in ingredients" :key="ingredient.id">
                         <div class="w-16 sm:flex-1 pr-2">
@@ -85,7 +85,7 @@
             </div>
             <div class="w-full md:w-1/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('meal.edit.settings') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('meal.edit.settings') }}</h2>
                     <form-item caption="general.title">
                         <input class="form-control"
                                type="text"
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="bg-white rounded border-b-2 p-2 mt-2">
-                    <h2 class="mb-2 pb-2 text-grey-darkest border-b">{{ $t('general.actions') }}</h2>
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('general.actions') }}</h2>
                     <delete-button :delete-callback="deleteMeal"></delete-button>
                 </div>
             </div>

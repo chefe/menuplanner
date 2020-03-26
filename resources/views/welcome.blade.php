@@ -13,26 +13,26 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-brand-lightest font-sans font-normal">
+<body class="bg-green-100 font-sans font-normal">
     <div class="flex flex-col">
 
         <div class="min-h-screen flex items-center justify-center">
             <div class="flex flex-col justify-around bg-white shadow p-8">
                 <div>
-                    <h1 class="text-grey-darker text-center font-hairline tracking-wide text-7xl mb-8 p-8">
+                    <h1 class="text-4xl text-gray-700 text-center font-hairline tracking-wider text-7xl mb-8 p-8">
                         {{ config('app.name', 'Menuplanner') }}
                     </h1>
 
                     <div class="flex text-center">
                         @auth
-                            <a href="{{ url('/') }}" class="flex-1 no-underline text-sm font-normal text-brand-dark uppercase">
+                            <a href="{{ url('/') }}" class="flex-1 text-sm font-normal text-green-600 uppercase">
                                 Home
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">
+                            <a href="{{ route('login') }}" class="flex-1 hover:underline text-sm font-normal text-green-600 uppercase">
                                 @lang('app.login')
                             </a>
-                            <a href="{{ route('register') }}" class="flex-1 no-underline hover:underline text-sm font-normal text-brand-dark uppercase">
+                            <a href="{{ route('register') }}" class="flex-1 hover:underline text-sm font-normal text-green-600 uppercase">
                                 @lang('app.register')
                             </a>
                         @endauth

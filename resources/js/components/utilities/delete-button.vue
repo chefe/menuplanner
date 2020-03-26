@@ -4,8 +4,8 @@
             {{ $t('general.delete') }}
         </summary>
 
-        <div class="fixed pin bg-black opacity-50"></div>
-        <div class="fixed pin" @click="closeIfClickOutside">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="fixed inset-0" @click="closeIfClickOutside">
             <div class="min-h-screen flex items-center justify-center">
                 <center-panel ref="modal" :is-critical-action="true">
                     <template slot="header">{{ $t('general.confirmTitle') }}</template>

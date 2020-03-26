@@ -17,8 +17,11 @@
         td, th {
             padding: 0.25em;
         }
-        .text-grey {
+        .text-gray-500 {
             color: #b8c2cc;
+        }
+        .text-4xl {
+            font-size: 2.25rem;
         }
         .footer {
             width: 100%;
@@ -32,11 +35,11 @@
     </style>
 </head>
 <body>
-    <div class="footer text-grey">
+    <div class="footer text-gray-500">
         @lang('app.page') <span class="pagenum"></span>
     </div>
 
-    <h1 class="center">@lang('app.shoppinglist') "{{ $menuplan->title }}"</h1>
+    <h1 class="text-4xl center">@lang('app.shoppinglist') "{{ $menuplan->title }}"</h1>
     <table>
         <tbody>
             @foreach ($items as $item)
@@ -48,7 +51,7 @@
                     <small>
                         {{
                             collect($item['meals'])->map(function ($meal) use ($item) {
-                                return sprintf('%s, %s [%s%s]', 
+                                return sprintf('%s, %s [%s%s]',
                                     $meal['title'],
                                     Carbon\Carbon::parse($meal['date'])->formatLocalized('%a %e'),
                                     $meal['quantity'],

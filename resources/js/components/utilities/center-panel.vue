@@ -24,7 +24,7 @@
         computed: {
             headerClasses() {
                 return 'flex items-center font-medium text-lg p-3 sm:rounded-t ' +
-                    (this.isCriticalAction ? 'bg-red-light' : 'bg-brand-light');
+                    (this.isCriticalAction ? 'bg-red-400' : 'bg-green-400');
             },
             contentClasses() {
                 return 'bg-white sm:rounded-b ' + (this.hasHeader ? '' : 'sm:rounded-t');

@@ -5,20 +5,20 @@
         </template>
 
         <div v-for="invitation in invitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
-            <div class="flex-1 text-grey-dark">
+            <div class="flex-1 text-gray-600">
                 <span v-text="invitation.email"></span>
-                <small class="p-1 rounded bg-grey-dark text-white" v-text="getStatus(invitation)"></small>
+                <small class="p-1 rounded bg-gray-600 text-white" v-text="getStatus(invitation)"></small>
             </div>
-            <a @click="deleteInvitation(invitation)" class="text-grey-dark hover:text-grey-darkest cursor-pointer">
+            <a @click="deleteInvitation(invitation)" class="text-gray-600 hover:text-gray-800 cursor-pointer">
                 <icon name="trash"></icon>
             </a>
         </div>
 
         <div class="flex text-sm p-3 border-b items-center">
-            <input v-model="email" 
-                   @keydown.enter="inviteEmail" 
-                   type="email" 
-                   placeholder="john@example.com" 
+            <input v-model="email"
+                   @keydown.enter="inviteEmail"
+                   type="email"
+                   placeholder="john@example.com"
                    class="form-control flex-1 mr-2">
             <a class="btn-primary" @click="inviteEmail">{{ $t('menuplan.share.share') }}</a>
         </div>
@@ -80,8 +80,8 @@
                 });
             },
             getStatus(invitation) {
-                return invitation.user_id == null ? 
-                    this.$t('menuplan.share.pending') : 
+                return invitation.user_id == null ?
+                    this.$t('menuplan.share.pending') :
                     this.$t('menuplan.share.accepted');
             }
         }

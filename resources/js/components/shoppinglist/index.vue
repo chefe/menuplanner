@@ -1,11 +1,11 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">{{ $t('shoppinglist.index.shoppinglist') }}</h1>
-            <a :href="'/menuplan/' + $route.params.id + '/shopping-list/pdf'" class="text-grey-darkest ml-4">
+        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-gray-800 text-xl bg-white">
+            <h1 class="text-4xl flex-1">{{ $t('shoppinglist.index.shoppinglist') }}</h1>
+            <a :href="'/menuplan/' + $route.params.id + '/shopping-list/pdf'" class="text-gray-800 ml-4">
                 <icon name="download" size="8"></icon>
             </a>
-            <router-link :to="'/menuplan/' + $route.params.id" class="text-grey-darkest ml-4">
+            <router-link :to="'/menuplan/' + $route.params.id" class="text-gray-800 ml-4">
                 <icon name="tile" size="8"></icon>
             </router-link>
         </div>
@@ -33,13 +33,13 @@
     export default {
         data() {
             return {
-                shoppingList: [], 
+                shoppingList: [],
             };
         },
         mounted() {
             this.endpoint = '/api/menuplan/' + this.$route.params.id + '/shopping-list';
             this.fetchShoppingList();
-        }, 
+        },
         methods: {
             fetchShoppingList() {
                 axios.get(this.endpoint).then(response => {
@@ -49,7 +49,7 @@
             quantityPerMealString(item) {
                 return item.meals.map(m => {
                     return m.title + ', '
-                        + moment(m.date).format('ddd Do') 
+                        + moment(m.date).format('ddd Do')
                         + ' ['  + m.quantity + item.unit + ']';
                 }).join(' · ');
             }

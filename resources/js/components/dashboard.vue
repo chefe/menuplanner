@@ -4,9 +4,9 @@
             <template slot="header">{{ $t('dashboard.invitations') }}</template>
 
             <div v-for="invitation in openInvitations" class="flex text-sm p-3 border-b items-center" :key="invitation.id">
-                <div class="flex-1 text-grey-dark">
-                    <span class="mr-2" v-text="invitation.menuplan.title"></span>
-                    <small class="text-grey" v-text="getDuration(invitation.menuplan)"></small>
+                <div class="flex-1">
+                    <span class="text-gray-600 mr-2" v-text="invitation.menuplan.title"></span>
+                    <small class="text-gray-500" v-text="getDuration(invitation.menuplan)"></small>
                 </div>
                 <span class="btn-primary-small mr-2" @click="acceptInvitation(invitation)">
                     {{ $t('dashboard.accept')}}
@@ -20,26 +20,26 @@
         <center-panel>
             <template slot="header">
                 <span class="flex-1">{{ $t('dashboard.menuplans') }}</span>
-                <router-link to="/menuplan/create" class="text-black hover:text-grey-darker no-underline">
-                    <icon name="add"></icon>
+                <router-link to="/menuplan/create">
+                    <icon class="text-black hover:text-gray-700" name="add"></icon>
                 </router-link>
             </template>
 
             <div v-for="menuplan in ownMenuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
-                <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
-                    <span class="mr-2" v-text="menuplan.title"></span>
-                    <small class="text-grey" v-text="getDuration(menuplan)"></small>
+                <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 group">
+                    <span class="text-gray-600 group-hover:text-gray-800 mr-2" v-text="menuplan.title"></span>
+                    <small class="text-gray-500 group-hover:text-gray-800" v-text="getDuration(menuplan)"></small>
                 </router-link>
-                <router-link :to="'/menuplan/' + menuplan.id + '/edit'" class="text-grey-dark hover:text-grey-darkest mr-3">
-                    <icon name="cog"></icon>
+                <router-link :to="'/menuplan/' + menuplan.id + '/edit'" class="hover:text-gray-800 mr-3">
+                    <icon class="text-gray-600" name="cog"></icon>
                 </router-link>
-                <router-link :to="'/menuplan/' + menuplan.id + '/share'" class="text-grey-dark hover:text-grey-darkest">
-                    <icon name="share"></icon>
+                <router-link :to="'/menuplan/' + menuplan.id + '/share'" class="hover:text-gray-800">
+                    <icon class="text-gray-600" name="share"></icon>
                 </router-link>
             </div>
 
             <div v-if="menuplans.length == 0" class="flex text-sm p-3 border-b items-center">
-                <router-link to="/menuplan/create" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
+                <router-link to="/menuplan/create" class="flex-1 text-gray-600 hover:text-gray-800">
                     {{ $t('dashboard.createFirstMenuplan') }}
                 </router-link>
             </div>
@@ -51,14 +51,14 @@
             </template>
 
             <div v-for="menuplan in sharedMenuplans" class="flex text-sm p-3 border-b items-center" :key="menuplan.id">
-                <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 text-grey-dark hover:text-grey-darkest no-underline">
-                    <span class="mr-2" v-text="menuplan.title"></span>
-                    <small class="text-grey" v-text="getDuration(menuplan)"></small>
+                <router-link :to="'/menuplan/' + menuplan.id" class="flex-1 group">
+                    <span class="text-gray-600 group-hover:text-gray-800 mr-2" v-text="menuplan.title"></span>
+                    <small class="text-gray-500 group-hover:text-gray-800" v-text="getDuration(menuplan)"></small>
                 </router-link>
-                <span :title="$t('dashboard.leave')" 
-                      @click="leaveMenuplan(menuplan)" 
-                      class="text-grey-dark hover:text-grey-darkest cursor-pointer">
-                    <icon name="trash"></icon>
+                <span :title="$t('dashboard.leave')"
+                      @click="leaveMenuplan(menuplan)"
+                      class="cursor-pointer">
+                    <icon class="text-gray-600 hover:text-gray-800" name="trash"></icon>
                 </span>
             </div>
         </center-panel>
@@ -143,7 +143,7 @@
                             that.fetchInASecond();
                         })
                 }
-            }, 
+            },
             fetchInASecond() {
                 let that = this;
                 setTimeout(function() {
@@ -152,7 +152,7 @@
                 }, 1000);
             },
             getDuration(menuplan) {
-                return moment(menuplan.start).format('Do MMM') + 
+                return moment(menuplan.start).format('Do MMM') +
                     ' - ' + moment(menuplan.end).format('Do MMM');
             }
         }

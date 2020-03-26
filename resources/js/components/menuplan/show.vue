@@ -1,50 +1,50 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-grey-darkest text-xl bg-white">
-            <h1 class="flex-1">
-                <span class="mr-2" v-text="menuplan.title"></span>
-                <small class="text-grey-dark" v-text="duration"></small>
+        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-xl bg-white">
+            <h1 class="text-4xl flex-1">
+                <span class="text-gray-800 mr-2" v-text="menuplan.title"></span>
+                <small class="text-gray-600" v-text="duration"></small>
             </h1>
-            <a :href="'/menuplan/' + $route.params.id + '/pdf'" class="text-grey-darkest ml-4">
-                <icon name="download" size="8"></icon>
+            <a :href="'/menuplan/' + $route.params.id + '/pdf'" class="ml-4">
+                <icon class="text-gray-800" name="download" size="8"></icon>
             </a>
-            <router-link :to="'/menuplan/' + $route.params.id + '/shopping-list'" class="text-grey-darkest ml-4">
-                <icon name="cart" size="8"></icon>
+            <router-link :to="'/menuplan/' + $route.params.id + '/shopping-list'" class="ml-4">
+                <icon class="text-gray-800" name="cart" size="8"></icon>
             </router-link>
-            <router-link :to="'/menuplan/' + $route.params.id + '/items'" class="text-grey-darkest ml-4">
-                <icon name="bulletlist" size="8"></icon>
+            <router-link :to="'/menuplan/' + $route.params.id + '/items'" class="ml-4">
+                <icon class="text-gray-800" name="bulletlist" size="8"></icon>
             </router-link>
         </div>
         <div class="flex flex-wrap bg-white rounded shadow-b border-b-2 mx-2">
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white">
-                    <p class="text-xl border-b text-grey-darkest px-2 py-3 mb-2" v-text="day.format('dddd, Do MMM')"></p>
+                    <p class="text-xl border-b text-gray-800 px-2 py-3 mb-2" v-text="day.format('dddd, Do MMM')"></p>
                     <div v-for="event in getEventsForDate(day)" :key="event.id">
                         <router-link v-if="event.meal"
-                                    :to="'/meal/' + event.meal.id + '/edit'" 
-                                    class="block no-underline px-2 py-4 hover:bg-grey-lighter rounded">
-                            <p class="text-grey-darker" v-text="event.meal.title"></p>
-                            <small class="text-grey">
-                                {{ getMealTime(event.meal) }} &middot; 
-                                {{ getMealPeople(event.meal) }} 
+                                    :to="'/meal/' + event.meal.id + '/edit'"
+                                    class="block px-2 py-4 hover:bg-gray-200 rounded">
+                            <p class="text-gray-700" v-text="event.meal.title"></p>
+                            <small class="text-gray-500">
+                                {{ getMealTime(event.meal) }} &middot;
+                                {{ getMealPeople(event.meal) }}
                                 {{ $t('general.people') }}
                             </small>
                         </router-link>
                         <router-link v-if="event.purchase"
                             :to="'/purchase/' + event.purchase.id + '/edit'"
-                            class="block no-underline px-2 py-2 hover:bg-grey-lighter rounded flex align-center">
-                            <span class="block h-1 my-1 bg-grey-light w-full rounded"></span>
+                            class="block px-2 py-2 hover:bg-gray-200 rounded flex align-center">
+                            <span class="block h-1 my-1 bg-gray-400 w-full rounded"></span>
                             <div class="mx-2 flex">
-                                <icon name="store" class="text-grey-light"></icon>
-                                <small class="mx-1 text-grey-darker" v-text="event.purchase.time"></small>
+                                <icon name="store" class="text-gray-400"></icon>
+                                <small class="mx-1 text-gray-700" v-text="event.purchase.time"></small>
                             </div>
-                            <span class="block h-1 my-1 bg-grey-light w-full rounded"></span>
+                            <span class="block h-1 my-1 bg-gray-400 w-full rounded"></span>
                         </router-link>
                     </div>
-                    <a @click="addMeal(day)" 
-                       class="block no-underline text-grey px-2 py-3 cursor-pointer flex hover:bg-grey-lighter rounded">
-                       <icon name="add"></icon>
-                        <span class="ml-2">{{ $t('menuplan.show.addNewMeal') }}</span>
+                    <a @click="addMeal(day)"
+                       class="block px-2 py-3 cursor-pointer flex items-center hover:bg-gray-200 rounded">
+                        <icon class="text-gray-500" name="add"></icon>
+                        <span class="text-gray-500 ml-2">{{ $t('menuplan.show.addNewMeal') }}</span>
                     </a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
         },
         computed: {
             duration() {
-                return moment(this.menuplan.start).format('Do MMM') + 
+                return moment(this.menuplan.start).format('Do MMM') +
                     ' - ' + moment(this.menuplan.end).format('Do MMM');
             }
         },
@@ -116,7 +116,7 @@
             },
             getEventsForDate(date) {
                 let events = [];
-                
+
                 this.meals.filter(function (meal) {
                     return moment(meal.date).format('YYYYMMDD') == date.format('YYYYMMDD');
                 }).forEach(m => {
@@ -136,7 +136,7 @@
                         time: p.time
                     });
                 });
-                
+
                 return events.sort(function (a, b) {
                     return a.time.localeCompare(b.time);
                 });
@@ -148,8 +148,8 @@
                 return meal.people ? meal.people : this.menuplan.people;
             },
             addMeal(date) {
-                router.push({ 
-                    path: '/menuplan/' + this.$route.params.id + '/meal/create', 
+                router.push({
+                    path: '/menuplan/' + this.$route.params.id + '/meal/create',
                     query: { date: date.format('YYYY-MM-DD') }
                 });
             },
