@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTimeInterface;
 use App\Http\Resources\ItemResource;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,5 +23,10 @@ class Item extends Model
     public function asResource()
     {
         return new ItemResource($this);
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }

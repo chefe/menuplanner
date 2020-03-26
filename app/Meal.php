@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTimeInterface;
 use App\Http\Resources\MealResource;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,5 +43,10 @@ class Meal extends Model
             $endTimeParts[0],
             $endTimeParts[1],
         ]);
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }

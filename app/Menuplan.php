@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTimeInterface;
 use App\Http\Resources\MenuplanResource;
 use Illuminate\Database\Eloquent\Model;
 
@@ -49,5 +50,10 @@ class Menuplan extends Model
     public function hasInvitationFor($email)
     {
         return $this->invitations()->where('email', $email)->count() > 0;
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }

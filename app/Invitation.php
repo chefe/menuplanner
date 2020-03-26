@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Invitation extends Model
@@ -32,5 +33,10 @@ class Invitation extends Model
     public function canBeDeclinedBy($user)
     {
         return $user->email == $this->email || $this->user_id == $user->id;
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }
