@@ -1,20 +1,10 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-xl bg-white">
-            <h1 class="text-4xl flex-1">
-                <span class="text-gray-800 mr-2" v-text="menuplan.title"></span>
-                <small class="text-gray-600" v-text="duration"></small>
-            </h1>
-            <a :href="'/menuplan/' + $route.params.id + '/pdf'" class="ml-4">
-                <icon class="text-gray-800" name="download" size="8"></icon>
-            </a>
-            <router-link :to="'/menuplan/' + $route.params.id + '/shopping-list'" class="ml-4">
-                <icon class="text-gray-800" name="cart" size="8"></icon>
-            </router-link>
-            <router-link :to="'/menuplan/' + $route.params.id + '/items'" class="ml-4">
-                <icon class="text-gray-800" name="bulletlist" size="8"></icon>
-            </router-link>
-        </div>
+        <page-title
+            :title="menuplan.title"
+            :subtitle="duration"
+            :links="pageTitleLinks">
+        </page-title>
         <div class="flex flex-wrap bg-white rounded shadow-b border-b-2 mx-2">
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white">
@@ -53,6 +43,7 @@
 </template>
 
 <script>
+    import PageTitle from '../utilities/page-title.vue'
     import moment from 'moment';
 
     export default {
@@ -66,8 +57,25 @@
                     title: '',
                     start: '',
                     end: ''
-                }
+                },
+                pageTitleLinks: [
+                    {
+                        href: '/menuplan/' + this.$route.params.id + '/pdf',
+                        icon: 'download'
+                    },
+                    {
+                        to: '/menuplan/' + this.$route.params.id + '/shopping-list',
+                        icon: 'cart'
+                    },
+                    {
+                        to: '/menuplan/' + this.$route.params.id + '/items',
+                        icon: 'bulletlist'
+                    },
+                ]
             }
+        },
+        components: {
+            PageTitle
         },
         created() {
             moment.locale(this.$i18n.locale);
