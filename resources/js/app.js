@@ -34,6 +34,7 @@ Vue.component('form-item', require('./components/utilities/form-item.vue').defau
 Vue.component('icon', require('./components/utilities/icon.vue').default);
 Vue.component('editor', require('./components/utilities/editor.vue').default);
 Vue.component('delete-button', require('./components/utilities/delete-button.vue').default);
+Vue.component('page-title', require('./components/utilities/page-title.vue').default);
 
 /** Define routes for router */
 const routes = [

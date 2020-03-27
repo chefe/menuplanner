@@ -5,10 +5,10 @@
             <small v-if="subtitle" class="text-gray-600" v-text="subtitle"></small>
         </h1>
         <template v-for="link in links">
-            <a v-if="link.href" :href="link.href" class="ml-4">
+            <a v-if="link.href" :href="link.href" :title="link.caption" class="ml-4">
                 <icon class="text-gray-800" :name="link.icon" size="8"></icon>
             </a>
-            <router-link v-if="link.to" :to="link.to" class="ml-4">
+            <router-link v-if="link.to" :to="link.to" :title="link.caption" class="ml-4">
                 <icon class="text-gray-800" :name="link.icon" size="8"></icon>
             </router-link>
         </template>

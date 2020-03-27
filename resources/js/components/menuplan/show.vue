@@ -43,7 +43,6 @@
 </template>
 
 <script>
-    import PageTitle from '../utilities/page-title.vue'
     import moment from 'moment';
 
     export default {
@@ -61,21 +60,21 @@
                 pageTitleLinks: [
                     {
                         href: '/menuplan/' + this.$route.params.id + '/pdf',
+                        caption: this.$t('general.downloadAsPdf'),
                         icon: 'download'
                     },
                     {
                         to: '/menuplan/' + this.$route.params.id + '/shopping-list',
+                        caption: this.$t('shoppinglist.index.shoppinglist'),
                         icon: 'cart'
                     },
                     {
                         to: '/menuplan/' + this.$route.params.id + '/items',
+                        caption: this.$t('item.index.items'),
                         icon: 'bulletlist'
                     },
                 ]
             }
-        },
-        components: {
-            PageTitle
         },
         created() {
             moment.locale(this.$i18n.locale);

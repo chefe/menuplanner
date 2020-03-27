@@ -86,6 +86,7 @@ export default {
             delete: 'Delete',
             confirmTitle: 'Confirm',
             confirmMessage: 'Are you sure?',
+            downloadAsPdf: 'Download as PDF',
         }
     },
     de: {
@@ -175,6 +176,7 @@ export default {
             delete: 'Löschen',
             confirmTitle: 'Bestätigen',
             confirmMessage: 'Bist du sicher?',
+            downloadAsPdf: 'Herunterladen als PDF',
         }
     }
 }

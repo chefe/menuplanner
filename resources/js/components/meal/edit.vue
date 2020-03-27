@@ -1,11 +1,10 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b bg-white">
-            <h1 class="text-4xl text-gray-800 flex-1">{{ $t('meal.edit.editMeal') }}</h1>
-            <router-link :to="'/menuplan/' + meal.menuplan_id" class="ml-4">
-                <icon class="text-gray-800" name="tile" size="8"></icon>
-            </router-link>
-        </div>
+        <page-title
+            :title="$t('meal.edit.editMeal')"
+            :links="pageTitleLinks">
+        </page-title>
+
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
                 <div class="bg-white rounded border-b-2 p-2 mb-4">
@@ -164,7 +163,8 @@
                 addItemModal: {
                     caption: '',
                     show: false
-                }
+                },
+                pageTitleLinks: []
             }
         },
         mounted() {
@@ -187,6 +187,11 @@
             fetchMeal() {
                 axios.get(this.endpoint).then(response => {
                     this.meal = response.data;
+                    this.pageTitleLinks.push({
+                        to: '/menuplan/' + this.meal.menuplan_id,
+                        caption: this.$t('menuplan.share.viewMenuplan'),
+                        icon: 'tile'
+                    });
                     this.fetchItems(this.meal.menuplan_id);
                 });
             },

@@ -1,11 +1,9 @@
 <template>
     <div class="container mx-auto">
-        <div class="flex items-center mx-2 mb-8 p-2 rounded border-b-2 shadow-b text-gray-800 text-xl bg-white">
-            <h1 class="text-4xl flex-1">{{ $t('item.index.items') }}</h1>
-            <router-link :to="'/menuplan/' + $route.params.id" class="text-gray-800 ml-4">
-                <icon name="tile" size="8"></icon>
-            </router-link>
-        </div>
+        <page-title
+            :title="$t('item.index.items')"
+            :links="pageTitleLinks">
+        </page-title>
 
         <div class="bg-white m-2 p-2 rounded border-b-2">
             <table class="w-full">
@@ -97,7 +95,14 @@
                 newitem: {
                     title: '',
                     unit: ''
-                }
+                },
+                pageTitleLinks: [
+                    {
+                        to: '/menuplan/' + this.$route.params.id,
+                        caption: this.$t('menuplan.share.viewMenuplan'),
+                        icon: 'tile'
+                    }
+                ],
             };
         },
         mounted() {
