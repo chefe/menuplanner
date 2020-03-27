@@ -8,34 +8,19 @@
         <div class="flex flex-wrap bg-white rounded shadow-b border-b-2 mx-2">
             <div v-for="day in days" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 flex" :key="day.format()">
                 <div class="flex-1 bg-white">
-                    <p class="text-xl border-b text-gray-800 px-2 py-3 mb-2" v-text="day.format('dddd, Do MMM')"></p>
+                    <day-title :date="day" />
                     <div v-for="event in getEventsForDate(day)" :key="event.id">
-                        <router-link v-if="event.meal"
-                                    :to="'/meal/' + event.meal.id + '/edit'"
-                                    class="block px-2 py-4 hover:bg-gray-200 rounded">
-                            <p class="text-gray-700" v-text="event.meal.title"></p>
-                            <small class="text-gray-500">
-                                {{ getMealTime(event.meal) }} &middot;
-                                {{ getMealPeople(event.meal) }}
-                                {{ $t('general.people') }}
-                            </small>
-                        </router-link>
-                        <router-link v-if="event.purchase"
-                            :to="'/purchase/' + event.purchase.id + '/edit'"
-                            class="block px-2 py-2 hover:bg-gray-200 rounded flex align-center">
-                            <span class="block h-1 my-1 bg-gray-400 w-full rounded"></span>
-                            <div class="mx-2 flex">
-                                <icon name="store" class="text-gray-400"></icon>
-                                <small class="mx-1 text-gray-700" v-text="event.purchase.time"></small>
-                            </div>
-                            <span class="block h-1 my-1 bg-gray-400 w-full rounded"></span>
-                        </router-link>
+                        <meal-link
+                            v-if="event.meal"
+                            :meal="event.meal"
+                            :menuplan="menuplan">
+                        </meal-link>
+                        <purchase-link
+                            v-if="event.purchase"
+                            :purchase="event.purchase">
+                        </purchase-link>
                     </div>
-                    <a @click="addMeal(day)"
-                       class="block px-2 py-3 cursor-pointer flex items-center hover:bg-gray-200 rounded">
-                        <icon class="text-gray-500" name="add"></icon>
-                        <span class="text-gray-500 ml-2">{{ $t('menuplan.show.addNewMeal') }}</span>
-                    </a>
+                    <add-meal-button :date="day" />
                 </div>
             </div>
         </div>
@@ -43,6 +28,10 @@
 </template>
 
 <script>
+    import AddMealButton from './utilities/add-meal-button.vue';
+    import PurchaseLink from './utilities/purchase-link.vue';
+    import MealLink from './utilities/meal-link.vue';
+    import DayTitle from './utilities/day-title.vue';
     import moment from 'moment';
 
     export default {
@@ -75,6 +64,12 @@
                     },
                 ]
             }
+        },
+        components: {
+            AddMealButton,
+            PurchaseLink,
+            MealLink,
+            DayTitle
         },
         created() {
             moment.locale(this.$i18n.locale);
@@ -144,18 +139,6 @@
                     return a.time.localeCompare(b.time);
                 });
             },
-            getMealTime(meal) {
-                return meal.start + ' - ' + meal.end;
-            },
-            getMealPeople(meal) {
-                return meal.people ? meal.people : this.menuplan.people;
-            },
-            addMeal(date) {
-                router.push({
-                    path: '/menuplan/' + this.$route.params.id + '/meal/create',
-                    query: { date: date.format('YYYY-MM-DD') }
-                });
-            }
         }
     }
 </script>
