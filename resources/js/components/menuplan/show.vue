@@ -69,18 +69,14 @@
                 }
             }
         },
+        created() {
+            moment.locale(this.$i18n.locale);
+        },
         mounted() {
             this.endpoint = '/api/menuplan/' + this.$route.params.id;
             this.fetchMenuplan();
             this.fetchMeals();
             this.fetchPurchases();
-        },
-        watch: {
-            '$i18n.locale': function (val) {
-                moment.locale(val);
-                this.setupDays();
-                this.foreReevaluateOfDurationProperty();
-            }
         },
         computed: {
             duration() {
@@ -152,11 +148,6 @@
                     path: '/menuplan/' + this.$route.params.id + '/meal/create',
                     query: { date: date.format('YYYY-MM-DD') }
                 });
-            },
-            foreReevaluateOfDurationProperty() {
-                let start = this.menuplan.start;
-                this.menuplan.start = '2000-01-01';
-                this.menuplan.start = start;
             }
         }
     }

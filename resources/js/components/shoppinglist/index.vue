@@ -36,6 +36,9 @@
                 shoppingList: [],
             };
         },
+        created() {
+            moment.locale(this.$i18n.locale);
+        },
         mounted() {
             this.endpoint = '/api/menuplan/' + this.$route.params.id + '/shopping-list';
             this.fetchShoppingList();

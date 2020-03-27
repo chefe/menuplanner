@@ -76,13 +76,12 @@
                 invitations: []
             }
         },
-        mounted() {
+        created() {
             moment.locale(this.$i18n.locale);
+        },
+        mounted() {
             this.fetchMenuplans();
             this.fetchInvitations();
-        },
-        watch: {
-            '$i18n.locale': val => moment.locale(val)
         },
         computed: {
             ownMenuplans() {
