@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use App\User;
 
 class LoginTest extends TestCase
 {
