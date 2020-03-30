@@ -6,24 +6,13 @@
         </page-title>
 
         <div class="bg-white m-2 p-2 rounded border-b-2">
-            <table class="w-full">
-                <tbody>
-                    <tr v-for="item in shoppingList" :key="item.id">
-                        <td class="p-1 text-right" v-text="item.quantity"></td>
-                        <td class="p-1" v-text="item.unit"></td>
-                        <td class="p-1" v-text="item.title"></td>
-                        <td>
-                            <small v-text="quantityPerMealString(item)"></small>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <shopping-list-table :shoppingList="shoppingList" />
        </div>
     </div>
 </template>
 
 <script>
-    import moment from 'moment';
+    import ShoppingListTable from './utilities/shopping-list-table.vue'
 
     export default {
         data() {
@@ -42,8 +31,8 @@
                 ]
             };
         },
-        created() {
-            moment.locale(this.$i18n.locale);
+        components: {
+            ShoppingListTable
         },
         mounted() {
             this.endpoint = '/api/menuplan/' + this.$route.params.id + '/shopping-list';
@@ -55,13 +44,6 @@
                     this.shoppingList = response.data;
                 });
             },
-            quantityPerMealString(item) {
-                return item.meals.map(m => {
-                    return m.title + ', '
-                        + moment(m.date).format('ddd Do')
-                        + ' ['  + m.quantity + item.unit + ']';
-                }).join(' · ');
-            }
         }
     }
 </script>

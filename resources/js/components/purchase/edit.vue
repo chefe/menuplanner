@@ -7,9 +7,13 @@
 
         <div class="flex flex-wrap flex-col-reverse md:flex-row">
             <div class="w-full md:w-2/3 p-2">
-                <div class="bg-white rounded border-b-2 p-2 mb-4">
+                <div class="bg-white rounded border-b-2 p-2 mb-2">
                     <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('purchase.edit.notes') }}</h2>
                     <editor v-model="purchase.notes" :placeholder="$t('purchase.edit.enterNotes')"></editor>
+                </div>
+                <div v-if="shoppingList.length > 0" class="bg-white rounded border-b-2 p-2 mt-2">
+                    <h2 class="text-2xl mb-2 pb-2 text-gray-800 border-b">{{ $t('shoppinglist.index.shoppinglist') }}</h2>
+                    <shopping-list-table :shoppingList="shoppingList" />
                 </div>
             </div>
             <div class="w-full md:w-1/3 p-2">
@@ -38,6 +42,8 @@
 </template>
 
 <script>
+    import ShoppingListTable from '../shoppinglist/utilities/shopping-list-table.vue'
+
     export default {
         data() {
             return {
@@ -49,16 +55,26 @@
                         stop: 0,
                     }
                 },
-                pageTitleLinks: []
+                pageTitleLinks: [],
+                shoppingList: []
             }
         },
         mounted() {
             this.endpoint = '/api/purchase/' + this.$route.params.id;
             this.fetchPurchase();
+            this.fetchShoppingList();
+        },
+        components: {
+            ShoppingListTable
         },
         watch: {
             purchase: {
-                handler: function (val, oldVal) { axios.put(this.endpoint, this.purchase); },
+                handler: function (val, oldVal) {
+                    let vm = this;
+                    axios.put(this.endpoint, this.purchase).then(function () {
+                        vm.fetchShoppingList();
+                    });
+                },
                 deep: true
             }
         },
@@ -77,7 +93,12 @@
                 axios.delete(this.endpoint).then(response => {
                     router.push('/menuplan/' + this.purchase.menuplan.id);
                 });
-            }
+            },
+            fetchShoppingList() {
+                axios.get(this.endpoint + '/shopping-list').then(response => {
+                    this.shoppingList = response.data;
+                });
+            },
         }
     }
 </script>
