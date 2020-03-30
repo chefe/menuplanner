@@ -3,9 +3,11 @@
 namespace Tests\Feature\API;
 
 use App\Item;
+use App\Purchase;
 use App\Meal;
 use App\Menuplan;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -106,6 +108,77 @@ class ShoppingListTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 ['quantity' => 1.001],
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_retrive_the_shopping_list_for_a_purchase()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = factory(User::class)->create();
+
+        $menuplan = factory(Menuplan::class)->create([
+            'user_id' => $user->id,
+            'people' => 8,
+            'start' => Carbon::parse('2020-03-20'),
+            'end' => Carbon::parse('2020-03-22'),
+        ]);
+
+        $createMeal = function ($date) use ($menuplan) {
+            return factory(Meal::class)->create([
+                'menuplan_id' => $menuplan->id,
+                'people' => null,
+                'ingredients_for' => 4,
+                'date' => Carbon::parse($date),
+                'start' => Carbon::parse($date),
+                'end' => Carbon::parse($date)->addHour(),
+            ]);
+        };
+
+        $purchase = factory(Purchase::class)->create([
+            'menuplan_id' => $menuplan->id,
+            'time' => Carbon::parse('2020-03-21 10:00:00'),
+        ]);
+
+        $itemA = factory(Item::class)->create([
+            'menuplan_id' => $menuplan->id,
+            'title' => 'Item A',
+        ]);
+
+        $itemB = factory(Item::class)->create([
+            'menuplan_id' => $menuplan->id,
+            'title' => 'Item B',
+        ]);
+
+        $mealOne = $createMeal('2020-03-21 12:00:00');
+        $mealOne->ingredients()->create(['quantity' => 1.25, 'item_id' => $itemA->id]);
+        $mealOne->ingredients()->create(['quantity' => 200, 'item_id' => $itemB->id]);
+        $mealOne->ingredients()->create(['quantity' => 15, 'item_id' => $itemA->id]);
+
+        $mealTwo = $createMeal('2020-03-20 10:00:00');
+        $mealTwo->ingredients()->create(['quantity' => 2.25, 'item_id' => $itemB->id]);
+
+        $mealThree = $createMeal('2020-03-21 18:00:00');
+        $mealThree->ingredients()->create(['quantity' => 1, 'item_id' => $itemA->id]);
+
+        $this->actingAs($user)
+            ->get('/api/purchase/'.$purchase->id.'/shopping-list')
+            ->assertStatus(200)
+            ->assertJsonCount(2)
+            ->assertJson([
+                ['item_id' => $itemA->id, 'quantity' => 34.5, 'meals' => [
+                    ['id' => $mealOne->id, 'quantity' => 2.5],
+                    ['id' => $mealOne->id, 'quantity' => 30],
+                    ['id' => $mealThree->id, 'quantity' => 2],
+                ]],
+                ['item_id' => $itemB->id, 'quantity' => 400, 'meals' => [
+                    ['id' => $mealOne->id, 'quantity' => 400],
+                ]],
+            ])->assertJsonMissing([
+                ['item_id' => $itemB->id, 'meals' => [
+                    ['id' => $mealTwo->id],
+                ]],
             ]);
     }
 }

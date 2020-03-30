@@ -27,6 +27,23 @@ class Meal extends Model
         return new MealResource($this);
     }
 
+    public function scopeBetween($query, $start, $end)
+    {
+        return $query->where(function ($query) use ($start) {
+            $query->where('date', '>', $start->format('Y-m-d'))
+                  ->orWhere(function ($query) use ($start) {
+                      $query->where('date', $start->format('Y-m-d'))
+                            ->where('start', '>', $start->format('H:i:s'));
+                  });
+        })->where(function ($query) use ($end) {
+            $query->where('date', '<', $end->format('Y-m-d'))
+                  ->orWhere(function ($query) use ($end) {
+                      $query->where('date', $end->format('Y-m-d'))
+                            ->where('end', '<', $end->format('H:i:s'));
+                  });
+        });
+    }
+
     public function getAbsolutPeopleAttribute()
     {
         return $this->people == null ? $this->menuplan->people : $this->people;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Purchase;
 use App\Menuplan;
 
 class ShoppingListController extends Controller
@@ -10,8 +11,18 @@ class ShoppingListController extends Controller
     public function index(Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);
+        return $this->getShoppingListFor($menuplan->ingredients);
+    }
 
-        return $menuplan->ingredients
+    public function show(Purchase $purchase)
+    {
+        $this->authorize('view', $purchase->menuplan);
+        return $this->getShoppingListFor($purchase->ingredients);
+    }
+
+    private function getShoppingListFor($ingredients)
+    {
+        return $ingredients
             ->load('meal')
             ->groupBy('item_id')
             ->filter(function ($ingredients) {
