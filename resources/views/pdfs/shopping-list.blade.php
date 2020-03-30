@@ -53,7 +53,7 @@
                             collect($item['meals'])->map(function ($meal) use ($item) {
                                 return sprintf('%s, %s [%s%s]',
                                     $meal['title'],
-                                    Carbon\Carbon::parse($meal['date'])->formatLocalized('%a %e'),
+                                    $meal['formatedDate'],
                                     $meal['quantity'],
                                     $item['unit']
                                 );
