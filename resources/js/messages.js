@@ -110,7 +110,7 @@ export default {
                 editMenuplan: 'Menuplan bearbeiten',
                 deleteMenuplan: 'Menuplan löschen',
                 sure: 'Bist du sicher?',
-                notRevertable: 'Aktion kann nicht rückgängig gemacht werden!',
+                notRevertable: 'Diese Aktion kann nicht rückgängig gemacht werden!',
             },
             share: {
                 shareMenuplan: 'Menuplan teilen',
