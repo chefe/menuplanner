@@ -20,7 +20,11 @@
                             :purchase="event.purchase">
                         </purchase-link>
                     </div>
-                    <add-meal-button :date="day" />
+                    <add-button
+                        :date="day"
+                        :menuplan="menuplan"
+                        @mealAdded="fetchMeals"
+                        @purchaseAdded="fetchPurchases" />
                 </div>
             </div>
         </div>
@@ -28,7 +32,7 @@
 </template>
 
 <script>
-    import AddMealButton from './utilities/add-meal-button.vue';
+    import AddButton from './utilities/add-button.vue';
     import PurchaseLink from './utilities/purchase-link.vue';
     import MealLink from './utilities/meal-link.vue';
     import DayTitle from './utilities/day-title.vue';
@@ -66,7 +70,7 @@
             }
         },
         components: {
-            AddMealButton,
+            AddButton,
             PurchaseLink,
             MealLink,
             DayTitle

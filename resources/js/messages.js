@@ -64,6 +64,9 @@ export default {
                 editPurchase: 'Edit Purchase',
                 notes: 'Notes',
                 enterNotes: 'Enter notes ...'
+            },
+            add: {
+                addPurchase: 'Add Purchase',
             }
         },
         notfound: {
@@ -87,6 +90,8 @@ export default {
             confirmTitle: 'Confirm',
             confirmMessage: 'Are you sure?',
             downloadAsPdf: 'Download as PDF',
+            add: 'Add',
+            optional: 'Optional',
         }
     },
     de: {
@@ -154,6 +159,9 @@ export default {
                 editPurchase: 'Einkauf bearbeiten',
                 notes: 'Notizen',
                 enterNotes: 'Notizen hinzufügen ...'
+            },
+            add: {
+                addPurchase: 'Einkauf hinzufügen',
             }
         },
         notfound: {
@@ -177,6 +185,8 @@ export default {
             confirmTitle: 'Bestätigen',
             confirmMessage: 'Bist du sicher?',
             downloadAsPdf: 'Herunterladen als PDF',
+            add: 'Hinzufügen',
+            optional: 'Optional',
         }
     }
 }

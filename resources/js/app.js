@@ -35,6 +35,7 @@ Vue.component('icon', require('./components/utilities/icon.vue').default);
 Vue.component('editor', require('./components/utilities/editor.vue').default);
 Vue.component('delete-button', require('./components/utilities/delete-button.vue').default);
 Vue.component('page-title', require('./components/utilities/page-title.vue').default);
+Vue.component('modal', require('./components/utilities/modal.vue').default);
 
 /** Define routes for router */
 const routes = [
@@ -42,7 +43,6 @@ const routes = [
     { path: '/menuplan/create', component: require('./components/menuplan/create.vue').default },
     { path: '/menuplan/:id', component: require('./components/menuplan/show.vue').default },
     { path: '/menuplan/:id/edit', component: require('./components/menuplan/edit.vue').default },
-    { path: '/menuplan/:id/meal/create', component: require('./components/meal/create.vue').default },
     { path: '/meal/:id/edit', component: require('./components/meal/edit.vue').default },
     { path: '/purchase/:id/edit', component: require('./components/purchase/edit.vue').default },
     { path: '/menuplan/:id/items', component: require('./components/item/index.vue').default },
