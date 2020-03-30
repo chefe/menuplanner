@@ -55,7 +55,13 @@
                         stop: 0,
                     }
                 },
-                pageTitleLinks: [],
+                pageTitleLinks: [
+                    {
+                        href: '/purchase/' + this.$route.params.id + '/shopping-list/pdf',
+                        caption: this.$t('general.downloadAsPdf'),
+                        icon: 'download'
+                    }
+                ],
                 shoppingList: []
             }
         },

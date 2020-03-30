@@ -25,7 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/menuplan/{menuplan}/shopping-list', 'HomeController@index');
     Route::get('/menuplan/{menuplan}/share', 'HomeController@index');
 
-    Route::get('/menuplan/{menuplan}/shopping-list/pdf', 'ShoppingListPdfController@show');
+    Route::get('/purchase/{purchase}/shopping-list/pdf', 'ShoppingListPdfController@show');
+    Route::get('/menuplan/{menuplan}/shopping-list/pdf', 'ShoppingListPdfController@index');
     Route::get('/menuplan/{menuplan}/pdf', 'MenuplanPdfController@show');
 });
 
