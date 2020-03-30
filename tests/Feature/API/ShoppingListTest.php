@@ -3,9 +3,9 @@
 namespace Tests\Feature\API;
 
 use App\Item;
-use App\Purchase;
 use App\Meal;
 use App\Menuplan;
+use App\Purchase;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

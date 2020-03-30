@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Purchase;
 use App\Menuplan;
+use App\Purchase;
 
 class ShoppingListController extends Controller
 {
     public function index(Menuplan $menuplan)
     {
         $this->authorize('view', $menuplan);
+
         return $this->getShoppingListFor($menuplan->ingredients);
     }
 
     public function show(Purchase $purchase)
     {
         $this->authorize('view', $purchase->menuplan);
+
         return $this->getShoppingListFor($purchase->ingredients);
     }
 
