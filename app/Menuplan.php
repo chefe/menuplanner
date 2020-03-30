@@ -12,6 +12,11 @@ class Menuplan extends Model
 
     protected $dates = ['start', 'end'];
 
+    protected $casts = [
+        'start' => 'date:Y-m-d',
+        'end' => 'date:Y-m-d',
+    ];
+
     public function meals()
     {
         return $this->hasMany(Meal::class);
