@@ -44,6 +44,7 @@
                                 :placeholder="$t('meal.edit.selectPlaceholder')"
                             >
                                 <span slot="noResult">{{ $t('meal.edit.nothingFound') }}</span>
+                                <span slot="noOptions">{{ $t('meal.edit.noOptions') }}</span>
                             </multiselect>
                         </div>
                         <div class="w-8 text-center">
@@ -76,6 +77,7 @@
                                 :tagPlaceholder="$t('meal.edit.tagPlaceholder')"
                             >
                                 <span slot="noResult">{{ $t('meal.edit.nothingFound') }}</span>
+                                <span slot="noOptions">{{ $t('meal.edit.noOptions') }}</span>
                             </multiselect>
                         </div>
                         <div class="w-8"></div>
