@@ -9,9 +9,9 @@
             <table class="w-full">
                 <thead>
                     <tr>
-                        <th width="50%" class="p-1 text-left">{{ $t('general.title') }}</th>
-                        <th width="40%" class="p-1 text-left">{{ $t('item.index.unit') }}</th>
-                        <th width="10%" style="min-width:40px"></th>
+                        <th style="width:50%" class="p-1 text-left">{{ $t('general.title') }}</th>
+                        <th style="width:40%" class="p-1 text-left">{{ $t('item.index.unit') }}</th>
+                        <th style="width:10%;min-width:40px"></th>
                     </tr>
                 </thead>
                 <tbody>
