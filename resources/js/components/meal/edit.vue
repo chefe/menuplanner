@@ -221,13 +221,15 @@
                 return items.length > 0 ? items[0].unit : '';
             },
             addIngredient() {
-                if (this.newIngredient.item != {} && this.newIngredient.quantity > 0) {
-                    axios.post(this.endpoint + '/ingredients', this.newIngredient).then(response => {
-                        this.ingredients.push(response.data);
-                        this.newIngredient.item_id = 0;
-                        this.newIngredient.quantity = 0;
-                    });
-                }
+                this.$nextTick(() => {
+                    if (this.newIngredient.item_id > 0 && this.newIngredient.quantity > 0) {
+                        axios.post(this.endpoint + '/ingredients', this.newIngredient).then(response => {
+                            this.ingredients.push(response.data);
+                            this.newIngredient.item_id = 0;
+                            this.newIngredient.quantity = 0;
+                        });
+                    }
+                });
             },
             deleteIngredient(ingredient) {
                 let endpoint = '/api/ingredient/' + ingredient.id;
