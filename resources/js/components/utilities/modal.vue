@@ -10,11 +10,19 @@
 </template>
 
 <script>
+    const KEY_CODE_ESCAPE = 27;
+
     export default {
         data() {
             return {
                 isOpen: false
             }
+        },
+        mounted() {
+            document.addEventListener('keyup', this.handleKeyUp);
+        },
+        destroyed() {
+            document.removeEventListener('keyup', this.handleKeyUp);
         },
         methods: {
             show() {
@@ -22,6 +30,11 @@
             },
             hide() {
                 this.isOpen = false;
+            },
+            handleKeyUp(ev) {
+                if (ev.keyCode === KEY_CODE_ESCAPE) {
+                    this.hide();
+                }
             }
         }
     }
