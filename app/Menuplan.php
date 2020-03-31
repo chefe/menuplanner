@@ -42,6 +42,11 @@ class Menuplan extends Model
         return $this->belongsToMany(User::class, 'invitations');
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
