@@ -28,6 +28,8 @@
                             <input @change="updateIngredient(ingredient)"
                                    class="form-control text-right"
                                    type="number"
+                                   step="any"
+                                   min="0.001"
                                    v-model="ingredient.quantity" />
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(ingredient.item_id)"></div>
@@ -58,6 +60,8 @@
                             <input @change="addIngredient()"
                                    class="form-control text-right"
                                    type="number"
+                                   step="any"
+                                   min="0.001"
                                    v-model="newIngredient.quantity"/>
                         </div>
                         <div class="w-16 sm:w-32" v-text="getUnitForItemId(newIngredient.item_id)"></div>
