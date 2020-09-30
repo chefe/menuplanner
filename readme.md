@@ -1,7 +1,7 @@
 # menuplanner
 [![TravisCI Status](https://travis-ci.org/chefe/menuplanner.svg?branch=master)](https://travis-ci.org/chefe/menuplanner)
 [![StyleCI Status](https://styleci.io/repos/119275915/shield?branch=master&style=flat)](https://styleci.io/repos/119275915)
-[![Codeship Status for chefe/menuplanner](https://app.codeship.com/projects/00ecaf40-e808-0135-107c-1aa0b4e9b70e/status?branch=master)](https://app.codeship.com/projects/269621)
+[![Codeship Status for chefe/menuplanner](https://app.codeship.com/projects/a9a73c90-e523-0138-a119-0262a986c13d/status?branch=master)](https://app.codeship.com/projects/410865)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=chefe_menuplanner&metric=alert_status)](https://sonarcloud.io/dashboard?id=chefe_menuplanner)
 
 An application to plan your meals for a given timeframe.
