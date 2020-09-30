@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\API;
 
-use App\Menuplan;
-use App\User;
+use App\Models\Menuplan;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;

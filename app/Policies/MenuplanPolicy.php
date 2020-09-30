@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Menuplan;
-use App\User;
+use App\Models\Menuplan;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MenuplanPolicy
@@ -13,8 +13,8 @@ class MenuplanPolicy
     /**
      * Determine whether the user can view the menuplan.
      *
-     * @param  \App\User  $user
-     * @param  \App\Menuplan  $menuplan
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Menuplan  $menuplan
      * @return mixed
      */
     public function view(User $user, Menuplan $menuplan)
@@ -26,7 +26,7 @@ class MenuplanPolicy
     /**
      * Determine whether the user can create menuplans.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create()
@@ -37,8 +37,8 @@ class MenuplanPolicy
     /**
      * Determine whether the user can update the menuplan.
      *
-     * @param  \App\User  $user
-     * @param  \App\Menuplan  $menuplan
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Menuplan  $menuplan
      * @return mixed
      */
     public function update(User $user, Menuplan $menuplan)
@@ -49,8 +49,8 @@ class MenuplanPolicy
     /**
      * Determine whether the user can delete the menuplan.
      *
-     * @param  \App\User  $user
-     * @param  \App\Menuplan  $menuplan
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Menuplan  $menuplan
      * @return mixed
      */
     public function delete(User $user, Menuplan $menuplan)

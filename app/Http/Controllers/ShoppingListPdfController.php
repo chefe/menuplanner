@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\API\ShoppingListController;
-use App\Menuplan;
-use App\Purchase;
+use App\Models\Menuplan;
+use App\Models\Purchase;
 use Carbon\Carbon;
 use PDF;
 

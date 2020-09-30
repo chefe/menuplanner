@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Menuplan;
+use App\Models\Menuplan;
 use Illuminate\Http\Request;
 
 class MenuplanInvitationController extends Controller

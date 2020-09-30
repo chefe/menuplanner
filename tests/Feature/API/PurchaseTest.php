@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\API;
 
-use App\Menuplan;
-use App\Purchase;
-use App\User;
+use App\Models\Menuplan;
+use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

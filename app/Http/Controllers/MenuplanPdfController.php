@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Menuplan;
+use App\Models\Menuplan;
 use Illuminate\Support\Collection;
 use PDF;
 

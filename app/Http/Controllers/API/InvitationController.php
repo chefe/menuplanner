@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Invitation;
+use App\Models\Invitation;
 
 class InvitationController extends Controller
 {
