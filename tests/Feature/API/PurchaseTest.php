@@ -15,10 +15,10 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_get_the_purchases_of_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $ownPurchases = factory(Purchase::class, 3)->create(['menuplan_id' => $menuplan->id]);
-        $otherPurchases = factory(Purchase::class, 2)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $ownPurchases = Purchase::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
+        $otherPurchases = Purchase::factory()->count(2)->create();
 
         $getDateAndTimeFromPurchase = function ($purchase) {
             return [
@@ -44,8 +44,8 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_create_a_purchase()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
         $validPurchaseData = $this->getValidPurchaseData($menuplan);
 
         $this->actingAs($user)
@@ -59,8 +59,8 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_only_add_a_purchases_to_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
         $validPurchaseData = $this->getValidPurchaseData($menuplan);
 
         $this->actingAs($user)
@@ -73,9 +73,9 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_get_a_purchase()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $purchase = factory(Purchase::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $purchase = Purchase::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($user)
             ->get('/api/purchase/'.$purchase->id)
@@ -88,8 +88,8 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_get_only_his_purchases()
     {
-        $user = factory(User::class)->create();
-        $purchase = factory(Purchase::class)->create();
+        $user = User::factory()->create();
+        $purchase = Purchase::factory()->create();
 
         $this->actingAs($user)
                 ->get('/api/purchase/'.$purchase->id)
@@ -101,9 +101,9 @@ class PurchaseTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $purchase = factory(Purchase::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $purchase = Purchase::factory()->create(['menuplan_id' => $menuplan->id]);
         $validPurchaseData = $this->getValidPurchaseData($menuplan);
 
         $this->assertDatabaseMissingPurchase($validPurchaseData);
@@ -119,8 +119,8 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_update_only_his_purchases()
     {
-        $user = factory(User::class)->create();
-        $purchase = factory(Purchase::class)->create();
+        $user = User::factory()->create();
+        $purchase = Purchase::factory()->create();
         $validPurchaseData = $this->getValidPurchaseData($purchase->menuplan);
 
         $this->actingAs($user)
@@ -133,9 +133,9 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_delete_a_purchase()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $purchase = factory(Purchase::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $purchase = Purchase::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $this->assertDatabaseHas('purchases', ['id' => $purchase->id]);
 
@@ -149,8 +149,8 @@ class PurchaseTest extends TestCase
     /** @test */
     public function a_user_can_delete_only_his_purchases()
     {
-        $user = factory(User::class)->create();
-        $purchase = factory(Purchase::class)->create();
+        $user = User::factory()->create();
+        $purchase = Purchase::factory()->create();
 
         $this->assertDatabaseHas('purchases', ['id' => $purchase->id]);
 

@@ -38,10 +38,10 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_get_the_meals_of_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $ownMeals = factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
-        $otherMeals = factory(Meal::class, 2)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $ownMeals = Meal::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
+        $otherMeals = Meal::factory()->count(2)->create();
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/meals')
@@ -60,12 +60,12 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_get_the_meals_of_a_shared_menuplans()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $anotherUser = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $anotherUser->id]);
+        $anotherUser = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $anotherUser->id]);
         $menuplan->invitations()->create(['email' => $user->email, 'user_id' => $user->id]);
-        $meals = factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        $meals = Meal::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/meals')
@@ -81,10 +81,10 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_only_get_the_meals_of_his_menuplans()
     {
-        $mainUser = factory(User::class)->create();
-        $anotherUser = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $mainUser->id]);
-        factory(Meal::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        $mainUser = User::factory()->create();
+        $anotherUser = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $mainUser->id]);
+        Meal::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($anotherUser)
             ->get('/api/menuplan/'.$menuplan->id.'/meals')
@@ -94,9 +94,9 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_get_data_from_a_meal()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $meal = Meal::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($user)
             ->get('/api/meal/'.$meal->id)
@@ -114,8 +114,8 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_only_get_data_from_his_meals()
     {
-        $user = factory(User::class)->create();
-        $meal = factory(Meal::class)->create();
+        $user = User::factory()->create();
+        $meal = Meal::factory()->create();
 
         $this->actingAs($user)
             ->get('/api/meal/'.$meal->id)
@@ -125,8 +125,8 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_create_a_meal()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
 
         $validMealData = $this->getValidMealData($menuplan);
         $this->actingAs($user)
@@ -141,8 +141,8 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_only_add_a_meals_to_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
 
         $this->actingAs($user)
             ->post('/api/menuplan/'.$menuplan->id.'/meals', $this->validMealData)
@@ -154,9 +154,9 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_update_a_meal()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $meal = Meal::factory()->create(['menuplan_id' => $menuplan->id]);
         $validMealData = $this->getValidMealData($menuplan);
 
         $this->assertDatabaseMissing('meals', $validMealData);
@@ -173,8 +173,8 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_update_only_his_meals()
     {
-        $user = factory(User::class)->create();
-        $meal = factory(Meal::class)->create();
+        $user = User::factory()->create();
+        $meal = Meal::factory()->create();
 
         $this->actingAs($user)
             ->put('/api/meal/'.$meal->id, $this->validMealData)
@@ -189,13 +189,13 @@ class MealTest extends TestCase
         $this->withoutExceptionHandling();
         $this->expectException(ValidationException::class);
 
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $user->id,
             'start' => '2018-01-01',
             'end' => '2018-01-07',
         ]);
-        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id]);
+        $meal = Meal::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $validMealData = $this->validMealData;
         $validMealData['date'] = '2018-02-03';
@@ -207,9 +207,9 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_delete_a_meal()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $meal = factory(Meal::class)->create([
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $meal = Meal::factory()->create([
             'menuplan_id' => $menuplan->id,
             'title' => 'Meal Number One',
         ]);
@@ -230,8 +230,8 @@ class MealTest extends TestCase
     /** @test */
     public function a_user_can_delete_only_his_meals()
     {
-        $user = factory(User::class)->create();
-        $meal = factory(Meal::class)->create([
+        $user = User::factory()->create();
+        $meal = Meal::factory()->create([
             'title' => 'Meal Number Two',
         ]);
 

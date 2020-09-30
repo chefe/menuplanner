@@ -4,10 +4,13 @@ namespace App;
 
 use App\Http\Resources\MealResource;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     protected $dates = ['date'];

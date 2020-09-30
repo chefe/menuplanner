@@ -15,10 +15,10 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_get_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $ownMenuplans = factory(Menuplan::class, 4)
+        $user = User::factory()->create();
+        $ownMenuplans = Menuplan::factory()->count(4)
             ->create(['user_id' => $user->id]);
-        factory(Menuplan::class, 10);
+        Menuplan::factory()->count(10);
 
         $this->actingAs($user)
             ->get('/api/menuplan')
@@ -44,11 +44,11 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_get_his_own_and_shared_menuplans()
     {
-        $user = factory(User::class)->create();
-        $ownMenuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $ownMenuplan = Menuplan::factory()->create(['user_id' => $user->id]);
 
-        $anotherUser = factory(User::class)->create();
-        $anotherMenuplan = factory(Menuplan::class)->create(['user_id' => $anotherUser->id]);
+        $anotherUser = User::factory()->create();
+        $anotherMenuplan = Menuplan::factory()->create(['user_id' => $anotherUser->id]);
         $anotherMenuplan->invitations()->create(['email' => $user->email, 'user_id' => $user->id]);
 
         $this->actingAs($user)
@@ -63,8 +63,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_get_data_from_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id)
@@ -80,8 +80,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_only_get_data_from_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id)
@@ -91,7 +91,7 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_create_a_menuplan()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $validMenuplanData = [
             'title' => 'Week 01 - 2018',
             'start' => '2018-01-01',
@@ -115,8 +115,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_update_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $user->id,
             'title' => 'old title',
             'start' => '2011-11-11',
@@ -139,9 +139,9 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_not_update_a_menuplan_from_another_user()
     {
-        $userOne = factory(User::class)->create();
-        $userTwo = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $userOne = User::factory()->create();
+        $userTwo = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $userOne->id,
         ]);
 
@@ -157,8 +157,8 @@ class MenuplanTest extends TestCase
         $this->withoutExceptionHandling();
         $this->expectException(ValidationException::class);
 
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
         $newMenuplanData = [
             'title' => 'Week 01 - 2018',
             'start' => '2018-01-07',
@@ -172,8 +172,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_delete_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $user->id,
         ]);
 
@@ -189,9 +189,9 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_not_delete_a_menuplan_from_another_user()
     {
-        $userOne = factory(User::class)->create();
-        $userTwo = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $userOne = User::factory()->create();
+        $userTwo = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $userOne->id,
         ]);
 
@@ -203,8 +203,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_download_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create([
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $user->id,
         ]);
 
@@ -217,8 +217,8 @@ class MenuplanTest extends TestCase
     /** @test */
     public function a_user_can_only_download_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
 
         $this->actingAs($user)
             ->get(url('/menuplan/'.$menuplan->id.'/pdf'))

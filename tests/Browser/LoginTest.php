@@ -26,7 +26,7 @@ class LoginTest extends DuskTestCase
     /** @test */
     public function a_user_can_login()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => 'john@example.com',
         ]);
 

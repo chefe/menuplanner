@@ -1,15 +1,33 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Invitation;
 use App\Menuplan;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Invitation::class, function (Faker $faker) {
-    return [
-        'email' => $faker->unique()->safeEmail,
-        'menuplan_id' => function () {
-            return factory(Menuplan::class)->create()->id;
-        },
-        'user_id' => null,
-    ];
-});
+class InvitationFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Invitation::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'email' => $this->faker->unique()->safeEmail,
+            'menuplan_id' => function () {
+                return Menuplan::factory()->create()->id;
+            },
+            'user_id' => null,
+        ];
+    }
+}

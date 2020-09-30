@@ -15,7 +15,7 @@ class LoginTest extends TestCase
     public function a_user_can_login_with_valid_credential()
     {
         // Arrange
-        factory(User::class)->create([
+        User::factory()->create([
             'email' => 'john@example.com',
             'password' => Hash::make('password'),
         ]);
@@ -38,7 +38,7 @@ class LoginTest extends TestCase
     public function a_user_can_not_login_with_invalid_credential()
     {
         // Arrange
-        factory(User::class)->create([
+        User::factory()->create([
             'email' => 'john@example.com',
             'password' => Hash::make('password'),
         ]);
@@ -61,7 +61,7 @@ class LoginTest extends TestCase
     public function a_user_gets_redirected_if_already_logged_in()
     {
         // Arrange
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         // Act
         $response = $this->actingAs($user)->get('/login');

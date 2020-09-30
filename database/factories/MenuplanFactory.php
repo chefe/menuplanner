@@ -1,22 +1,40 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Menuplan;
 use App\User;
 use Carbon\Carbon;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Menuplan::class, function (Faker $faker) {
-    $start = $faker->dateTimeThisYear();
+class MenuplanFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Menuplan::class;
 
-    return [
-        'title' => $faker->sentence(4),
-        'start' => $start,
-        'end' => Carbon::instance($start)->addDays(
-            $faker->numberBetween(0, 31)
-        )->format('Y-m-d'),
-        'people' => $faker->numberBetween(2, 50),
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        },
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $start = $this->faker->dateTimeThisYear();
+
+        return [
+            'title' => $this->faker->sentence(4),
+            'start' => $start,
+            'end' => Carbon::instance($start)->addDays(
+                $this->faker->numberBetween(0, 31)
+            )->format('Y-m-d'),
+            'people' => $this->faker->numberBetween(2, 50),
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+        ];
+    }
+}

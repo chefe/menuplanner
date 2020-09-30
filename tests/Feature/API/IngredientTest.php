@@ -18,10 +18,10 @@ class IngredientTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
-        $this->menuplan = factory(Menuplan::class)
+        $this->user = User::factory()->create();
+        $this->menuplan = Menuplan::factory()
             ->create(['user_id' => $this->user->id]);
-        $this->item = factory(Item::class)
+        $this->item = Item::factory()
             ->create(['menuplan_id' => $this->menuplan->id]);
         $this->validIngredientData = [
             'quantity' => 12.001,
@@ -32,9 +32,9 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_get_the_ingredients_of_a_meal()
     {
-        $meal = factory(Meal::class)->create(['menuplan_id' => $this->menuplan->id]);
-        $ingredients = factory(Ingredient::class, 2)->create(['meal_id' => $meal->id]);
-        $otherIngredients = factory(Ingredient::class, 2)->create();
+        $meal = Meal::factory()->create(['menuplan_id' => $this->menuplan->id]);
+        $ingredients = Ingredient::factory()->count(2)->create(['meal_id' => $meal->id]);
+        $otherIngredients = Ingredient::factory()->count(2)->create();
 
         $this->actingAs($this->user)
             ->get('/api/meal/'.$meal->id.'/ingredients')
@@ -51,8 +51,8 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_only_get_the_ingredients_of_a_meal_from_his_menuplans()
     {
-        $meal = factory(Meal::class)->create();
-        factory(Ingredient::class)->create(['meal_id' => $meal->id]);
+        $meal = Meal::factory()->create();
+        Ingredient::factory()->create(['meal_id' => $meal->id]);
 
         $this->actingAs($this->user)
             ->get('/api/meal/'.$meal->id.'/ingredients')
@@ -62,7 +62,7 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_create_an_ingredient_for_a_meal()
     {
-        $meal = factory(Meal::class)->create(['menuplan_id' => $this->menuplan->id]);
+        $meal = Meal::factory()->create(['menuplan_id' => $this->menuplan->id]);
 
         $this->assertDatabaseMissing('ingredients', $this->validIngredientData);
 
@@ -77,7 +77,7 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_create_ingredients_only_for_a_meal_of_his_menuplans()
     {
-        $meal = factory(Meal::class)->create();
+        $meal = Meal::factory()->create();
 
         $this->actingAs($this->user)
             ->post('/api/meal/'.$meal->id.'/ingredients', $this->validIngredientData)
@@ -89,8 +89,8 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_create_an_ingredient_only_if_the_referenced_item_is_in_one_of_his_menuplans()
     {
-        $meal = factory(Meal::class)->create();
-        $otherItem = factory(Item::class)->create();
+        $meal = Meal::factory()->create();
+        $otherItem = Item::factory()->create();
 
         $ingredientData = $this->validIngredientData;
         $ingredientData['item_id'] = $otherItem->id;
@@ -105,8 +105,8 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_update_an_ingredient()
     {
-        $meal = factory(Meal::class)->create(['menuplan_id' => $this->menuplan->id]);
-        $ingredient = factory(Ingredient::class)->create([
+        $meal = Meal::factory()->create(['menuplan_id' => $this->menuplan->id]);
+        $ingredient = Ingredient::factory()->create([
             'meal_id' => $meal->id,
             'item_id' => $this->item->id,
         ]);
@@ -124,7 +124,7 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_update_only_the_ingredients_he_has_acces_to()
     {
-        $ingredient = factory(Ingredient::class)->create();
+        $ingredient = Ingredient::factory()->create();
 
         $this->actingAs($this->user)
             ->put('/api/ingredient/'.$ingredient->id, $this->validIngredientData)
@@ -136,8 +136,8 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_delete_an_ingredient()
     {
-        $meal = factory(Meal::class)->create(['menuplan_id' => $this->menuplan->id]);
-        $ingredient = factory(Ingredient::class)->create([
+        $meal = Meal::factory()->create(['menuplan_id' => $this->menuplan->id]);
+        $ingredient = Ingredient::factory()->create([
             'meal_id' => $meal->id,
             'item_id' => $this->item->id,
         ]);
@@ -154,7 +154,7 @@ class IngredientTest extends TestCase
     /** @test */
     public function a_user_can_only_delete_ingredients_he_has_access_to()
     {
-        $ingredient = factory(Ingredient::class)->create();
+        $ingredient = Ingredient::factory()->create();
 
         $this->actingAs($this->user)
             ->delete('/api/ingredient/'.$ingredient->id)
