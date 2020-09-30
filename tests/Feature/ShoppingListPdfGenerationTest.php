@@ -14,7 +14,7 @@ class ShoppingListPdfGenerationTest extends TestCase
     /** @test */
     public function a_user_can_download_the_shoppinglist_of_a_menuplan()
     {
-        $ingredient = factory(Ingredient::class)->create();
+        $ingredient = Ingredient::factory()->create();
         $menuplan = $ingredient->meal->menuplan;
 
         $response = $this
@@ -26,9 +26,9 @@ class ShoppingListPdfGenerationTest extends TestCase
 
     public function a_user_can_download_the_shoppinglist_of_a_purchase()
     {
-        $ingredient = factory(Ingredient::class)->create();
+        $ingredient = Ingredient::factory()->create();
         $menuplan = $ingredient->meal->menuplan;
-        $purchase = factory(Purchase::class)->create([
+        $purchase = Purchase::factory()->create([
             'time' => $menuplan->start,
             'menuplan_id' => $menuplan->id,
         ]);

@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Resources\MenuplanResource;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Menuplan extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     protected $dates = ['start', 'end'];

@@ -18,10 +18,10 @@ class ShoppingListTest extends TestCase
     /** @test */
     public function a_user_can_retrive_the_shopping_list_for_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id, 'people' => 8]);
-        $meals = factory(Meal::class, 2)->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
-        $items = factory(Item::class, 4)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id, 'people' => 8]);
+        $meals = Meal::factory()->count(2)->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
+        $items = Item::factory()->count(4)->create(['menuplan_id' => $menuplan->id]);
 
         $items[0]->update(['title' => 'A']);
         $items[1]->update(['title' => 'B']);
@@ -59,8 +59,8 @@ class ShoppingListTest extends TestCase
     /** @test */
     public function a_user_can_not_retrive_the_shopping_list_for_a_menuplan_from_another_user()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/shopping-list')
@@ -70,10 +70,10 @@ class ShoppingListTest extends TestCase
     /** @test */
     public function the_shopping_list_is_sorted_alphabetiically_by_the_item_title()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id, 'people' => 4]);
-        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
-        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id, 'people' => 4]);
+        $meal = Meal::factory()->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
+        $items = Item::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
 
         $items[0]->update(['title' => 'C']);
         $items[1]->update(['title' => 'A']);
@@ -97,10 +97,10 @@ class ShoppingListTest extends TestCase
     /** @test */
     public function quantity_of_shopping_list_items_is_rounded_up_to_three_decimal_digits()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id, 'people' => 4]);
-        $meal = factory(Meal::class)->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
-        $item = factory(Item::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id, 'people' => 4]);
+        $meal = Meal::factory()->create(['menuplan_id' => $menuplan->id, 'people' => null, 'ingredients_for' => 4]);
+        $item = Item::factory()->create(['menuplan_id' => $menuplan->id]);
         $meal->ingredients()->create(['quantity' => 1.000001, 'item_id' => $item->id]);
 
         $this->actingAs($user)
@@ -116,9 +116,9 @@ class ShoppingListTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $menuplan = factory(Menuplan::class)->create([
+        $menuplan = Menuplan::factory()->create([
             'user_id' => $user->id,
             'people' => 8,
             'start' => Carbon::parse('2020-03-20'),
@@ -126,7 +126,7 @@ class ShoppingListTest extends TestCase
         ]);
 
         $createMeal = function ($date) use ($menuplan) {
-            return factory(Meal::class)->create([
+            return Meal::factory()->create([
                 'menuplan_id' => $menuplan->id,
                 'people' => null,
                 'ingredients_for' => 4,
@@ -136,17 +136,17 @@ class ShoppingListTest extends TestCase
             ]);
         };
 
-        $purchase = factory(Purchase::class)->create([
+        $purchase = Purchase::factory()->create([
             'menuplan_id' => $menuplan->id,
             'time' => Carbon::parse('2020-03-21 10:00:00'),
         ]);
 
-        $itemA = factory(Item::class)->create([
+        $itemA = Item::factory()->create([
             'menuplan_id' => $menuplan->id,
             'title' => 'Item A',
         ]);
 
-        $itemB = factory(Item::class)->create([
+        $itemB = Item::factory()->create([
             'menuplan_id' => $menuplan->id,
             'title' => 'Item B',
         ]);

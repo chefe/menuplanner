@@ -25,10 +25,10 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_get_all_items_of_from_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
-        $otherItems = factory(Item::class, 3)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $items = Item::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
+        $otherItems = Item::factory()->count(3)->create();
 
         $items[0]->update(['title' => 'A']);
         $items[1]->update(['title' => 'B']);
@@ -51,9 +51,9 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_get_only_items_from_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
-        factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
+        Item::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
 
         $this->actingAs($user)
             ->get('/api/menuplan/'.$menuplan->id.'/items')
@@ -63,8 +63,8 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_create_an_item_for_a_menuplan()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
 
         $this->assertDatabaseMissing('items', $this->validItemData);
 
@@ -79,8 +79,8 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_only_create_items_for_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create();
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create();
 
         $this->assertDatabaseMissing('items', $this->validItemData);
 
@@ -94,9 +94,9 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_update_an_item()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $item = factory(Item::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $item = Item::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $this->assertDatabaseMissing('items', $this->validItemData);
 
@@ -111,8 +111,8 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_update_only_items_of_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $item = factory(Item::class)->create();
+        $user = User::factory()->create();
+        $item = Item::factory()->create();
 
         $this->actingAs($user)
             ->put('/api/item/'.$item->id, $this->validItemData)
@@ -122,9 +122,9 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_delete_an_item()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $item = factory(Item::class)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $item = Item::factory()->create(['menuplan_id' => $menuplan->id]);
 
         $this->assertDatabaseHas('items', $item->toArray());
 
@@ -138,8 +138,8 @@ class ItemTest extends TestCase
     /** @test */
     public function a_user_can_delete_only_items_of_his_menuplans()
     {
-        $user = factory(User::class)->create();
-        $item = factory(Item::class)->create();
+        $user = User::factory()->create();
+        $item = Item::factory()->create();
 
         $this->actingAs($user)
             ->delete('/api/item/'.$item->id)
@@ -151,9 +151,9 @@ class ItemTest extends TestCase
     /** @test */
     public function items_of_a_menuplan_are_sorted_by_title()
     {
-        $user = factory(User::class)->create();
-        $menuplan = factory(Menuplan::class)->create(['user_id' => $user->id]);
-        $items = factory(Item::class, 3)->create(['menuplan_id' => $menuplan->id]);
+        $user = User::factory()->create();
+        $menuplan = Menuplan::factory()->create(['user_id' => $user->id]);
+        $items = Item::factory()->count(3)->create(['menuplan_id' => $menuplan->id]);
 
         $items[0]->update(['title' => 'C']);
         $items[1]->update(['title' => 'A']);

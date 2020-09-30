@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Resources\PurchaseResource;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     protected $dates = ['time'];

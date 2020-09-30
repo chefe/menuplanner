@@ -1,35 +1,53 @@
 <?php
 
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Meal;
 use App\Menuplan;
-use Faker\Generator as Faker;
 
-$factory->define(Meal::class, function (Faker $faker) {
-    $times = [
-        $faker->time('H:i'),
-        $faker->time('H:i'),
-    ];
+class MealFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Meal::class;
 
-    return [
-        'title' => $faker->sentence(4),
-        'description' => $faker->paragraph(),
-        'start' => min($times),
-        'end' => max($times),
-        'people' => $faker->randomElement([
-            null,
-            $faker->numberBetween(2, 50),
-        ]),
-        'menuplan_id' => function () {
-            return factory(Menuplan::class)->create()->id;
-        },
-        'date' => function (array $meal) use ($faker) {
-            $plan = Menuplan::find($meal['menuplan_id']);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $times = [
+            $this->faker->time('H:i'),
+            $this->faker->time('H:i'),
+        ];
 
-            if ($plan->start->diff($plan->end)->days == 0) {
-                return $plan->start;
-            }
+        return [
+            'title' => $this->faker->sentence(4),
+            'description' => $this->faker->paragraph(),
+            'start' => min($times),
+            'end' => max($times),
+            'people' => $this->faker->randomElement([
+                null,
+                $this->faker->numberBetween(2, 50),
+            ]),
+            'menuplan_id' => function () {
+                return Menuplan::factory()->create()->id;
+            },
+            'date' => function (array $meal) use ($faker) {
+                $plan = Menuplan::find($meal['menuplan_id']);
 
-            return $faker->dateTimeBetween($plan->start, $plan->end);
-        },
-    ];
-});
+                if ($plan->start->diff($plan->end)->days == 0) {
+                    return $plan->start;
+                }
+
+                return $this->faker->dateTimeBetween($plan->start, $plan->end);
+            },
+        ];
+    }
+}
