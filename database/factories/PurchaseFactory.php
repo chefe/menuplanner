@@ -26,7 +26,7 @@ class PurchaseFactory extends Factory
             'menuplan_id' => function () {
                 return Menuplan::factory()->create()->id;
             },
-            'time' => function (array $purchase) use ($faker) {
+            'time' => function (array $purchase) {
                 $plan = Menuplan::find($purchase['menuplan_id']);
 
                 return $this->faker->dateTimeBetween($plan->start, $plan->end->endOfDay());

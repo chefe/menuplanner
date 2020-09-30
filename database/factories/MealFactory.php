@@ -39,7 +39,7 @@ class MealFactory extends Factory
             'menuplan_id' => function () {
                 return Menuplan::factory()->create()->id;
             },
-            'date' => function (array $meal) use ($faker) {
+            'date' => function (array $meal) {
                 $plan = Menuplan::find($meal['menuplan_id']);
 
                 if ($plan->start->diff($plan->end)->days == 0) {
