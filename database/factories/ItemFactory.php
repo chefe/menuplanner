@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Item;
 use App\Menuplan;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ItemFactory extends Factory
 {
