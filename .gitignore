@@ -16,6 +16,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+.env.backup
 .env.dusk.local
 .phpunit.result.cache
 *.code-workspace
