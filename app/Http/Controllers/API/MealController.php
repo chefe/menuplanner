@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MealResource;
-use App\Meal;
-use App\Menuplan;
+use App\Models\Meal;
+use App\Models\Menuplan;
 use Illuminate\Http\Request;
 
 class MealController extends Controller

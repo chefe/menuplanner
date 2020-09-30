@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Menuplan;
-use App\Purchase;
+use App\Models\Menuplan;
+use App\Models\Purchase;
 
 class ShoppingListController extends Controller
 {

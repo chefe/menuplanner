@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Invitation;
-use App\Menuplan;
+use App\Models\Invitation;
+use App\Models\Menuplan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvitationFactory extends Factory

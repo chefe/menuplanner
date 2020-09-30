@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Menuplan;
-use App\User;
+use App\Models\Menuplan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

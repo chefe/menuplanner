@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemResource;
-use App\Item;
-use App\Menuplan;
+use App\Models\Item;
+use App\Models\Menuplan;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller

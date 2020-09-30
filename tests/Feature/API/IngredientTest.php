@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\API;
 
-use App\Ingredient;
-use App\Item;
-use App\Meal;
-use App\Menuplan;
-use App\User;
+use App\Models\Ingredient;
+use App\Models\Item;
+use App\Models\Meal;
+use App\Models\Menuplan;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

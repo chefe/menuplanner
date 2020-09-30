@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Ingredient;
-use App\Meal;
+use App\Models\Ingredient;
+use App\Models\Meal;
 use App\Rules\ItemInMenuplan;
 use Illuminate\Http\Request;
 

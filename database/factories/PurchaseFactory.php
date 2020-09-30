@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Menuplan;
+use App\Models\Menuplan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PurchaseFactory extends Factory
@@ -12,7 +12,7 @@ class PurchaseFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Purchase::class;
+    protected $model = \App\Models\Purchase::class;
 
     /**
      * Define the model's default state.

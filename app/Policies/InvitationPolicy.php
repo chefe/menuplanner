@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Invitation;
-use App\User;
+use App\Models\Invitation;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class InvitationPolicy

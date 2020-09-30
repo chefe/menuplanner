@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MenuplanResource;
-use App\Menuplan;
+use App\Models\Menuplan;
 use Illuminate\Http\Request;
 
 class MenuplanController extends Controller
